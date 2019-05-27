@@ -1,4 +1,4 @@
-@page "/"
+﻿@page "/"
 @namespace BlazePort.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -10,16 +10,11 @@
     <title>BlazePort</title>
     <base href="~/" />
     <environment include="Development">
-        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/site.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="css/bootstrap/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+        <link rel="stylesheet" href="css/site.min.css" />
     </environment>
-    <link href="css/site.css" rel="stylesheet" />
 </head>
 <body>
     <app>@(await Html.RenderComponentAsync<App>())</app>
