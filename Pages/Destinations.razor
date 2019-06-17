@@ -1,0 +1,33 @@
+@page "/destinations"
+@using Data;
+@using Services;
+@inject LocationService locationService;
+
+<h3>Destinations</h3>
+
+<div class="masonry">
+    @foreach (var location in Locations)
+    {
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">
+                    @location.Name
+                </h4>
+                <p class="card-text">
+                    @location.Description
+                </p>
+            </div>
+        </div>
+    }
+
+</div>
+@code {
+
+    LocationDetails[] Locations;
+
+    protected override void OnInit()
+    {
+        Locations = locationService.GetLocations().ToArray();
+    }
+
+}
