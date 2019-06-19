@@ -1,0 +1,20 @@
+@page "/destination/{Id:int}"
+@using Data;
+
+<h3>@location.Name</h3>
+<img src="@location.ImageUrl" />
+<p>@location.Description</p>
+
+@code {
+
+[Parameter] int Id { get; set; }
+
+LocationDetails location;
+
+protected override void OnInit()
+{
+    location = GenFu.A.New<LocationDetails>();
+
+}
+
+}

@@ -6408,15 +6408,3 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
-
-.masonry {
-  display: flex;
-  flex-flow: column wrap;
-  width: 100%;
-  max-height: 800px; }
-  .masonry > div {
-    margin: 0 8px 8px 0; }
-
-@media (min-width: 576px) {
-  .masonry > div {
-    width: 33.33333%; } }
