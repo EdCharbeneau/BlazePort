@@ -6408,3 +6408,16 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
+
+.main-menu {
+  background-color: #808080;
+  margin-left: -15px;
+  margin-right: -15px; }
+
+.nav-link {
+  border-radius: 5px;
+  background-color: white;
+  margin: 5px; }
+
+.content {
+  margin-top: 15px; }
