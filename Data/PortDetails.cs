@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 
 namespace BlazePort.Data
 {
-    public class LocationDetails
+    public class PortDetails
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        public List<PortDetails> Ports { get; set; }
+        public string Country { get; set; }
+        public double Lat { get; set; }
+        public double Long { get; set; }
+        public int LocationId { get; set; }
 
         public void Deconstruct(out int id, out string name)
         {
