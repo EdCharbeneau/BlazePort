@@ -1,0 +1,46 @@
+﻿@page "/"
+@using Data;
+@using Services;
+@inject LocationService locationService;
+
+<EditForm Model="form">
+    <label>Pickup Location</label>
+    <InputSelect @bind-Value="@form.SelectedLocation">
+        @foreach (var (id, name) in Locations)
+        {
+            <option value="@id">@name</option>
+        }
+    </InputSelect>
+
+    <label>Destination</label>
+    <InputSelect @bind-Value="@form.SelectedDestination">
+        @foreach (var item in Locations)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </InputSelect>
+</EditForm>
+
+<!-- Calculated -->
+<label>Time until trip</label>
+<label>Total Price</label>
+<label>Trip Time</label>
+
+@code {
+
+    LocationDetails[] Locations;
+
+    MyForm form = new MyForm();
+
+    public class MyForm
+    {
+        public string SelectedLocation { get; set; }
+        public string SelectedDestination { get; set; }
+    }
+
+    protected override void OnInit()
+    {
+        Locations = locationService.GetLocations().ToArray();
+    }
+
+}
