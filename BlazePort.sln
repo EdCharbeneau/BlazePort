@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.28917.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazePort", "BlazePort.csproj", "{6DAE62EF-0BF9-44CD-9F07-ABB38CD5A5B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazePort.TripCost.Trainer", "..\BlazePort.TripCost.Trainer\BlazePort.TripCost.Trainer.csproj", "{DDD03EF2-4572-4ED9-AEF8-2C29E0B58B8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazePort.TripCost.Service", "..\BlazePort.TripCost.Service\BlazePort.TripCost.Service.csproj", "{0A7DA808-43C2-4739-8BF4-24F5B77CF1D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6DAE62EF-0BF9-44CD-9F07-ABB38CD5A5B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DAE62EF-0BF9-44CD-9F07-ABB38CD5A5B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DAE62EF-0BF9-44CD-9F07-ABB38CD5A5B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDD03EF2-4572-4ED9-AEF8-2C29E0B58B8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDD03EF2-4572-4ED9-AEF8-2C29E0B58B8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDD03EF2-4572-4ED9-AEF8-2C29E0B58B8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDD03EF2-4572-4ED9-AEF8-2C29E0B58B8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A7DA808-43C2-4739-8BF4-24F5B77CF1D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A7DA808-43C2-4739-8BF4-24F5B77CF1D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A7DA808-43C2-4739-8BF4-24F5B77CF1D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A7DA808-43C2-4739-8BF4-24F5B77CF1D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
