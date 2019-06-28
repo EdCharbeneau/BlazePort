@@ -1,46 +1,48 @@
 ﻿@page "/"
-@using Data;
-@using Services;
-@inject LocationService locationService;
+@inherits IndexBase
 
-<EditForm Model="form">
-    <label>Pickup Location</label>
-    <InputSelect @bind-Value="@form.SelectedLocation">
-        @foreach (var (id, name) in Locations)
-        {
-            <option value="@id">@name</option>
-        }
-    </InputSelect>
+    <EditForm Model="form">
+        <label>Dates</label>
+        <span>1/1/10</span>
 
-    <label>Destination</label>
-    <InputSelect @bind-Value="@form.SelectedDestination">
-        @foreach (var item in Locations)
-        {
-            <option value="@item.Id">@item.Name</option>
-        }
-    </InputSelect>
-</EditForm>
+        <label>Passenger</label>
+        <span>1</span>
+
+        <label>Service Provider</label>
+        <span>Foo | Bar</span>
+
+        <label>Payment Method</label>
+        <span>Currency | Miles</span>
+
+        <label>Pickup Location</label>
+        <label>Location</label>
+        <InputSelect @bind-Value="@form.SelectedLocation">
+            @foreach (var (id, name) in Locations)
+            {
+                <option value="@id">@name</option>
+            }
+        </InputSelect>
+        <label>Port</label>
+        <span>Foo</span>
+
+        <label>Destination</label>
+        <InputSelect @bind-Value="@form.SelectedDestination">
+            @foreach (var item in Locations)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </InputSelect>
+        <label>Port</label>
+        <span>Foo</span>
+
+
+    </EditForm>
 
 <!-- Calculated -->
 <label>Time until trip</label>
-<label>Total Price</label>
+
+<label class="h2">Total Price</label><span class="h2">@totalPrice.ToString("C2")</span>
+
 <label>Trip Time</label>
 
-@code {
-
-    LocationDetails[] Locations;
-
-    MyForm form = new MyForm();
-
-    public class MyForm
-    {
-        public string SelectedLocation { get; set; }
-        public string SelectedDestination { get; set; }
-    }
-
-    protected override void OnInit()
-    {
-        Locations = locationService.GetLocations().ToArray();
-    }
-
-}
+<label>Trip Distance</label>
