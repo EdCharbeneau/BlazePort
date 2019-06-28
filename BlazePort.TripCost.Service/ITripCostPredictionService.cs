@@ -6,6 +6,6 @@ namespace BlazePort.TripCost.Service
     {
         string ModelPath { get; }
 
-        TripCostPrediction PredictFare(Trip taxiTrip);
+        TripCostPrediction PredictFare(Trip trip);
     }
 }

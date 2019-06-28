@@ -9,7 +9,7 @@ namespace BlazePort.TripCost.Service
         public string ModelPath { get; }
         public TripCostPredictionService(string modelPath) => ModelPath = modelPath;
 
-        public TripCostPrediction PredictFare(Trip taxiTrip)
+        public TripCostPrediction PredictFare(Trip trip)
         {
             MLContext mlContext = new MLContext(seed: 0);
 
@@ -25,7 +25,7 @@ namespace BlazePort.TripCost.Service
             var predEngine = mlContext.Model.CreatePredictionEngine<Trip, TripCostPrediction>(trainedModel);
 
             //Score
-            return predEngine.Predict(taxiTrip);
+            return predEngine.Predict(trip);
         }
     }
 }
