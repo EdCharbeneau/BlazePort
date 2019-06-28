@@ -96,6 +96,11 @@
         "scss/_utilities.scss",
         "scss/_variables.scss"
       ]
+    },
+    {
+      "provider": "filesystem",
+      "library": "../BlazePort.TripCost.Trainer/MLModels/",
+      "destination": "MLModels/"
     }
   ]
 }
