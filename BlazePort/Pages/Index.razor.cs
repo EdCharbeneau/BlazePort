@@ -4,6 +4,7 @@ using BlazePort.Services;
 using BlazePort.TripCost.Service;
 using BlazePort.TripCost.Service.DataStructures;
 using System.Linq;
+using BlazePort.Models.FormModels;
 
 namespace BlazePort.Pages
 {
@@ -17,28 +18,24 @@ namespace BlazePort.Pages
 
         protected float totalPrice;
 
-        protected MyForm form = new MyForm();
-
-        public class MyForm
-        {
-            public string SelectedLocation { get; set; }
-            public string SelectedDestination { get; set; }
-        }
+        protected TripConfiguration form = new TripConfiguration();
 
         protected override void OnInit()
         {
             Locations = locationService.GetLocations().ToArray();
-            Trip trip = new Trip()
-            {
-                PassengerCount = 1, //Form
-                RateCode = "4", //service
-                PaymentType = "CSH", //?
-                VendorId = "VTS", //Form
-                TripDistance = 2.1F //caclculated 
-            };
+        }
+
+        public void OnTripEstimateTripCost()
+        {
+            Trip trip = new Trip();
+
+            trip.PassengerCount = form.PassengerCount;
+            trip.PaymentType = form.paymentType;
+            trip.TripDistance = form.tripDistance;
+            trip.VendorId = form.vendor;
+            trip.RateCode = form.rateCode.ToString();
 
             totalPrice = tripCostService.PredictFare(trip).FareAmount;
-
         }
     }
 }

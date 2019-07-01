@@ -6298,10 +6298,10 @@ a.text-info:hover, a.text-info:focus {
 a.text-warning:hover, a.text-warning:focus {
   color: #ba8b00 !important; }
 
-.text-danger {
+.text-danger, .validation-message {
   color: #dc3545 !important; }
 
-a.text-danger:hover, a.text-danger:focus {
+a.text-danger:hover, a.validation-message:hover, a.text-danger:focus, a.validation-message:focus {
   color: #a71d2a !important; }
 
 .text-light {

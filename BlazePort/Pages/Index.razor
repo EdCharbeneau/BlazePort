@@ -1,48 +1,72 @@
 ﻿@page "/"
 @inherits IndexBase
 
-    <EditForm Model="form">
-        <label>Dates</label>
-        <span>1/1/10</span>
+<div class="row">
 
-        <label>Passenger</label>
-        <span>1</span>
+    <div class="col-md-6">
+        <EditForm Model="form" OnValidSubmit="@OnTripEstimateTripCost">
+            <DataAnnotationsValidator />
 
-        <label>Service Provider</label>
-        <span>Foo | Bar</span>
+            <div class="form-group">
+                <label>Dates</label>
+                <InputDate @bind-Value="form.TripStart" min="@DateTime.Now.ToString("yyyy-MM-dd")" Class="form-control"></InputDate>
+                <ValidationMessage For="@(()=> form.TripStart)"></ValidationMessage>
+            </div>
 
-        <label>Payment Method</label>
-        <span>Currency | Miles</span>
+            <div class="form-group">
+                <label>Passenger</label>
+                <InputNumber @bind-Value="form.PassengerCount" Class="form-control"></InputNumber>
+                <ValidationMessage For="@(()=> form.PassengerCount)"></ValidationMessage>
+            </div>
 
-        <label>Pickup Location</label>
-        <label>Location</label>
-        <InputSelect @bind-Value="@form.SelectedLocation">
-            @foreach (var (id, name) in Locations)
-            {
-                <option value="@id">@name</option>
-            }
-        </InputSelect>
-        <label>Port</label>
-        <span>Foo</span>
+            <div class="form-group">
+                <label>Pickup Location</label>
+                <InputSelect @bind-Value="@form.SelectedLocation" Class="form-control">
+                    <option value="">--Select a location</option>
+                    @foreach (var (id, name) in Locations)
+                    {
+                        <option value="@id">@name</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(()=> form.SelectedLocation)"></ValidationMessage>
+            </div>
 
-        <label>Destination</label>
-        <InputSelect @bind-Value="@form.SelectedDestination">
-            @foreach (var item in Locations)
-            {
-                <option value="@item.Id">@item.Name</option>
-            }
-        </InputSelect>
-        <label>Port</label>
-        <span>Foo</span>
+            <div class="form-group">
+                <label>Destination</label>
+                <InputSelect @bind-Value="@form.SelectedDestination" Class="form-control">
+                    <option value="">--Select a location</option>
 
+                    @foreach (var item in Locations)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
 
-    </EditForm>
+                </InputSelect>
+                <ValidationMessage class="text-danger" For="@(()=> form.SelectedDestination)"></ValidationMessage>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-outline-primary" type="submit">Estimate Trip Cost</button>
+            </div>
 
-<!-- Calculated -->
-<label>Time until trip</label>
-
-<label class="h2">Total Price</label><span class="h2">@totalPrice.ToString("C2")</span>
-
-<label>Trip Time</label>
-
-<label>Trip Distance</label>
+            <!--
+              Service Provider: A | B
+              Payment Method: Currency | Miles
+            -->
+        </EditForm>
+    </div>
+    <div class="col-md-6">
+        <!-- Calculated -->
+        <div class="form-group">
+            <label class="h3">Time until trip</label>
+        </div>
+        <div class="form-group">
+            <label class="h3">Total Price: </label><span class="h3">@totalPrice.ToString("C2")</span>
+        </div>
+        <div class="form-group">
+            <label class="h3">Trip Time</label>
+        </div>
+        <div class="form-group">
+            <label class="h3">Trip Distance</label>
+        </div>
+    </div>
+</div>
