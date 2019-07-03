@@ -1,0 +1,72 @@
+@page "/admin/destinations"
+@using BlazePort.Data
+@using Microsoft.EntityFrameworkCore
+@inject BlazePortContext dbContext
+
+<h3>Admin Destination</h3>
+
+<EditForm Model="newPort" OnValidSubmit="@SaveLocation">
+
+    <div class="form-group">
+        <label>Name</label>
+        <InputText @bind-Value="@newPort.Name" Class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <InputTextArea @bind-Value="@newPort.Description" Class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Image URL</label>
+        <InputText @bind-Value="@newPort.ImageUrl" Class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Location</label>
+    </div>
+    <button>Save</button>
+</EditForm>
+
+<ul>
+    @if (ports == null)
+    {
+        <span>Loading...</span>
+    }
+    else
+    {
+        @foreach (var port in ports)
+        {
+            <li>
+                @port.Name
+            </li>
+        }
+    }
+</ul>
+
+@code {
+
+PortDetails[] ports;
+
+PortDetails newPort = new PortDetails();
+
+protected override async Task OnInitAsync()
+{
+    await LoadPorts();
+}
+
+async Task LoadPorts()
+{
+    ports = await dbContext.PortDetails.ToArrayAsync();
+}
+
+async Task SaveLocation()
+{
+    newPort.LocationId = 1; // From Drop Down List
+    dbContext.PortDetails.Add(newPort);
+
+    await dbContext.SaveChangesAsync();
+
+    newPort = new PortDetails();
+
+    await LoadPorts();
+}
+
+}

@@ -1,0 +1,68 @@
+@page "/admin/index"
+@using BlazePort.Data
+@using Microsoft.EntityFrameworkCore
+@inject BlazePortContext dbContext
+
+<h3>Admin Index</h3>
+
+<EditForm Model="newLocation" OnValidSubmit="@SaveLocation">
+
+    <div class="form-group">
+        <label>Name</label>
+        <InputText @bind-Value="@newLocation.Name" Class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <InputTextArea @bind-Value="@newLocation.Description" Class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Image URL</label>
+        <InputText @bind-Value="@newLocation.ImageUrl" Class="form-control" />
+    </div>
+    <button>Save</button>
+</EditForm>
+
+<ul>
+    @if (locations == null)
+    {
+        <span>Loading...</span>
+    }
+    else
+    {
+        @foreach (var location in locations)
+        {
+            <li>
+                @location.Name
+            </li>
+        }
+    }
+</ul>
+
+@code {
+
+LocationDetails[] locations;
+
+LocationDetails newLocation = new LocationDetails();
+
+protected override async Task OnInitAsync()
+{
+    await LoadLocations();
+}
+
+async Task LoadLocations()
+{
+    locations = await dbContext.Locations.ToArrayAsync();
+}
+
+async Task SaveLocation()
+{
+    dbContext.Locations.Add(newLocation);
+
+    await dbContext.SaveChangesAsync();
+
+    newLocation = new LocationDetails();
+
+    await LoadLocations();
+}
+
+}
