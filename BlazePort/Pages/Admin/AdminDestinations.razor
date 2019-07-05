@@ -1,41 +1,39 @@
-@page "/admin/destinations"
+@page "/admin/Destinations"
 @using BlazePort.Data
 @using Microsoft.EntityFrameworkCore
 @inject BlazePortContext dbContext
 
-<h3>Admin Destination</h3>
+<a href="/admin/index">Admin Home</a>
+<h3>Admin Destinations</h3>
 
-<EditForm Model="newPort" OnValidSubmit="@SaveLocation">
+<EditForm Model="newLocation" OnValidSubmit="@SaveLocation">
 
     <div class="form-group">
         <label>Name</label>
-        <InputText @bind-Value="@newPort.Name" Class="form-control" />
+        <InputText @bind-Value="@newLocation.Name" Class="form-control" />
     </div>
     <div class="form-group">
         <label>Description</label>
-        <InputTextArea @bind-Value="@newPort.Description" Class="form-control" />
+        <InputTextArea @bind-Value="@newLocation.Description" Class="form-control" />
     </div>
     <div class="form-group">
         <label>Image URL</label>
-        <InputText @bind-Value="@newPort.ImageUrl" Class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Location</label>
+        <InputText @bind-Value="@newLocation.ImageUrl" Class="form-control" />
     </div>
     <button>Save</button>
 </EditForm>
 
 <ul>
-    @if (ports == null)
+    @if (locations == null)
     {
         <span>Loading...</span>
     }
     else
     {
-        @foreach (var port in ports)
+        @foreach (var location in locations)
         {
             <li>
-                @port.Name
+                @location.Name
             </li>
         }
     }
@@ -43,30 +41,29 @@
 
 @code {
 
-PortDetails[] ports;
+    LocationDetails[] locations;
 
-PortDetails newPort = new PortDetails();
+    LocationDetails newLocation = new LocationDetails();
 
-protected override async Task OnInitAsync()
-{
-    await LoadPorts();
-}
+    protected override async Task OnInitAsync()
+    {
+        await LoadLocations();
+    }
 
-async Task LoadPorts()
-{
-    ports = await dbContext.PortDetails.ToArrayAsync();
-}
+    async Task LoadLocations()
+    {
+        locations = await dbContext.Locations.ToArrayAsync();
+    }
 
-async Task SaveLocation()
-{
-    newPort.LocationId = 1; // From Drop Down List
-    dbContext.PortDetails.Add(newPort);
+    async Task SaveLocation()
+    {
+        dbContext.Locations.Add(newLocation);
 
-    await dbContext.SaveChangesAsync();
+        await dbContext.SaveChangesAsync();
 
-    newPort = new PortDetails();
+        newLocation = new LocationDetails();
 
-    await LoadPorts();
-}
+        await LoadLocations();
+    }
 
 }

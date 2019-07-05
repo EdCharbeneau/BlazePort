@@ -1,0 +1,100 @@
+@page "/admin/ports"
+@using BlazePort.Data
+@using Microsoft.EntityFrameworkCore
+@using BlazePort.Models.FormModels
+@inject BlazePortContext dbContext
+
+<a href="/admin/index">Admin Home</a>
+<h3>Admin Ports</h3>
+
+<EditForm Model="portForm" OnValidSubmit="@SaveLocation">
+
+    <div class="form-group">
+        <label>Name</label>
+        <InputText @bind-Value="@portForm.Name" Class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <InputTextArea @bind-Value="@portForm.Description" Class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Country</label>
+        <InputTextArea @bind-Value="@portForm.Country" Class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Image URL</label>
+        <InputText @bind-Value="@portForm.ImageUrl" Class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Parent Location</label>
+        <InputSelect @bind-Value="@portForm.SelectedLocation" Class="form-control">
+            <option value="">--Select a location</option>
+            @if (locations != null)
+            {
+                @foreach (var location in locations)
+                {
+                    <option value="@location.Id">@location.Name</option>
+                }
+            }
+        </InputSelect>
+        <ValidationMessage For="@(()=> portForm.SelectedLocation)"></ValidationMessage>
+    </div>
+    <button>Save</button>
+</EditForm>
+
+<ul>
+    @if (ports == null)
+    {
+        <span>Loading...</span>
+    }
+    else
+    {
+        @foreach (var port in ports)
+        {
+            <li>
+                @port.Name
+            </li>
+        }
+    }
+</ul>
+
+@code {
+
+PortDetails[] ports;
+
+PortDetailsForm portForm = new PortDetailsForm();
+
+LocationDetails[] locations;
+
+protected override async Task OnInitAsync()
+{
+    await LoadPorts();
+    locations = await dbContext.Locations.ToArrayAsync();
+}
+
+async Task LoadPorts()
+{
+    ports = await dbContext.PortDetails.ToArrayAsync();
+}
+
+async Task SaveLocation()
+{
+    PortDetails portDetails = portForm.Map(form => new PortDetails()
+    {
+        Name = form.Name,
+        LocationId = int.Parse(form.SelectedLocation),
+        Country = form.Country,
+        Description = form.Description,
+        ImageUrl = form.ImageUrl
+    });
+
+    dbContext.PortDetails.Add(portDetails);
+
+    await dbContext.SaveChangesAsync();
+
+    portForm = new PortDetailsForm();
+
+    await LoadPorts();
+}
+
+}
