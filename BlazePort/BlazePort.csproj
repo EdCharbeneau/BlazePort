@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="MLModels\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

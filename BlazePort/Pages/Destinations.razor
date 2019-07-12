@@ -1,43 +1,41 @@
 @page "/destinations"
 
-@using GenFu;
-
 @using Data;
-@using Services;
-@inject LocationService locationService;
+@inject BlazePortContext dbContext;
 
 <h3>Destinations</h3>
 
 <div class="card-columns">
-    @foreach (var location in Locations)
+    @if (Locations == null)
     {
-        <div class="card">
-            <img class="card-img-top" src="@location.ImageUrl" />
-            <div class="card-body">
-                <h4 class="card-title">
-                    @location.Name
-                </h4>
-                <p class="card-text">
-                    @location.Description
-                </p>
-                <a href="/destination/@location.Id" class="card-link">View Details</a>
+        <span>Loading...</span>
+    }
+    else
+    {
+        @foreach (var location in Locations)
+        {
+            <div class="card">
+                <img class="card-img-top" src="@location.ImageUrl" />
+                <div class="card-body">
+                    <h4 class="card-title">
+                        @location.Name
+                    </h4>
+                    <p class="card-text">
+                        @location.Description
+                    </p>
+                    <a href="/destination/@location.Id" class="card-link">View Details</a>
+                </div>
             </div>
-        </div>
+        }
     }
 </div>
 @code {
 
     LocationDetails[] Locations;
 
-    protected override void OnInit()
+    protected override async Task OnInitAsync()
     {
-        //Locations = locationService.GetLocations().ToArray();
-        A.Configure<LocationDetails>()
-            .Fill(ld => ld.Description)
-            .AsLoremIpsumWords(50)
-            .Fill(ld => ld.ImageUrl, () => "http://placehold.it/600x150");
-
-        Locations = A.ListOf<LocationDetails>(50).ToArray();
+        Locations = await dbContext.Locations.ToArrayAsync();
     }
 
 }

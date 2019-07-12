@@ -1,13 +1,12 @@
 using BlazePort.Data;
-using BlazePort.Services;
 using BlazePort.TripCost.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
-using Microsoft.EntityFrameworkCore;
 
 namespace BlazePort
 {
@@ -19,7 +18,6 @@ namespace BlazePort
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddScoped<LocationService>();
             string modelPath = Path.Combine(Environment.CurrentDirectory, "MLModels", "TripCostModel.zip"); ;
             services.AddSingleton<ITripCostPredictionService>(new TripCostPredictionService(modelPath));
 

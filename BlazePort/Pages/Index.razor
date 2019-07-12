@@ -23,9 +23,12 @@
                 <label>Pickup Location</label>
                 <InputSelect @bind-Value="@form.SelectedLocation" Class="form-control">
                     <option value="">--Select a location</option>
-                    @foreach (var (id, name) in Locations)
+                    @if (Locations != null)
                     {
-                        <option value="@id">@name</option>
+                        @foreach (var location in Locations)
+                        {
+                            <option value="@location.Id">@location.Name</option>
+                        }
                     }
                 </InputSelect>
                 <ValidationMessage For="@(()=> form.SelectedLocation)"></ValidationMessage>
@@ -35,12 +38,13 @@
                 <label>Destination</label>
                 <InputSelect @bind-Value="@form.SelectedDestination" Class="form-control">
                     <option value="">--Select a location</option>
-
-                    @foreach (var item in Locations)
+                    @if (Locations != null)
                     {
-                        <option value="@item.Id">@item.Name</option>
+                        @foreach (var location in Locations)
+                        {
+                            <option value="@location.Id">@location.Name</option>
+                        }
                     }
-
                 </InputSelect>
                 <ValidationMessage class="text-danger" For="@(()=> form.SelectedDestination)"></ValidationMessage>
             </div>
