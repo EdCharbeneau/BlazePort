@@ -1,0 +1,58 @@
+@using Data
+    
+<div class="form-group">
+    <label>@LocationLabel</label>
+    <InputSelect Value="@LocationSelectedValue"
+                 ValueExpression="@(()=> LocationSelectedValue)"
+                 ValueChanged="@((string s) => HandleOnLocationChanged(s))"
+                 Class="form-control">
+
+        <option value="">--Select a location</option>
+        @if (Locations != null)
+        {
+            @foreach (var location in Locations)
+            {
+                <option value="@location.Id">@location.Name</option>
+            }
+        }
+    </InputSelect>
+    <ValidationMessage For="@(()=> LocationSelectedValue)"></ValidationMessage>
+</div>
+<div class="form-group">
+    <label>@PortLabel</label>
+    <InputSelect disabled="@(Ports == null)" @bind-Value="@PortSelectedValue" Class="form-control">
+        @if (Ports == null)
+        {
+            <option value="">--Select a location</option>
+        }
+        else
+        {
+            @foreach (var port in Ports)
+            {
+                <option value="@port.Id">@port.Name</option>
+            }
+        }
+    </InputSelect>
+    <ValidationMessage For="@(()=> PortSelectedValue)"></ValidationMessage>
+
+</div>
+
+@code {
+    [Parameter] protected string LocationLabel { get; set; }
+    [Parameter] protected string PortLabel { get; set; }
+
+    [Parameter] protected string LocationSelectedValue { get; set; }
+    [Parameter] protected string PortSelectedValue { get; set; }
+
+    [Parameter] protected EventCallback<string> OnLocationChanged { get; set; }
+
+    [Parameter] protected LocationDetails[] Locations { get; set; }
+    [Parameter] protected PortDetails[] Ports { get; set; }
+
+    void HandleOnLocationChanged(string selectedValue)
+    {
+        OnLocationChanged.InvokeAsync(selectedValue);
+    }
+
+
+}

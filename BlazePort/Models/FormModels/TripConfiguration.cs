@@ -12,13 +12,16 @@ namespace BlazePort.Models.FormModels
         public int PassengerCount { get; set; }
 
         [Required(AllowEmptyStrings = false)]
-        public string SelectedLocation { get; set; }
+        public string SelectedDeparture { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         public string SelectedPortOfTravel { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         public string SelectedDestination { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        public string SelectedPortOfEntry { get; set; }
 
         public string paymentType = "CSH"; // Form ?
 

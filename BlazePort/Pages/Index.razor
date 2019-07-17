@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inherits IndexBase
+@using BlazePort.Components
 
 <div class="row">
 
@@ -18,57 +19,22 @@
                 <ValidationMessage For="@(()=> form.PassengerCount)"></ValidationMessage>
             </div>
 
-            <div class="form-group">
-                <label>Pickup Location</label>
-                <InputSelect Value="@form.SelectedLocation"
-                             ValueExpression="@(()=> form.SelectedLocation)"
-                             ValueChanged="@((string s) => OnLocationChanged(s))"
-                             Class="form-control">
+            <LocationDropdowns LocationLabel="Departure"
+                                   LocationSelectedValue="@form.SelectedDeparture"
+                                   Locations="@DepartureLocations"
+                                   OnLocationChanged="OnLocationChanged"
+                                   PortLabel="Port of Travel"
+                                   Ports="@DeparturePorts"
+                                   PortSelectedValue="@form.SelectedPortOfTravel" />
 
-                    <option value="">--Select a location</option>
-                    @if (Locations != null)
-                    {
-                        @foreach (var location in Locations)
-                        {
-                            <option value="@location.Id">@location.Name</option>
-                        }
-                    }
-                </InputSelect>
-                <ValidationMessage For="@(()=> form.SelectedLocation)"></ValidationMessage>
-            </div>
-            <div class="form-group">
-                <label>Port of Travel</label>
-                <InputSelect disabled="@(DeparturePorts == null)" @bind-Value="@form.SelectedPortOfTravel" Class="form-control">
-                    @if (DeparturePorts == null)
-                    {
-                        <option value="">--Select a location</option>
-                    }
-                    else
-                    {
-                        @foreach (var port in DeparturePorts)
-                        {
-                            <option value="@port.Id">@port.Name</option>
-                        }
-                    }
-                </InputSelect>
-                <ValidationMessage For="@(()=> form.SelectedLocation)"></ValidationMessage>
+                <LocationDropdowns LocationLabel="Destination"
+                                   LocationSelectedValue="@form.SelectedDestination"
+                                   Locations="@DestinationLocations"
+                                   OnLocationChanged="OnDestinationChanged"
+                                   PortLabel="Port of Entry"
+                                   Ports="@DestinationPorts"
+                                   PortSelectedValue="@form.SelectedPortOfEntry" />
 
-            </div>
-
-            <div class="form-group">
-                <label>Destination</label>
-                <InputSelect @bind-Value="@form.SelectedDestination" Class="form-control">
-                    <option value="">--Select a location</option>
-                    @if (Locations != null)
-                    {
-                        @foreach (var location in Locations)
-                        {
-                            <option value="@location.Id">@location.Name</option>
-                        }
-                    }
-                </InputSelect>
-                <ValidationMessage class="text-danger" For="@(()=> form.SelectedDestination)"></ValidationMessage>
-            </div>
             <div class="form-group">
                 <button class="btn btn-outline-primary" type="submit">Estimate Trip Cost</button>
             </div>

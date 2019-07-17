@@ -15,7 +15,9 @@ namespace BlazePort.Pages
 
         [Inject] ITripCostPredictionService tripCostService { get; set; }
 
-        protected LocationDetails[] Locations;
+        protected LocationDetails[] DepartureLocations;
+
+        protected LocationDetails[] DestinationLocations;
 
         protected PortDetails[] DeparturePorts;
 
@@ -27,16 +29,34 @@ namespace BlazePort.Pages
 
         protected override async Task OnInitAsync()
         {
-            Locations = await dbContext.Locations.ToArrayAsync();
+            DepartureLocations = await dbContext.Locations.ToArrayAsync();
         }
 
-        protected async Task OnLocationChanged(string selected)
+        protected async Task OnLocationChanged(string selectedValue)
         {
-            form.SelectedLocation = selected;
-            DeparturePorts = await dbContext.PortDetails
-                .Where(p => p.LocationId == int.Parse(form.SelectedLocation))
-                .ToArrayAsync();
+            form.SelectedDeparture = selectedValue;
+            DeparturePorts = await GetPortsByLocation(selectedValue);
+
+            await ClearDestinations(selectedValue);
         }
+
+        private async Task ClearDestinations(string selectedValue)
+        {
+            DestinationLocations = await dbContext.Locations.Where(loc => loc.Id != int.Parse(selectedValue)).ToArrayAsync();
+            form.SelectedDestination = "";
+            DestinationPorts = null;
+        }
+
+        protected async Task OnDestinationChanged(string selectedValue)
+        {
+            form.SelectedDestination = selectedValue;
+            DestinationPorts = await GetPortsByLocation(selectedValue);
+        }
+
+        private async Task<PortDetails[]> GetPortsByLocation(string selectedValue) =>
+            await dbContext.PortDetails
+                .Where(p => p.LocationId == int.Parse(selectedValue))
+                .ToArrayAsync();
 
         public void OnTripEstimateTripCost()
         {
