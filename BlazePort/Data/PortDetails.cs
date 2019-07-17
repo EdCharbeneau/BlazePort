@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,7 +16,11 @@ namespace BlazePort.Data
         public string Country { get; set; }
         public double Lat { get; set; }
         public double Long { get; set; }
+
+        [Required]
         public int LocationId { get; set; }
+
+        public LocationDetails Location { get; set; }
 
         public void Deconstruct(out int id, out string name)
         {

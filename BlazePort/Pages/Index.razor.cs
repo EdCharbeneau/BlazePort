@@ -1,28 +1,41 @@
 ﻿using BlazePort.Data;
-using Microsoft.AspNetCore.Components;
-using BlazePort.Services;
+using BlazePort.Models.FormModels;
 using BlazePort.TripCost.Service;
 using BlazePort.TripCost.Service.DataStructures;
+using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using BlazePort.Models.FormModels;
+using System.Threading.Tasks;
 
 namespace BlazePort.Pages
 {
     public class IndexBase : ComponentBase
     {
-        [Inject] LocationService locationService { get; set; }
+        [Inject] BlazePortContext dbContext { get; set; }
 
         [Inject] ITripCostPredictionService tripCostService { get; set; }
 
         protected LocationDetails[] Locations;
 
+        protected PortDetails[] DeparturePorts;
+
+        protected PortDetails[] DestinationPorts;
+
         protected float totalPrice;
 
         protected TripConfiguration form = new TripConfiguration();
 
-        protected override void OnInit()
+        protected override async Task OnInitAsync()
         {
-            Locations = locationService.GetLocations().ToArray();
+            Locations = await dbContext.Locations.ToArrayAsync();
+        }
+
+        protected async Task OnLocationChanged(string selected)
+        {
+            form.SelectedLocation = selected;
+            DeparturePorts = await dbContext.PortDetails
+                .Where(p => p.LocationId == int.Parse(form.SelectedLocation))
+                .ToArrayAsync();
         }
 
         public void OnTripEstimateTripCost()

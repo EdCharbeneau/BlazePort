@@ -1,31 +1,34 @@
 @layout CenteredContentLayout
 @page "/destination/{Id:int}"
 @using Data;
-@using GenFu;
+@inject BlazePortContext dbContext
 
-
-<h1>@location.Name</h1>
-<img src="@location.ImageUrl" />
-<p>@location.Description</p>
-<ol>
-    @foreach (var port in location.Ports)
-    {
-        <li><a href="/port/@port.Id">@port.Name</a></li>
-    }
-</ol>
-
+@if (location == null)
+{
+    <span>Loading...</span>
+}
+else
+{
+    <h1>@location.Name</h1>
+    <img src="@location.ImageUrl" />
+    <p>@location.Description</p>
+    <ol>
+        @foreach (var port in location.Ports)
+        {
+            <li><a href="/port/@port.Id">@port.Name</a></li>
+        }
+    </ol>
+}
 @code {
 
-[Parameter] int Id { get; set; }
+    [Parameter] int Id { get; set; }
 
-LocationDetails location;
+    LocationDetails location;
 
-protected override void OnInit()
-{
-    A.Configure<LocationDetails>()
-        .Fill(ld => ld.Ports, () => A.ListOf<PortDetails>(20));
-
-    location = A.New<LocationDetails>();
-}
+    protected override async Task OnInitAsync()
+    {
+        location = await dbContext.Locations.Include(l => l.Ports)
+                                            .FirstAsync(l => l.Id == Id);
+    }
 
 }
