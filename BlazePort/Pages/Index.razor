@@ -6,7 +6,6 @@
     <div class="col-md-6">
         <EditForm Model="form" OnValidSubmit="@OnTripEstimateTripCost">
             <DataAnnotationsValidator />
-
             <div class="form-group">
                 <label>Dates</label>
                 <InputDate @bind-Value="form.TripStart" min="@DateTime.Now.ToString("yyyy-MM-dd")" Class="form-control"></InputDate>
@@ -21,7 +20,11 @@
 
             <div class="form-group">
                 <label>Pickup Location</label>
-                <InputSelect @bind-Value="@form.SelectedLocation" Class="form-control">
+                <InputSelect Value="@form.SelectedLocation"
+                             ValueExpression="@(()=> form.SelectedLocation)"
+                             ValueChanged="@((string s) => OnLocationChanged(s))"
+                             Class="form-control">
+
                     <option value="">--Select a location</option>
                     @if (Locations != null)
                     {
@@ -32,6 +35,24 @@
                     }
                 </InputSelect>
                 <ValidationMessage For="@(()=> form.SelectedLocation)"></ValidationMessage>
+            </div>
+            <div class="form-group">
+                <label>Port of Travel</label>
+                <InputSelect disabled="@(DeparturePorts == null)" @bind-Value="@form.SelectedPortOfTravel" Class="form-control">
+                    @if (DeparturePorts == null)
+                    {
+                        <option value="">--Select a location</option>
+                    }
+                    else
+                    {
+                        @foreach (var port in DeparturePorts)
+                        {
+                            <option value="@port.Id">@port.Name</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(()=> form.SelectedLocation)"></ValidationMessage>
+
             </div>
 
             <div class="form-group">

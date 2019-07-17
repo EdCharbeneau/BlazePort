@@ -15,6 +15,9 @@ namespace BlazePort.Models.FormModels
         public string SelectedLocation { get; set; }
 
         [Required(AllowEmptyStrings = false)]
+        public string SelectedPortOfTravel { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
         public string SelectedDestination { get; set; }
 
         public string paymentType = "CSH"; // Form ?

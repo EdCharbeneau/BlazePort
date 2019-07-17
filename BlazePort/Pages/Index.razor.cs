@@ -17,6 +17,10 @@ namespace BlazePort.Pages
 
         protected LocationDetails[] Locations;
 
+        protected PortDetails[] DeparturePorts;
+
+        protected PortDetails[] DestinationPorts;
+
         protected float totalPrice;
 
         protected TripConfiguration form = new TripConfiguration();
@@ -24,6 +28,14 @@ namespace BlazePort.Pages
         protected override async Task OnInitAsync()
         {
             Locations = await dbContext.Locations.ToArrayAsync();
+        }
+
+        protected async Task OnLocationChanged(string selected)
+        {
+            form.SelectedLocation = selected;
+            DeparturePorts = await dbContext.PortDetails
+                .Where(p => p.LocationId == int.Parse(form.SelectedLocation))
+                .ToArrayAsync();
         }
 
         public void OnTripEstimateTripCost()
