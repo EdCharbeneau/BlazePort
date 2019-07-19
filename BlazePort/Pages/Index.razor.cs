@@ -4,6 +4,7 @@ using BlazePort.TripCost.Service;
 using BlazePort.TripCost.Service.DataStructures;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,8 +37,18 @@ namespace BlazePort.Pages
         {
             form.SelectedDeparture = selectedValue;
             DeparturePorts = await GetPortsByLocation(selectedValue);
-
+            form.SelectedPortOfTravel = DeparturePorts[0].Id.ToString();
             await ClearDestinations(selectedValue);
+        }
+
+        protected void OnDeparturePortChanged(string selectedValue)
+        {
+            form.SelectedPortOfTravel = selectedValue;
+        }
+
+        protected void OnPortOfEntryChanged(string selectedValue)
+        {
+            form.SelectedPortOfEntry = selectedValue;
         }
 
         private async Task ClearDestinations(string selectedValue)
@@ -51,6 +62,7 @@ namespace BlazePort.Pages
         {
             form.SelectedDestination = selectedValue;
             DestinationPorts = await GetPortsByLocation(selectedValue);
+            form.SelectedPortOfEntry = DestinationPorts[0].Id.ToString();
         }
 
         private async Task<PortDetails[]> GetPortsByLocation(string selectedValue) =>
@@ -69,6 +81,11 @@ namespace BlazePort.Pages
             trip.RateCode = form.rateCode.ToString();
 
             totalPrice = tripCostService.PredictFare(trip).FareAmount;
+        }
+
+        public void InvalidSubmit()
+        {
+            Console.WriteLine("invalid submit");
         }
     }
 }

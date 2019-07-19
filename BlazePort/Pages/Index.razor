@@ -5,7 +5,9 @@
 <div class="row">
 
     <div class="col-md-6">
-        <EditForm Model="form" OnValidSubmit="@OnTripEstimateTripCost">
+        <EditForm Model="form" OnValidSubmit="@OnTripEstimateTripCost" 
+                  OnInvalidSubmit="@InvalidSubmit">
+            <ValidationSummary/>
             <DataAnnotationsValidator />
             <div class="form-group">
                 <label>Dates</label>
@@ -25,15 +27,19 @@
                                    OnLocationChanged="OnLocationChanged"
                                    PortLabel="Port of Travel"
                                    Ports="@DeparturePorts"
-                                   PortSelectedValue="@form.SelectedPortOfTravel" />
+                                   PortSelectedValue="@form.SelectedPortOfTravel"
+                                   OnPortChanged="OnDeparturePortChanged"
+                               />
 
-                <LocationDropdowns LocationLabel="Destination"
+            <LocationDropdowns LocationLabel="Destination"
                                    LocationSelectedValue="@form.SelectedDestination"
                                    Locations="@DestinationLocations"
                                    OnLocationChanged="OnDestinationChanged"
                                    PortLabel="Port of Entry"
                                    Ports="@DestinationPorts"
-                                   PortSelectedValue="@form.SelectedPortOfEntry" />
+                                   PortSelectedValue="@form.SelectedPortOfEntry"
+                                   OnPortChanged="OnPortOfEntryChanged"
+                               />
 
             <div class="form-group">
                 <button class="btn btn-outline-primary" type="submit">Estimate Trip Cost</button>
