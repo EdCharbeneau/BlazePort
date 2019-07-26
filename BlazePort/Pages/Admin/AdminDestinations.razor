@@ -23,7 +23,14 @@
     <button>Save</button>
 </EditForm>
 
-<ul>
+<TelerikGrid Data="locations">
+    <TelerikGridColumns>
+        <TelerikGridColumn Field="@nameof(LocationDetails.Name)"/>
+        <TelerikGridColumn Field="@nameof(LocationDetails.Description)"/>
+    </TelerikGridColumns>
+</TelerikGrid>
+
+@*<ul>
     @if (locations == null)
     {
         <span>Loading...</span>
@@ -37,7 +44,7 @@
             </li>
         }
     }
-</ul>
+</ul>*@
 
 @code {
 

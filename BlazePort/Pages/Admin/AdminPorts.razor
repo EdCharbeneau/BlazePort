@@ -2,6 +2,7 @@
 @using BlazePort.Data
 @using Microsoft.EntityFrameworkCore
 @using BlazePort.Models.FormModels
+@using BlazePort.Models.ViewModels
 @inject BlazePortContext dbContext
 
 <a href="/admin/index">Admin Home</a>
@@ -42,59 +43,68 @@
     <button>Save</button>
 </EditForm>
 
-<ul>
-    @if (ports == null)
-    {
-        <span>Loading...</span>
-    }
-    else
-    {
-        @foreach (var port in ports)
-        {
-            <li>
-                @port.Name
-            </li>
-        }
-    }
-</ul>
+<TelerikGrid Data="portsGridView"
+             Sortable="true"
+             Pageable="true">
+    <TelerikGridColumns>
+        <TelerikGridColumn Field="@nameof(PortDetailsGridView.Name)" />
+        <TelerikGridColumn Field="@nameof(PortDetailsGridView.LatLong)" />
+        <TelerikGridColumn Field="@nameof(PortDetailsGridView.Country)" />
+        <TelerikGridColumn Field="@nameof(PortDetailsGridView.LocationName)" />
+        <TelerikGridColumn Field="@nameof(PortDetailsGridView.ShortDescriptioin)" />
+    </TelerikGridColumns>
+</TelerikGrid>
 
 @code {
 
-PortDetails[] ports;
+    PortDetails[] ports;
+    PortDetailsGridView[] portsGridView;
 
-PortDetailsForm portForm = new PortDetailsForm();
+    PortDetailsForm portForm = new PortDetailsForm();
 
-LocationDetails[] locations;
+    LocationDetails[] locations;
 
-protected override async Task OnInitAsync()
-{
-    await LoadPorts();
-    locations = await dbContext.Locations.ToArrayAsync();
-}
-
-async Task LoadPorts()
-{
-    ports = await dbContext.PortDetails.ToArrayAsync();
-}
-
-async Task SaveLocation()
-{
-    PortDetails portDetails = portForm.Map(form => new PortDetails()
+    protected override async Task OnInitAsync()
     {
-        Name = form.Name,
-        LocationId = int.Parse(form.SelectedLocation),
-        Country = form.Country,
-        Description = form.Description,
-        ImageUrl = form.ImageUrl
-    });
+        await LoadPortsViewModel();
+        locations = await dbContext.Locations.ToArrayAsync();
+    }
 
-    dbContext.PortDetails.Add(portDetails);
+    async Task LoadPortsViewModel()
+    {
+        portsGridView = await dbContext.PortDetails.Include(p => p.Location)
+            .Select(p => new
+            PortDetailsGridView
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Lat = p.Lat,
+                Long = p.Long,
+                Country = p.Country,
+                ImageUrl = p.ImageUrl,
+                LocationName = p.Location.Name
+            }).ToArrayAsync();
+    }
 
-    await dbContext.SaveChangesAsync();
+    async Task SaveLocation()
+    {
+        PortDetails portDetails = portForm.Map(form => new PortDetails()
+        {
+            Name = form.Name,
+            LocationId = int.Parse(form.SelectedLocation),
+            Country = form.Country,
+            Description = form.Description,
+            ImageUrl = form.ImageUrl
+        });
 
-    portForm = new PortDetailsForm();
+        dbContext.PortDetails.Add(portDetails);
 
-    await LoadPorts();
-}
+        await dbContext.SaveChangesAsync();
+
+        portForm = new PortDetailsForm();
+
+        await LoadPortsViewModel();
+    }
 
 }
