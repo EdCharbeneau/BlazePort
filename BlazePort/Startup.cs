@@ -16,6 +16,7 @@ namespace BlazePort
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTelerikBlazor();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             string modelPath = Path.Combine(Environment.CurrentDirectory, "MLModels", "TripCostModel.zip"); ;
