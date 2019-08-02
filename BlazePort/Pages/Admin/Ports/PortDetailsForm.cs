@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BlazePort.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlazePort.Pages.Admin
 {
@@ -13,5 +14,14 @@ namespace BlazePort.Pages.Admin
         public string ImageUrl { get; set; }
         [Required(AllowEmptyStrings = false)]
         public string SelectedLocation { get; set; }
+
+        public PortDetails ToPortDetails() => new PortDetails()
+        {
+            Name = Name,
+            LocationId = int.Parse(SelectedLocation),
+            Country = Country,
+            Description = Description,
+            ImageUrl = ImageUrl
+        };
     }
 }

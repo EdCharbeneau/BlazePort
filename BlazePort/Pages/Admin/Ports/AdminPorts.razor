@@ -1,45 +1,58 @@
 @page "/admin/ports"
-@using BlazePort.Data
-@using Microsoft.EntityFrameworkCore
-@inject BlazePortContext dbContext
+@inherits AdminPortsBase
 
 <a href="/admin/index">Admin Home</a>
 <h3>Admin Ports</h3>
 
-<EditForm Model="portForm" OnValidSubmit="@SaveLocation">
+<button @onclick="@OpenEditor">Add New Record</button>
 
-    <div class="form-group">
-        <label>Name</label>
-        <InputText @bind-Value="@portForm.Name" Class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Description</label>
-        <InputTextArea @bind-Value="@portForm.Description" Class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Country</label>
-        <InputTextArea @bind-Value="@portForm.Country" Class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Image URL</label>
-        <InputText @bind-Value="@portForm.ImageUrl" Class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Parent Location</label>
-        <InputSelect @bind-Value="@portForm.SelectedLocation" Class="form-control">
-            <option value="">--Select a location</option>
-            @if (locations != null)
-            {
-                @foreach (var location in locations)
-                {
-                    <option value="@location.Id">@location.Name</option>
-                }
-            }
-        </InputSelect>
-        <ValidationMessage For="@(()=> portForm.SelectedLocation)"></ValidationMessage>
-    </div>
-    <button>Save</button>
-</EditForm>
+<TelerikWindow Class="@PanelCss" Visible="EditorVisible">
+    <TelerikWindowActions>
+        <TelerikWindowAction Name="Close" Icon="close" OnClick="CloseEditor" />
+    </TelerikWindowActions>
+    <TelerikWindowTitle>
+        <strong>New Port Details</strong>
+    </TelerikWindowTitle>
+    <TelerikWindowContent>
+        <EditForm Model="portForm" OnValidSubmit="@SaveLocation">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label>Name</label>
+                <InputText @bind-Value="@portForm.Name" Class="form-control" />
+                <ValidationMessage For="@(()=> portForm.Name)"></ValidationMessage>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <InputTextArea @bind-Value="@portForm.Description" Class="form-control" />
+                <ValidationMessage For="@(()=> portForm.Description)"></ValidationMessage>
+            </div>
+            <div class="form-group">
+                <label>Country</label>
+                <InputTextArea @bind-Value="@portForm.Country" Class="form-control" />
+                <ValidationMessage For="@(()=> portForm.Country)"></ValidationMessage>
+            </div>
+            <div class="form-group">
+                <label>Image URL</label>
+                <InputText @bind-Value="@portForm.ImageUrl" Class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Parent Location</label>
+                <InputSelect @bind-Value="@portForm.SelectedLocation" Class="form-control">
+                    <option value="">--Select a location</option>
+                    @if (locations != null)
+                    {
+                        @foreach (var location in locations)
+                        {
+                            <option value="@location.Id">@location.Name</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(()=> portForm.SelectedLocation)"></ValidationMessage>
+            </div>
+            <button>Save</button>
+        </EditForm>
+    </TelerikWindowContent>
+</TelerikWindow>
 
 <TelerikGrid Data="portsGridView"
              Sortable="true"
@@ -50,60 +63,6 @@
         <TelerikGridColumn Field="@nameof(PortDetailsGridView.LatLong)" />
         <TelerikGridColumn Field="@nameof(PortDetailsGridView.Country)" />
         <TelerikGridColumn Field="@nameof(PortDetailsGridView.LocationName)" />
-        <TelerikGridColumn Field="@nameof(PortDetailsGridView.ShortDescriptioin)" />
+        <TelerikGridColumn Field="@nameof(PortDetailsGridView.ShortDescription)" />
     </TelerikGridColumns>
 </TelerikGrid>
-
-@code {
-
-    PortDetails[] ports;
-    PortDetailsGridView[] portsGridView;
-
-    PortDetailsForm portForm = new PortDetailsForm();
-
-    LocationDetails[] locations;
-
-    protected override async Task OnInitAsync()
-    {
-        await LoadPortsViewModel();
-        locations = await dbContext.Locations.ToArrayAsync();
-    }
-
-    async Task LoadPortsViewModel()
-    {
-        portsGridView = await dbContext.PortDetails.Include(p => p.Location)
-            .Select(p => new
-            PortDetailsGridView
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Lat = p.Lat,
-                Long = p.Long,
-                Country = p.Country,
-                ImageUrl = p.ImageUrl,
-                LocationName = p.Location.Name
-            }).ToArrayAsync();
-    }
-
-    async Task SaveLocation()
-    {
-        PortDetails portDetails = portForm.Map(form => new PortDetails()
-        {
-            Name = form.Name,
-            LocationId = int.Parse(form.SelectedLocation),
-            Country = form.Country,
-            Description = form.Description,
-            ImageUrl = form.ImageUrl
-        });
-
-        dbContext.PortDetails.Add(portDetails);
-
-        await dbContext.SaveChangesAsync();
-
-        portForm = new PortDetailsForm();
-
-        await LoadPortsViewModel();
-    }
-
-}
