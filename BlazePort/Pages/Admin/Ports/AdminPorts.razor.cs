@@ -48,7 +48,7 @@ namespace BlazePort.Pages.Admin.Ports
             var item = portForm.ToPortDetails();
             Db.PortDetails.Add(item);
                                   
-            //await Db.SaveChangesAsync();
+            await Db.SaveChangesAsync();
 
             LastSuccessfulSave = item;
 
