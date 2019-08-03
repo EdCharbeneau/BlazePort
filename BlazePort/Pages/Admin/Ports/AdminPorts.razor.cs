@@ -12,15 +12,12 @@ namespace BlazePort.Pages.Admin.Ports
         [Inject] BlazePortContext Db { get; set; }
         protected FlyoutPanel EditorPanel { get; set; }
         protected Notification SuccessNotification { get; set; }
+
         protected PortDetailsGridView[] portsGridView;
 
         protected PortDetailsForm portForm = new PortDetailsForm();
 
         protected LocationDetails[] locations;
-
-        protected bool SuccessMessageVisible => LastSuccessfulSave != null;
-
-        protected PortDetails LastSuccessfulSave { get; set; }
 
         protected override async Task OnInitAsync()
         {
@@ -45,12 +42,9 @@ namespace BlazePort.Pages.Admin.Ports
 
         protected async Task SaveLocation()
         {
-            var item = portForm.ToPortDetails();
-            Db.PortDetails.Add(item);
-                                  
-            await Db.SaveChangesAsync();
+            Db.PortDetails.Add(portForm.ToPortDetails());
 
-            LastSuccessfulSave = item;
+            await Db.SaveChangesAsync();
 
             portsGridView = await LoadPortsViewModel();
 
