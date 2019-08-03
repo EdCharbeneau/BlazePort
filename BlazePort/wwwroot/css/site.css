@@ -6409,47 +6409,6 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
-.main-menu {
-  background-color: #808080;
-  margin-left: -15px;
-  margin-right: -15px; }
-
-.nav-link {
-  border-radius: 5px;
-  background-color: white;
-  margin: 5px; }
-
-.fly-out-panel {
-  top: 0;
-  left: -50%;
-  width: 50%;
-  height: 100%;
-  border-radius: 0;
-  box-shadow: 5px 0px 10px -2px #888888;
-  animation: fly-out-animation 0.7s ease forwards; }
-
-.fly-out-panel-close {
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  border-radius: 0;
-  animation: fly-out-animation-close 0.7s ease forwards; }
-
-@keyframes fly-out-animation {
-  100% {
-    left: 0px; } }
-
-@keyframes fly-out-animation-close {
-  100% {
-    opacity: 0;
-    left: -50%;
-    display: none;
-    visibility: none; } }
-
-.content {
-  margin-top: 15px; }
-
 .k-button[disabled], .k-button[disabled]:focus, .k-button[disabled].k-state-focused,
 [disabled] .k-button,
 [disabled] .k-button:focus,
@@ -23040,3 +22999,24 @@ kendo-scheduler .k-event .k-event-template {
   color: #292b2c;
   background-color: white;
   box-shadow: 0 0 15px rgba(33, 37, 41, 0.125); }
+
+.main-menu {
+  background-color: #808080;
+  margin-left: -15px;
+  margin-right: -15px; }
+
+.nav-link {
+  border-radius: 5px;
+  background-color: white;
+  margin: 5px; }
+
+.fly-out-panel > .k-animation-container {
+  height: 100%; }
+
+.fly-out-panel .k-child-animation-container {
+  width: calc(100% - 20px);
+  background-color: white;
+  box-shadow: 5px 0px 10px -2px #888888; }
+
+.content {
+  margin-top: 15px; }

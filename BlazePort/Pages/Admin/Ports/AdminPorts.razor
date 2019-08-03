@@ -1,58 +1,57 @@
 @page "/admin/ports"
+@using BlazePort.Components;
 @inherits AdminPortsBase
 
 <a href="/admin/index">Admin Home</a>
 <h3>Admin Ports</h3>
 
-<button @onclick="@OpenEditor">Add New Record</button>
+<div class="my-2">
+    <TelerikButton OnClick="@OpenEditor" Icon="@IconName.PlusCircle">Add New Record</TelerikButton>
+</div>
 
-<TelerikWindow Class="@PanelCss" Visible="EditorVisible">
-    <TelerikWindowActions>
-        <TelerikWindowAction Name="Close" Icon="close" OnClick="CloseEditor" />
-    </TelerikWindowActions>
-    <TelerikWindowTitle>
-        <strong>New Port Details</strong>
-    </TelerikWindowTitle>
-    <TelerikWindowContent>
-        <EditForm Model="portForm" OnValidSubmit="@SaveLocation">
-            <DataAnnotationsValidator />
-            <div class="form-group">
-                <label>Name</label>
-                <InputText @bind-Value="@portForm.Name" Class="form-control" />
-                <ValidationMessage For="@(()=> portForm.Name)"></ValidationMessage>
-            </div>
-            <div class="form-group">
-                <label>Description</label>
-                <InputTextArea @bind-Value="@portForm.Description" Class="form-control" />
-                <ValidationMessage For="@(()=> portForm.Description)"></ValidationMessage>
-            </div>
-            <div class="form-group">
-                <label>Country</label>
-                <InputTextArea @bind-Value="@portForm.Country" Class="form-control" />
-                <ValidationMessage For="@(()=> portForm.Country)"></ValidationMessage>
-            </div>
-            <div class="form-group">
-                <label>Image URL</label>
-                <InputText @bind-Value="@portForm.ImageUrl" Class="form-control" />
-            </div>
-            <div class="form-group">
-                <label>Parent Location</label>
-                <InputSelect @bind-Value="@portForm.SelectedLocation" Class="form-control">
-                    <option value="">--Select a location</option>
-                    @if (locations != null)
+<FlyoutPanel @ref="EditorPanel" Title="New Port">
+    <EditForm Model="portForm" OnValidSubmit="@SaveLocation">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label>Name</label>
+            <InputText @bind-Value="@portForm.Name" Class="form-control" />
+            <ValidationMessage For="@(()=> portForm.Name)"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <InputTextArea @bind-Value="@portForm.Description" Class="form-control" />
+            <ValidationMessage For="@(()=> portForm.Description)"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label>Country</label>
+            <InputTextArea @bind-Value="@portForm.Country" Class="form-control" />
+            <ValidationMessage For="@(()=> portForm.Country)"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <label>Image URL</label>
+            <InputText @bind-Value="@portForm.ImageUrl" Class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Parent Location</label>
+            <InputSelect @bind-Value="@portForm.SelectedLocation" Class="form-control">
+                <option value="">--Select a location</option>
+                @if (locations != null)
+                {
+                    @foreach (var location in locations)
                     {
-                        @foreach (var location in locations)
-                        {
-                            <option value="@location.Id">@location.Name</option>
-                        }
+                        <option value="@location.Id">@location.Name</option>
                     }
-                </InputSelect>
-                <ValidationMessage For="@(()=> portForm.SelectedLocation)"></ValidationMessage>
-            </div>
-            <button>Save</button>
-        </EditForm>
-    </TelerikWindowContent>
-</TelerikWindow>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(()=> portForm.SelectedLocation)"></ValidationMessage>
+        </div>
+        <TelerikButton Icon="@IconName.Save">Save</TelerikButton>
+    </EditForm>
+</FlyoutPanel>
+
+<Notification @ref="SuccessNotification" Title="New Item" Color="success">
+    <p>The new item saved successfully.</p>
+</Notification>
 
 <TelerikGrid Data="portsGridView"
              Sortable="true"

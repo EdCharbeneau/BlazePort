@@ -1,0 +1,36 @@
+﻿@using Telerik.Blazor.Components.AnimationContainer
+@using Telerik.Blazor.Components.Button
+
+<div class="fly-out-panel">
+    <TelerikAnimationContainer AnimationType="AnimationType.SlideRight" @ref="Panel"
+                               Top="0" Left="0" Height="100%" Width="50%">
+        <div class="k-window-titlebar k-dialog-titlebar k-header">
+            <div class="k-window-title k-dialog-title">
+                <strong>@Title</strong>
+            </div>
+            <TelerikButton Icon="close" OnClick="HideAsync"></TelerikButton>
+        </div>
+        <div class="k-content k-window-content k-dialog-content">
+            @ChildContent
+        </div>
+    </TelerikAnimationContainer>
+</div>
+
+@code {
+    TelerikAnimationContainer Panel { get; set; }
+
+    [Parameter] string Title { get; set; }
+
+    [Parameter] RenderFragment ChildContent { get; set; }
+
+    public async Task HideAsync()
+    {
+        await Panel.HideAsync();
+    }
+
+    public async Task ShowAsync()
+    {
+        await Panel.ShowAsync();
+    }
+
+}

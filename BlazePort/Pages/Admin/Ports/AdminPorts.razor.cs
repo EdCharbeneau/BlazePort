@@ -1,4 +1,5 @@
-﻿using BlazePort.Data;
+﻿using BlazePort.Components;
+using BlazePort.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -9,16 +10,17 @@ namespace BlazePort.Pages.Admin.Ports
     public class AdminPortsBase : ComponentBase
     {
         [Inject] BlazePortContext Db { get; set; }
-
-        protected bool EditorVisible { get; set; }
-
-        protected string PanelCss { get; set; }
-
+        protected FlyoutPanel EditorPanel { get; set; }
+        protected Notification SuccessNotification { get; set; }
         protected PortDetailsGridView[] portsGridView;
 
         protected PortDetailsForm portForm = new PortDetailsForm();
 
         protected LocationDetails[] locations;
+
+        protected bool SuccessMessageVisible => LastSuccessfulSave != null;
+
+        protected PortDetails LastSuccessfulSave { get; set; }
 
         protected override async Task OnInitAsync()
         {
@@ -28,15 +30,12 @@ namespace BlazePort.Pages.Admin.Ports
 
         protected async Task CloseEditor()
         {
-            PanelCss = "fly-out-panel-close";
-            await Task.Delay(700);
-            EditorVisible = false;
+            await EditorPanel.HideAsync();
         }
 
-        protected void OpenEditor()
+        protected async Task OpenEditor()
         {
-            PanelCss = "fly-out-panel";
-            EditorVisible = true;
+            await EditorPanel.ShowAsync();
         }
 
         protected async Task<PortDetailsGridView[]> LoadPortsViewModel() =>
@@ -46,13 +45,20 @@ namespace BlazePort.Pages.Admin.Ports
 
         protected async Task SaveLocation()
         {
-            Db.PortDetails.Add(portForm.ToPortDetails());
+            var item = portForm.ToPortDetails();
+            Db.PortDetails.Add(item);
+                                  
+            //await Db.SaveChangesAsync();
 
-            await Db.SaveChangesAsync();
+            LastSuccessfulSave = item;
 
             portsGridView = await LoadPortsViewModel();
 
             portForm = new PortDetailsForm();
+
+            await EditorPanel.HideAsync();
+
+            await SuccessNotification.Show();
         }
     }
 }

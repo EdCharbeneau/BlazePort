@@ -1,6 +1,6 @@
 ﻿@import "bootstrap";
-@import "components/all";
 @import "telerik";
+@import "components/all";
 
 .validation-message {
     @extend .text-danger;
