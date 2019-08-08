@@ -12,6 +12,7 @@ namespace BlazePort.Pages.Admin.Ports
         [Inject] BlazePortContext Db { get; set; }
         protected FlyoutPanel EditorPanel { get; set; }
         protected Notification SuccessNotification { get; set; }
+        protected Notification FailNotification { get; set; }
 
         protected PortDetailsGridView[] portsGridView;
 
@@ -44,7 +45,14 @@ namespace BlazePort.Pages.Admin.Ports
         {
             Db.PortDetails.Add(portForm.ToPortDetails());
 
-            await Db.SaveChangesAsync();
+            try
+            {
+                await Db.SaveChangesAsync();
+            }
+            catch (System.Exception)
+            {
+                await FailNotification.Show();
+            }
 
             portsGridView = await LoadPortsViewModel();
 

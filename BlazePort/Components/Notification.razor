@@ -2,7 +2,7 @@
 
 <div style="position: absolute; top: calc(50% - 100px); left: calc(50% - 150px)">
     <TelerikAnimationContainer @ref="@AnimationContainer" Width="300px" Height="200px" AnimationType=@AnimationType.Fade>
-        <div class="k-widget k-popup k-notification k-notification-@Color">
+        <div class="k-widget k-popup k-notification k-notification-@Theme">
             <div class="notification-content">
                 <h3>@Title</h3>
                 @ChildContent
@@ -12,13 +12,14 @@
 </div>
 
 @code {
+
     public TelerikAnimationContainer AnimationContainer { get; set; }
 
     [Parameter] RenderFragment ChildContent { get; set; }
 
     [Parameter] string Title { get; set; }
 
-    [Parameter] string Color { get; set; }
+    [Parameter] string Theme { get; set; }
 
     public async Task Show()
     {
