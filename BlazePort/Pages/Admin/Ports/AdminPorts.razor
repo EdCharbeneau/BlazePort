@@ -13,7 +13,7 @@
     <TitleTemplate>
         <strong>New Port</strong>
     </TitleTemplate>
-    <FlyoutContent>
+    <ContentTemplate>
         <EditForm Model="portForm" OnValidSubmit="@SaveLocation">
             <DataAnnotationsValidator />
             <div class="form-group">
@@ -51,7 +51,7 @@
             </div>
             <TelerikButton Icon="@IconName.Save">Save</TelerikButton>
         </EditForm>
-    </FlyoutContent>
+    </ContentTemplate>
 </FlyoutPanel>
 
 <Notification @ref="SuccessNotification" Title="New Item" Theme="@Theme.Success">

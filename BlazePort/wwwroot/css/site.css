@@ -23020,3 +23020,6 @@ kendo-scheduler .k-event .k-event-template {
 
 .content {
   margin-top: 15px; }
+
+.k-datepicker {
+  width: 100%; }

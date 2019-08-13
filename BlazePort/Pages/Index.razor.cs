@@ -1,4 +1,5 @@
-﻿using BlazePort.Data;
+﻿using BlazePort.Components;
+using BlazePort.Data;
 using BlazePort.Models.FormModels;
 using BlazePort.TripCost.Service;
 using BlazePort.TripCost.Service.DataStructures;
@@ -28,6 +29,15 @@ namespace BlazePort.Pages
 
         protected TripConfiguration form = new TripConfiguration();
 
+        [Parameter] protected FlyoutPanel ConfigurationPanel { get; set; }
+
+        string ArrivalLocation() => DestinationLocations.First(l => l.Id == int.Parse(form.SelectedDestinationId)).Name;
+        string ArrivalPort() => DestinationPorts.First(l => l.Id == int.Parse(form.SelectedPortOfEntryId)).Name;
+        protected string ArrivalTo => $"{ArrivalLocation()} - {ArrivalPort()}";
+        string DepartureLocation() => DepartureLocations.First(l => l.Id == int.Parse(form.SelectedDepartureId)).Name;
+        string DeparturePort() => DeparturePorts.First(l => l.Id == int.Parse(form.SelectedPortOfTravelId)).Name;
+        protected string DepartureFrom => $"{DepartureLocation()} - {DeparturePort()}";
+        protected bool IsValid { get; set; }
         protected override async Task OnInitAsync()
         {
             DepartureLocations = await dbContext.Locations.ToArrayAsync();
@@ -35,34 +45,34 @@ namespace BlazePort.Pages
 
         protected async Task OnLocationChanged(string selectedValue)
         {
-            form.SelectedDeparture = selectedValue;
+            form.SelectedDepartureId = selectedValue;
             DeparturePorts = await GetPortsByLocation(selectedValue);
-            form.SelectedPortOfTravel = DeparturePorts[0].Id.ToString();
+            form.SelectedPortOfTravelId = DeparturePorts[0].Id.ToString();
             await ClearDestinations(selectedValue);
         }
 
         protected void OnDeparturePortChanged(string selectedValue)
         {
-            form.SelectedPortOfTravel = selectedValue;
+            form.SelectedPortOfTravelId = selectedValue;
         }
 
         protected void OnPortOfEntryChanged(string selectedValue)
         {
-            form.SelectedPortOfEntry = selectedValue;
+            form.SelectedPortOfEntryId = selectedValue;
         }
 
         private async Task ClearDestinations(string selectedValue)
         {
             DestinationLocations = await dbContext.Locations.Where(loc => loc.Id != int.Parse(selectedValue)).ToArrayAsync();
-            form.SelectedDestination = "";
+            form.SelectedDestinationId = "";
             DestinationPorts = null;
         }
 
         protected async Task OnDestinationChanged(string selectedValue)
         {
-            form.SelectedDestination = selectedValue;
+            form.SelectedDestinationId = selectedValue;
             DestinationPorts = await GetPortsByLocation(selectedValue);
-            form.SelectedPortOfEntry = DestinationPorts[0].Id.ToString();
+            form.SelectedPortOfEntryId = DestinationPorts[0].Id.ToString();
         }
 
         private async Task<PortDetails[]> GetPortsByLocation(string selectedValue) =>
@@ -70,8 +80,9 @@ namespace BlazePort.Pages
                 .Where(p => p.LocationId == int.Parse(selectedValue))
                 .ToArrayAsync();
 
-        public void OnTripEstimateTripCost()
+        public async Task OnTripEstimateTripCost()
         {
+            IsValid = true;
             Trip trip = new Trip();
 
             trip.PassengerCount = form.PassengerCount;
@@ -81,11 +92,17 @@ namespace BlazePort.Pages
             trip.RateCode = form.rateCode.ToString();
 
             totalPrice = tripCostService.PredictFare(trip).FareAmount;
+            await ConfigurationPanel.HideAsync();
         }
 
         public void InvalidSubmit()
         {
-            Console.WriteLine("invalid submit");
+            IsValid = false;
+        }
+
+        public async Task ShowConfigurationPanel()
+        {
+            await ConfigurationPanel.ShowAsync();
         }
     }
 }
