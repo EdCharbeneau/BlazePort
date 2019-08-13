@@ -3,7 +3,7 @@
 
 <div class="fly-out-panel">
     <TelerikAnimationContainer AnimationType="AnimationType.SlideRight" @ref="Panel"
-                               Top="0" Left="0" Height="100%" Width="50%">
+                               Top="0" Left="0" Height="100%" Width="@Width">
         <div class="k-window-titlebar k-dialog-titlebar k-header">
             <div class="k-window-title k-dialog-title">
                 @TitleTemplate
@@ -11,7 +11,7 @@
             <TelerikButton Icon="close" OnClick="HideAsync"></TelerikButton>
         </div>
         <div class="k-content k-window-content k-dialog-content">
-            @FlyoutContent
+            @ContentTemplate
         </div>
     </TelerikAnimationContainer>
 </div>
@@ -19,9 +19,11 @@
 @code {
     TelerikAnimationContainer Panel { get; set; }
 
+    [Parameter] string Width { get; set; } = "50%";
+
     [Parameter] RenderFragment TitleTemplate { get; set; }
 
-    [Parameter] RenderFragment FlyoutContent { get; set; }
+    [Parameter] RenderFragment ContentTemplate { get; set; }
 
     public async Task HideAsync()
     {
