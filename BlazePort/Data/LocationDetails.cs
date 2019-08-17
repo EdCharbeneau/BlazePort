@@ -12,6 +12,7 @@ namespace BlazePort.Data
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
+        public float Distance { get; set; }
 
         public List<PortDetails> Ports { get; set; }
 

@@ -17,15 +17,15 @@ else
         <li>@port.Lat, @port.Long</li>
     </ol>
 }
-    @code {
+@code {
 
-[Parameter] int Id { get; set; }
+    [Parameter] public int Id { get; set; }
 
     PortDetails port;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         port = await dbContext.PortDetails.FirstAsync(p => p.Id == Id);
     }
 
-    }
+}

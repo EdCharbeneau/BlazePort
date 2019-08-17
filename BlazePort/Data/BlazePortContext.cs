@@ -30,13 +30,15 @@ namespace BlazePort.Data
                 Id = 6,
                 Name = "Earth",
                 Description = "Earth is the third planet from the Sun, and the only astronomical object known to harbor life. According to radiometric dating and other sources of evidence, Earth formed over 4.5 billion years ago.[24][25][26] Earth's gravity interacts with other objects in space, especially the Sun and the Moon, Earth's only natural satellite. Earth orbits around the Sun in 365.26 days, a period known as an Earth year. During this time, Earth rotates about its axis about 366.26 times.",
-            });
+                Distance = 0
+            }); ;
 
             locations.Add(new LocationDetails
             {
                 Id = 7,
                 Name = "Earth's Moon",
                 Description = "The Moon is an astronomical body that orbits planet Earth and is Earth's only permanent natural satellite. It is the fifth-largest natural satellite in the Solar System, and the largest among planetary satellites relative to the size of the planet that it orbits (its primary). The Moon is after Jupiter's satellite Io the second-densest satellite in the Solar System among those whose densities are known.",
+                Distance = 0.239F
             });
 
             locations.Add(new LocationDetails
@@ -44,6 +46,7 @@ namespace BlazePort.Data
                 Id = 8,
                 Name = "Mars",
                 Description = "Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System after Mercury. In English, Mars carries a name of the Roman god of war, and is often referred to as the \"Red Planet\"[15][16] because the iron oxide prevalent on its surface gives it a reddish appearance that is distinctive among the astronomical bodies visible to the naked eye.[17] Mars is a terrestrial planet with a thin atmosphere, having surface features reminiscent both of the impact craters of the Moon and the valleys, deserts, and polar ice caps of Earth.",
+                Distance = 140F
             });
 
             return locations;

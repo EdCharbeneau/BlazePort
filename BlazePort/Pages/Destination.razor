@@ -21,11 +21,11 @@ else
 }
 @code {
 
-    [Parameter] int Id { get; set; }
+    [Parameter] public int Id { get; set; }
 
     LocationDetails location;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         location = await dbContext.Locations.Include(l => l.Ports)
                                             .FirstAsync(l => l.Id == Id);

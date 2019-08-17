@@ -20,7 +20,7 @@ namespace BlazePort.Pages.Admin.Ports
 
         protected LocationDetails[] locations;
 
-        protected override async Task OnInitAsync()
+        protected override async Task OnInitializedAsync()
         {
             portsGridView = await LoadPortsViewModel();
             locations = await Db.Locations.ToArrayAsync();

@@ -41,17 +41,14 @@
 </div>
 
 @code {
-    [Parameter] protected string LocationLabel { get; set; }
-    [Parameter] protected string PortLabel { get; set; }
-
-    [Parameter] protected string LocationSelectedValue { get; set; }
-    [Parameter] protected string PortSelectedValue { get; set; }
-
-    [Parameter] protected EventCallback<string> OnLocationChanged { get; set; }
-    [Parameter] protected EventCallback<string> OnPortChanged { get; set; }
-
-    [Parameter] protected LocationDetails[] Locations { get; set; }
-    [Parameter] protected PortDetails[] Ports { get; set; }
+    [Parameter] public string LocationLabel { get; set; }
+    [Parameter] public string PortLabel { get; set; }
+    [Parameter] public string LocationSelectedValue { get; set; }
+    [Parameter] public string PortSelectedValue { get; set; }
+    [Parameter] public EventCallback<string> OnLocationChanged { get; set; }
+    [Parameter] public EventCallback<string> OnPortChanged { get; set; }
+    [Parameter] public LocationDetails[] Locations { get; set; }
+    [Parameter] public PortDetails[] Ports { get; set; }
 
     void HandleOnLocationChanged(string selectedValue)
     {

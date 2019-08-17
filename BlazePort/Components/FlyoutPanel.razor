@@ -2,7 +2,7 @@
 @using Telerik.Blazor.Components.Button
 
 <div class="fly-out-panel">
-    <TelerikAnimationContainer AnimationType="AnimationType.SlideRight" @ref="Panel"
+    <TelerikAnimationContainer AnimationType="AnimationType.SlideRight" @ref="Panel" @ref:suppressField
                                Top="0" Left="0" Height="100%" Width="@Width">
         <div class="k-window-titlebar k-dialog-titlebar k-header">
             <div class="k-window-title k-dialog-title">
@@ -19,11 +19,11 @@
 @code {
     TelerikAnimationContainer Panel { get; set; }
 
-    [Parameter] string Width { get; set; } = "50%";
+    [Parameter] public string Width { get; set; } = "50%";
 
-    [Parameter] RenderFragment TitleTemplate { get; set; }
+    [Parameter] public RenderFragment TitleTemplate { get; set; }
 
-    [Parameter] RenderFragment ContentTemplate { get; set; }
+    [Parameter] public RenderFragment ContentTemplate { get; set; }
 
     public async Task HideAsync()
     {

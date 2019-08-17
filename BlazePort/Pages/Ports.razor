@@ -1,7 +1,7 @@
 @layout CenteredContentLayout
 @page "/ports"
 
-@using GenFu;
+@using GenFu
 
 @using Data;
 
@@ -28,7 +28,7 @@
 
     PortDetails[] ports;
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
         //Locations = locationService.GetLocations().ToArray();
         A.Configure<PortDetails>()
