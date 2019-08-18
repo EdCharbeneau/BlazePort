@@ -42,5 +42,6 @@ namespace BlazePort.Pages
             totalPrice = TripCostService.PredictFare(trip).FareAmount;
             await ConfigurationPanel.HideAsync();
         }
+
     }
 }
