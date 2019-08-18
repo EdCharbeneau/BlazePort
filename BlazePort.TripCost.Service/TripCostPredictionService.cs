@@ -25,7 +25,11 @@ namespace BlazePort.TripCost.Service
             var predEngine = mlContext.Model.CreatePredictionEngine<Trip, TripCostPrediction>(trainedModel);
 
             //Score
-            return predEngine.Predict(trip);
+            var prediction = predEngine.Predict(trip);
+
+            prediction.FareAmount *= 1000;
+
+            return prediction;
         }
     }
 }
