@@ -1,0 +1,80 @@
+﻿@using Data
+@inject BlazePortContext dbContext
+
+<div class="form-group">
+    <label>Dates</label>
+    <TelerikDatePicker @bind-Value="Form.TripStart" Min="@DateTime.Now.AddDays(1)" />
+    <ValidationMessage For="@(()=> Form.TripStart)"></ValidationMessage>
+</div>
+
+<div class="form-group">
+    <label>Passenger</label>
+    <InputNumber @bind-Value="Form.PassengerCount" Class="form-control"></InputNumber>
+    <ValidationMessage For="@(()=> Form.PassengerCount)"></ValidationMessage>
+</div>
+
+<LocationDropdowns LocationLabel="Departure"
+    LocationSelectedValue="@Form.SelectedDepartureLocationId"
+    Locations="@Form.DepartureLocations"
+    OnLocationChanged="OnLocationChanged"
+    PortLabel="Departure Port"
+    Ports="@Form.DeparturePorts"
+    PortSelectedValue="@Form.SelectedDeparturePortId"
+    OnPortChanged="OnDeparturePortChanged" />
+
+<LocationDropdowns LocationLabel="Arrival"
+                   LocationSelectedValue="@Form.SelectedArrivalLocationId"
+                   Locations="@Form.ArrivalLocations"
+                   OnLocationChanged="OnDestinationChanged"
+                   PortLabel="Arrival Port"
+                   Ports="@Form.ArrivalPorts"
+                   PortSelectedValue="@Form.SelectedArrivalPortId"
+                   OnPortChanged="OnPortOfEntryChanged" />
+
+@code {
+    [Parameter] public TripConfigurationModel Form { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Form.DepartureLocations = await dbContext.Locations.ToArrayAsync();
+    }
+
+    protected async Task OnLocationChanged(string selectedValue)
+    {
+        Form.SelectedDepartureLocationId = selectedValue;
+        Form.DeparturePorts = await GetPortsByLocation(selectedValue);
+        Form.SelectedDeparturePortId = Form.DeparturePorts[0].Id.ToString();
+        await ClearDestinations(selectedValue);
+    }
+
+    protected void OnDeparturePortChanged(string selectedValue)
+    {
+        Form.SelectedDeparturePortId = selectedValue;
+    }
+
+    protected void OnPortOfEntryChanged(string selectedValue)
+    {
+        Form.SelectedArrivalPortId = selectedValue;
+    }
+
+    private async Task ClearDestinations(string selectedValue)
+    {
+        Form.ArrivalLocations = await dbContext.Locations.Where(loc => loc.Id != int.Parse(selectedValue)).ToArrayAsync();
+        Form.SelectedArrivalLocationId = Form.ArrivalLocations.First().Id.ToString();
+        await OnDestinationChanged(Form.SelectedArrivalLocationId);
+    }
+
+    protected async Task OnDestinationChanged(string selectedValue)
+    {
+        Form.SelectedArrivalLocationId = selectedValue;
+        Form.ArrivalPorts = await GetPortsByLocation(selectedValue);
+        Form.SelectedArrivalPortId = Form.ArrivalPorts[0].Id.ToString();
+    }
+
+    private async Task<PortDetails[]> GetPortsByLocation(string selectedValue) =>
+         await dbContext.PortDetails
+            .Where(p => p.LocationId == int.Parse(selectedValue))
+            .ToArrayAsync();
+
+
+}

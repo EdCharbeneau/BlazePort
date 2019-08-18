@@ -1,0 +1,12 @@
+﻿<div class="row h-100">
+    <div class="col-sm-12 my-auto">
+        <div class="card card-block w-25 mx-auto">
+            <h3>TripEmptyState</h3>
+            @ButtonTemplate
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public RenderFragment ButtonTemplate { get; set; }
+}

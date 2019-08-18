@@ -10,8 +10,6 @@
 
     [Parameter] public DateTime CountdownTo { get; set; }
 
-    Timer timer;
-
     protected override void OnParametersSet()
     {
         var timer = new Timer(new TimerCallback(_ =>

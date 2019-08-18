@@ -1,0 +1,56 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="h3">Departing: </label>
+            <span class="h3 text-muted">
+                @TripConfiguration.TripStart.ToShortDateString()
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="h3">Departure from: </label>
+            <span class="h3 text-muted">@TripConfiguration.DepartureFrom</span>
+        </div>
+        <div class="form-group">
+            <label class="h3">Arriving to: </label>
+            <span class="h3 text-muted">@TripConfiguration.ArrivalTo</span>
+        </div>
+        <div class="form-group">
+            <label class="h3">Passengers: </label>
+            <span class="h3 text-muted">
+                <PassengerCount Count="TripConfiguration.PassengerCount" />
+            </span>
+        </div>
+        @ButtonTemplate
+    </div>
+    <div class="col-md-6">
+        <!-- Calculated -->
+        <div class="form-group">
+            <label class="h3">Time until trip: </label>
+            <span class="h3 text-muted">
+                <Countdown CountdownTo="@TripConfiguration.TripStart" />
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="h3">Total Price: </label>
+            <span class="h3 text-muted">@TotalPrice.ToString("C2")</span>
+        </div>
+        <div class="form-group">
+            <label class="h3">Trip Time: </label>
+            <span class="h3 text-muted">
+                <span>@TripConfiguration.FormattedTripTimeFromDistance</span>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="h3">Trip Distance: </label>
+            <span class="h3 text-muted">@TripConfiguration.FormattedMiles</span>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public TripConfigurationModel TripConfiguration { get; set; }
+
+    [Parameter] public RenderFragment ButtonTemplate { get; set; }
+
+    [Parameter] public float TotalPrice { get; set; }
+}

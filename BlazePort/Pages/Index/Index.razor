@@ -1,0 +1,41 @@
+﻿@page "/"
+@inherits BlazePort.Pages.IndexBase
+@using BlazePort.Components
+
+@if (totalPrice > 0)
+{
+    <TripOverview TripConfiguration="TripConfiguration" TotalPrice="totalPrice">
+        <ButtonTemplate>
+            <TelerikButton OnClick="ShowConfigurationPanel">Edit Trip</TelerikButton>
+            <TelerikButton Class="k-primary">Book Now</TelerikButton>
+        </ButtonTemplate>
+    </TripOverview>
+}
+else
+{
+    <TripEmptyState>
+        <ButtonTemplate>
+            <TelerikButton OnClick="ShowConfigurationPanel" Class="k-primary">New Trip</TelerikButton>
+        </ButtonTemplate>
+    </TripEmptyState>
+}
+
+<FlyoutPanel Width="50%" @ref="ConfigurationPanel" @ref:suppressField>
+    <TitleTemplate>
+        Trip Options
+    </TitleTemplate>
+    <ContentTemplate>
+        <EditForm Model="TripConfiguration" OnValidSubmit="@OnTripEstimateTripCost"
+                  OnInvalidSubmit="@InvalidSubmit">
+            <ValidationSummary />
+            <DataAnnotationsValidator />
+
+            <TripConfigurationForm Form="TripConfiguration"></TripConfigurationForm>
+
+            <div class="form-group">
+                <button class="btn btn-outline-primary" type="submit">Estimate Trip Cost</button>
+            </div>
+
+        </EditForm>
+    </ContentTemplate>
+</FlyoutPanel>
