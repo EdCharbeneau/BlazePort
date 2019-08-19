@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,22 +17,29 @@ namespace BlazePort.Data
         public DbSet<PortDetails> PortDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<LocationDetails>().HasData(GenerateLocations());
-            modelBuilder.Entity<PortDetails>().HasData(GeneratePorts());
+        {   
+            modelBuilder.Entity<LocationDetails>().OwnsMany<PortDetails>(p => p.Ports);
         }
 
-        private static List<LocationDetails> GenerateLocations()
+        public async Task InitializeContainerAsync()
+        {
+            await Database.EnsureCreatedAsync();
+            Locations.AddRange(GenerateLocations());
+            PortDetails.AddRange(GeneratePorts());
+            var changed = await SaveChangesAsync();
+            Console.WriteLine($"created {changed} records");
+        }
+
+        private List<LocationDetails> GenerateLocations()
         {
             var locations = new List<LocationDetails>();
-
             locations.Add(new LocationDetails
             {
                 Id = 6,
                 Name = "Earth",
                 Description = "Earth is the third planet from the Sun, and the only astronomical object known to harbor life. According to radiometric dating and other sources of evidence, Earth formed over 4.5 billion years ago.[24][25][26] Earth's gravity interacts with other objects in space, especially the Sun and the Moon, Earth's only natural satellite. Earth orbits around the Sun in 365.26 days, a period known as an Earth year. During this time, Earth rotates about its axis about 366.26 times.",
-                Distance = 0
-            }); ;
+                Distance = 0,
+            });
 
             locations.Add(new LocationDetails
             {
@@ -51,7 +59,6 @@ namespace BlazePort.Data
 
             return locations;
         }
-
         private static List<PortDetails> GeneratePorts()
         {
             var ports = new List<PortDetails>();
@@ -155,6 +162,5 @@ namespace BlazePort.Data
 
             return ports;
         }
-
     }
 }

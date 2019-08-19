@@ -3,78 +3,94 @@
 
 <div class="form-group">
     <label>Dates</label>
-    <TelerikDatePicker @bind-Value="Form.TripStart" Min="@DateTime.Now.AddDays(1)" />
-    <ValidationMessage For="@(()=> Form.TripStart)"></ValidationMessage>
+    <TelerikDatePicker @bind-Value="ViewModel.TripStart" Min="@DateTime.Now.AddDays(1)" />
+    <ValidationMessage For="@(()=> ViewModel.TripStart)"></ValidationMessage>
 </div>
 
 <div class="form-group">
     <label>Passenger</label>
-    <InputNumber @bind-Value="Form.PassengerCount" Class="form-control"></InputNumber>
-    <ValidationMessage For="@(()=> Form.PassengerCount)"></ValidationMessage>
+    <InputNumber @bind-Value="ViewModel.PassengerCount" Class="form-control"></InputNumber>
+    <ValidationMessage For="@(()=> ViewModel.PassengerCount)"></ValidationMessage>
 </div>
 
-<LocationDropdowns LocationLabel="Departure"
-    LocationSelectedValue="@Form.SelectedDepartureLocationId"
-    Locations="@Form.DepartureLocations"
-    OnLocationChanged="OnLocationChanged"
-    PortLabel="Departure Port"
-    Ports="@Form.DeparturePorts"
-    PortSelectedValue="@Form.SelectedDeparturePortId"
-    OnPortChanged="OnDeparturePortChanged" />
+<div class="form-group">
+    <label>Departing from</label>
+    <InputSelect @bind-Value="ViewModel.SelectedDepartureLocationId"
+                 Class="form-control">
+        <option value="">--Select a location</option>
+        @if (ViewModel.DepartureLocations != null)
+        {
+            @foreach (var location in ViewModel.DepartureLocations)
+            {
+                <option value="@location.Id">@location.Name</option>
+            }
+        }
+    </InputSelect>
+</div>
+<div class="form-group">
+    <label>Departure Port</label>
+    <InputSelect disabled="@(ViewModel.DepartureLocation.Ports == null)"
+                 @bind-Value="ViewModel.SelectedDeparturePortId"
+                 Class="form-control">
+        @if (ViewModel.DepartureLocation.Ports == null)
+        {
+            <option value="">--Select a location</option>
+        }
+        else
+        {
+            <option value="">--Select a port</option>
+            @foreach (var port in ViewModel.DepartureLocation.Ports)
+            {
+                <option value="@port.Id">@port.Name</option>
+            }
+        }
+    </InputSelect>
 
-<LocationDropdowns LocationLabel="Arrival"
-                   LocationSelectedValue="@Form.SelectedArrivalLocationId"
-                   Locations="@Form.ArrivalLocations"
-                   OnLocationChanged="OnDestinationChanged"
-                   PortLabel="Arrival Port"
-                   Ports="@Form.ArrivalPorts"
-                   PortSelectedValue="@Form.SelectedArrivalPortId"
-                   OnPortChanged="OnPortOfEntryChanged" />
+</div>
+
+<div class="form-group">
+    <label>Arriving to</label>
+    <InputSelect @bind-Value="ViewModel.SelectedArrivalLocationId"
+                 Class="form-control">
+        <option value="">--Select a location</option>
+        @if (ViewModel.ArrivalLocations != null)
+        {
+            @foreach (var location in ViewModel.ArrivalLocations)
+            {
+                <option value="@location.Id">@location.Name</option>
+            }
+        }
+    </InputSelect>
+</div>
+<div class="form-group">
+    <label>Departure Port</label>
+    <InputSelect disabled="@(ViewModel.ArrivalLocation.Ports == null)"
+                 @bind-Value="ViewModel.SelectedArrivalPortId"
+                 Class="form-control">
+        @if (ViewModel.ArrivalLocation.Ports == null)
+        {
+            <option value="">--Select a location</option>
+        }
+        else
+        {
+            <option value="">--Select a port</option>
+            @foreach (var port in ViewModel.ArrivalLocation.Ports)
+            {
+                <option value="@port.Id">@port.Name</option>
+            }
+        }
+    </InputSelect>
+
+</div>
+
+
 
 @code {
-    [Parameter] public TripConfigurationModel Form { get; set; }
+    [Parameter] public TripConfigurationModel ViewModel { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Form.DepartureLocations = await dbContext.Locations.ToArrayAsync();
+        ViewModel.DepartureLocations = await dbContext.Locations.ToArrayAsync();
     }
-
-    protected async Task OnLocationChanged(string selectedValue)
-    {
-        Form.SelectedDepartureLocationId = selectedValue;
-        Form.DeparturePorts = await GetPortsByLocation(selectedValue);
-        Form.SelectedDeparturePortId = Form.DeparturePorts[0].Id.ToString();
-        await ClearDestinations(selectedValue);
-    }
-
-    protected void OnDeparturePortChanged(string selectedValue)
-    {
-        Form.SelectedDeparturePortId = selectedValue;
-    }
-
-    protected void OnPortOfEntryChanged(string selectedValue)
-    {
-        Form.SelectedArrivalPortId = selectedValue;
-    }
-
-    private async Task ClearDestinations(string selectedValue)
-    {
-        Form.ArrivalLocations = await dbContext.Locations.Where(loc => loc.Id != int.Parse(selectedValue)).ToArrayAsync();
-        Form.SelectedArrivalLocationId = Form.ArrivalLocations.First().Id.ToString();
-        await OnDestinationChanged(Form.SelectedArrivalLocationId);
-    }
-
-    protected async Task OnDestinationChanged(string selectedValue)
-    {
-        Form.SelectedArrivalLocationId = selectedValue;
-        Form.ArrivalPorts = await GetPortsByLocation(selectedValue);
-        Form.SelectedArrivalPortId = Form.ArrivalPorts[0].Id.ToString();
-    }
-
-    private async Task<PortDetails[]> GetPortsByLocation(string selectedValue) =>
-         await dbContext.PortDetails
-            .Where(p => p.LocationId == int.Parse(selectedValue))
-            .ToArrayAsync();
-
 
 }
