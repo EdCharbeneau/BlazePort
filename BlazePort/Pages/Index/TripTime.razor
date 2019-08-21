@@ -1,0 +1,22 @@
+﻿
+@if (time.Days > 0)
+{
+    <span class="tt-days">@time.Days</span>
+    <span class="tt-seperator">&nbsp;Days&nbsp;</span>
+    <span class="tt-hours">@time.Hours</span>
+    <span class="tt-seperator">&nbsp;Hours</span>
+}
+else
+{
+    <span class="tt-hours">@time.Hours</span>
+    <span class="tt-seperator">&nbsp;Hours&nbsp;</span>
+    <span class="tt-minutes">@time.Minutes</span>
+    <span class="tt-seperator">&nbsp;Minutes</span>
+}
+
+@code {
+
+    [Parameter] public float TripDistance { get; set; }
+
+    private TimeSpan time => TimeSpan.FromHours(TripDistance / .2F);
+}

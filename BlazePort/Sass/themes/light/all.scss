@@ -1,6 +1,8 @@
-﻿@import "bootstrap";
-@import "telerik";
+﻿@import "variables";
+@import "vendors";
 @import "components/all";
+
+
 
 .validation-message {
     @extend .text-danger;
@@ -12,4 +14,14 @@
 
 body, html, .content, .container-fluid {
     height:calc(100% - 50px);
+}
+
+body {
+    background-image: url("/img/blazeport-bg.jpg");
+    background-color: $vintage-cream;
+    background-size: 100%;
+    background-position-x: center;
+    background-position: top;
+    background-repeat-x: repeat;
+    background-repeat-y: no-repeat;
 }

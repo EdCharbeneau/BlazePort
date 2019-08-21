@@ -1,11 +1,85 @@
-﻿.main-menu {
-    background-color:#808080;
-    margin-left: -15px;
-    margin-right: -15px;
+﻿
+.logo-area {
+    clear: both;
+    background-color: $deep-space-blue;
+    padding: 1em;
+
+    h1 {
+        color: $accent;
+        float: none;
+        text-align: center;
+        margin: 1.5em;
+        font-size: 1em;
+
+        @include media-breakpoint-up(md) {
+            font-size: 2em;
+            margin: 10px;
+            float: left;
+        }
+    }
+
+    a {
+        color: $accent;
+        transition: all .2s;
+
+        &:hover {
+            text-decoration: none;
+            color: darken($color: $accent, $amount: 20)
+        }
+    }
 }
 
-.nav-link {
-    border-radius:5px;
-    background-color:white;
-    margin: 5px
+.site-header {
+    nav {
+        padding: 0;
+        margin-bottom: -15px;
+        z-index: 10000;
+
+        @include media-breakpoint-up(md) {
+            margin-bottom: -2em;
+        }
+    }
+}
+
+.site-nav {
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    height: 100%;
+    border-radius: 0 0 0 1rem;
+    background-color: $secondary;
+
+    @include media-breakpoint-up(lg) {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0 0 0 1rem;
+        text-transform: uppercase;
+        overflow: hidden;
+
+        @include media-breakpoint-up(md) {
+            padding: 0 0 0 3rem;
+        }
+
+        li {
+            float: left;
+
+            a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: .5rem 1rem;
+                text-decoration: none;
+                border-radius: .25rem;
+
+                &:hover {
+                    background-color: $deep-space-blue;
+                    color: $accent;
+                }
+            }
+        }
+    }
 }

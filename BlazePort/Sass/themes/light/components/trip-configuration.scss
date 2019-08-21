@@ -1,0 +1,58 @@
+﻿.card.trip-configuration {
+    background-color: transparent;
+
+    .card-body {
+    }
+
+    .card-title {
+        color: $body-bg;
+    }
+
+    .card-text {
+        color: $accent;
+
+        .primary {
+            font-weight: bold;
+            display: block;
+            color: $secondary;
+            font-size: 2.5em;
+        }
+
+        .primary-highlight {
+            font-weight: bold;
+            display: block;
+            color: $accent;
+            font-size: 2.5em;
+        }
+
+        .meta {
+            display: block;
+            font-size: 2em;
+        }
+
+        .meta-time--namepart {
+            font-size: 1.5em;
+        }
+    }
+}
+
+.t-days, .t-hours, .t-minutes, .t-seconds {
+    font-weight:bold;
+    font-size: 2.5em;
+    color: $secondary;
+}
+.t-seperator {
+    font-size: 2.5em;
+    color: $body-bg;
+}
+
+.tt-days, .tt-hours, .tt-minutes, .tt-seconds {
+    font-size: 2.5em;
+    color: $secondary;
+}
+
+.tt-seperator {
+    font-weight: bold;
+    font-size: 1em;
+    color: $body-bg;
+}

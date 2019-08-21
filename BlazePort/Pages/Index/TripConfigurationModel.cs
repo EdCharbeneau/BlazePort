@@ -94,20 +94,6 @@ namespace BlazePort.Pages.Index
 
         public LocationDetails[] ArrivalLocations { get; set; }
 
-        public string ArrivalTo => $"{ArrivalLocation?.Name} - {ArrivalPort?.Name}";
-        public string DepartureFrom => $"{DepartureLocation?.Name} - {DeparturePort?.Name}";
-
-        public string FormattedTripTimeFromDistance
-        {
-            get
-            {
-                var time = TimeSpan.FromHours(TripDistance / .2F);
-                return time.Days > 0 ?
-                    $"{time.Days} Days {time.Hours} Hours" :
-                    $"{time.Hours} Hours {time.Minutes} Minutes";
-            }
-        }
-
         public string FormattedMiles =>
               TripDistance > 1 ? $"{TripDistance}mil. Miles" :
                     $"{TripDistance * 1000}k. Miles";

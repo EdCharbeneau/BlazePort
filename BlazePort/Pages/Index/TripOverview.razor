@@ -1,48 +1,76 @@
-﻿<div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label class="h3">Departing: </label>
-            <span class="h3 text-muted">
-                @TripConfiguration.TripStart.ToShortDateString()
-            </span>
+﻿<div class="card-columns">
+    <div class="card trip-configuration">
+        <div class="card-body">
+            <h4 class="card-title">
+                Departing from
+            </h4>
+            <p class="card-text">
+                <span class="primary">
+                    @TripConfiguration.DepartureLocation?.Name
+                </span>
+                <span class="meta">
+                    @TripConfiguration.DeparturePort?.Name
+                </span>
+            </p>
         </div>
-        <div class="form-group">
-            <label class="h3">Departure from: </label>
-            <span class="h3 text-muted">@TripConfiguration.DepartureFrom</span>
-        </div>
-        <div class="form-group">
-            <label class="h3">Arriving to: </label>
-            <span class="h3 text-muted">@TripConfiguration.ArrivalTo</span>
-        </div>
-        <div class="form-group">
-            <label class="h3">Passengers: </label>
-            <span class="h3 text-muted">
-                <PassengerCount Count="TripConfiguration.PassengerCount" />
-            </span>
-        </div>
-        @ButtonTemplate
     </div>
-    <div class="col-md-6">
-        <!-- Calculated -->
-        <div class="form-group">
-            <label class="h3">Time until trip: </label>
-            <span class="h3 text-muted">
+    <div class="card trip-configuration">
+        <div class="card-body">
+            <h4 class="card-title">
+                Arriving to
+            </h4>
+            <p class="card-text">
+                <span class="primary">
+                    @TripConfiguration.ArrivalLocation?.Name
+                </span>
+                <span class="meta">
+                    @TripConfiguration.ArrivalPort?.Name
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="card trip-configuration">
+        <div class="card-body">
+            <h4 class="card-title">
+                Next trip will launch in t-minus
+            </h4>
+            <p class="card-text">
                 <Countdown CountdownTo="@TripConfiguration.TripStart" />
-            </span>
+                <span class="meta">On @TripConfiguration.TripStart.ToShortDateString()</span>
+            </p>
         </div>
-        <div class="form-group">
-            <label class="h3">Total Price: </label>
-            <span class="h3 text-muted">@TotalPrice.ToString("C2")</span>
+    </div>
+    <div class="card trip-configuration">
+        <div class="card-body">
+            <h4 class="card-title">
+                Estimated price
+            </h4>
+            <p class="card-text">
+                <span class="primary">@TotalPrice.ToString("C0")</span>
+                <span class="meta">Per Passenger</span>
+                <PassengerCount Count="TripConfiguration.PassengerCount" />
+            </p>
         </div>
-        <div class="form-group">
-            <label class="h3">Trip Time: </label>
-            <span class="h3 text-muted">
-                <span>@TripConfiguration.FormattedTripTimeFromDistance</span>
-            </span>
+    </div>
+    <div class="card trip-configuration">
+        <div class="card-body">
+            <h4 class="card-title">
+                Your trip will take
+            </h4>
+            <p class="card-text">
+                <TripTime TripDistance="TripConfiguration.TripDistance" />
+                <span class="meta">@TripConfiguration.FormattedMiles</span>
+            </p>
         </div>
-        <div class="form-group">
-            <label class="h3">Trip Distance: </label>
-            <span class="h3 text-muted">@TripConfiguration.FormattedMiles</span>
+    </div>
+    <div class="card trip-configuration">
+        <div class="card-body">
+            <h4 class="card-title">
+                Book your trip
+            </h4>
+            <p class="card-text">
+                @ButtonTemplate
+            </p>
         </div>
     </div>
 </div>

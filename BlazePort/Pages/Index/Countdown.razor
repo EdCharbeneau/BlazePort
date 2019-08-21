@@ -1,6 +1,12 @@
 ﻿@using System.Threading
 
-@CountdownMessage
+<span class="t-days">@timeSpan.Days</span>
+<span class="t-seperator">:</span>
+<span class="t-hours">@timeSpan.Hours</span>
+<span class="t-seperator">:</span>
+<span class="t-minutes">@timeSpan.Minutes</span>
+<span class="t-seperator">:</span>
+<span class="t-seconds">@timeSpan.Seconds</span>
 
 @code {
 
@@ -15,7 +21,6 @@
         var timer = new Timer(new TimerCallback(_ =>
         {
             timeSpan = CountdownTo - DateTime.Now;
-            CountdownMessage = $"{timeSpan.Days:00}:{timeSpan.Hours:00}:{timeSpan.Minutes:00}:{timeSpan.Seconds:00}";
             InvokeAsync(StateHasChanged);
         }), null, 1000, 1000);
     }

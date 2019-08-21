@@ -12,12 +12,12 @@ namespace BlazePort
             var host = CreateHostBuilder(args).Build();
 
             //Initialize the database
-            var scopeFactory = host.Services.GetRequiredService<IServiceScopeFactory>();
-            using (var scope = scopeFactory.CreateScope())// Seed COSMOS, disable after seeding
-            {
-                var db = scope.ServiceProvider.GetRequiredService<BlazePort.Data.BlazePortContext>();
-                await db.InitializeContainerAsync(); 
-            }
+            //var scopeFactory = host.Services.GetRequiredService<IServiceScopeFactory>();
+            //using (var scope = scopeFactory.CreateScope())// Seed COSMOS, disable after seeding
+            //{
+            //    var db = scope.ServiceProvider.GetRequiredService<BlazePort.Data.BlazePortContext>();
+            //    await db.InitializeContainerAsync();
+            //}
 
             host.Run();
         }

@@ -9,83 +9,60 @@
 
 <div class="form-group">
     <label>Passenger</label>
-    <InputNumber @bind-Value="ViewModel.PassengerCount" Class="form-control"></InputNumber>
+    <TelerikNumericTextBox @bind-Value="ViewModel.PassengerCount"/>
     <ValidationMessage For="@(()=> ViewModel.PassengerCount)"></ValidationMessage>
 </div>
 
 <div class="form-group">
     <label>Departing from</label>
-    <InputSelect @bind-Value="ViewModel.SelectedDepartureLocationId"
-                 Class="form-control">
-        <option value="">--Select a location</option>
-        @if (ViewModel.DepartureLocations != null)
-        {
-            @foreach (var location in ViewModel.DepartureLocations)
-            {
-                <option value="@location.Id">@location.Name</option>
-            }
-        }
-    </InputSelect>
+    <TelerikDropDownList Data="ViewModel.DepartureLocations"
+                         @bind-Value="ViewModel.SelectedDepartureLocationId"
+                         ValueField="@nameof(LocationDetails.Id)"
+                         TextField="@nameof(LocationDetails.Name)"
+                         Width="100%"
+                         PopupWidth="@popupWidth">
+    </TelerikDropDownList>
+
 </div>
 <div class="form-group">
     <label>Departure Port</label>
-    <InputSelect disabled="@(ViewModel.DepartureLocation.Ports == null)"
-                 @bind-Value="ViewModel.SelectedDeparturePortId"
-                 Class="form-control">
-        @if (ViewModel.DepartureLocation.Ports == null)
-        {
-            <option value="">--Select a location</option>
-        }
-        else
-        {
-            <option value="">--Select a port</option>
-            @foreach (var port in ViewModel.DepartureLocation.Ports)
-            {
-                <option value="@port.Id">@port.Name</option>
-            }
-        }
-    </InputSelect>
+    <TelerikDropDownList Data="ViewModel.DepartureLocation.Ports"
+                         @bind-Value="ViewModel.SelectedDeparturePortId"
+                         ValueField="@nameof(PortDetails.Id)"
+                         TextField="@nameof(PortDetails.Name)"
+                         Width="100%"
+                         PopupWidth="@popupWidth">
+    </TelerikDropDownList>
 
 </div>
 
 <div class="form-group">
     <label>Arriving to</label>
-    <InputSelect @bind-Value="ViewModel.SelectedArrivalLocationId"
-                 Class="form-control">
-        <option value="">--Select a location</option>
-        @if (ViewModel.ArrivalLocations != null)
-        {
-            @foreach (var location in ViewModel.ArrivalLocations)
-            {
-                <option value="@location.Id">@location.Name</option>
-            }
-        }
-    </InputSelect>
+    <TelerikDropDownList Data="ViewModel.ArrivalLocations"
+                         @bind-Value="ViewModel.SelectedArrivalLocationId"
+                         ValueField="@nameof(LocationDetails.Id)"
+                         TextField="@nameof(LocationDetails.Name)"
+                         Width="100%"
+                         PopupWidth="@popupWidth">
+    </TelerikDropDownList>
 </div>
 <div class="form-group">
     <label>Departure Port</label>
-    <InputSelect disabled="@(ViewModel.ArrivalLocation.Ports == null)"
-                 @bind-Value="ViewModel.SelectedArrivalPortId"
-                 Class="form-control">
-        @if (ViewModel.ArrivalLocation.Ports == null)
-        {
-            <option value="">--Select a location</option>
-        }
-        else
-        {
-            <option value="">--Select a port</option>
-            @foreach (var port in ViewModel.ArrivalLocation.Ports)
-            {
-                <option value="@port.Id">@port.Name</option>
-            }
-        }
-    </InputSelect>
-
+    <TelerikDropDownList Data="ViewModel.ArrivalLocation.Ports"
+                         @bind-Value="ViewModel.SelectedArrivalPortId"
+                         ValueField="@nameof(PortDetails.Id)"
+                         TextField="@nameof(PortDetails.Name)"
+                         Width="100%"
+                         PopupWidth="@popupWidth">
+    </TelerikDropDownList>
 </div>
 
 
 
 @code {
+
+    string popupWidth = "calc(50% - 48px)";
+
     [Parameter] public TripConfigurationModel ViewModel { get; set; }
 
     protected override async Task OnInitializedAsync()

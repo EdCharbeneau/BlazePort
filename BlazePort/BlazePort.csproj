@@ -35,6 +35,7 @@
   <ItemGroup>
     <Folder Include="MLModels\" />
     <Folder Include="Services\" />
+    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
 </Project>
