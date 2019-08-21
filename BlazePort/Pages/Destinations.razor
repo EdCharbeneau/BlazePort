@@ -3,31 +3,34 @@
 @using Data;
 @inject BlazePortContext dbContext;
 
-<h3>Destinations</h3>
+<div class="container-fluid blazeport-bg pt-5">
 
-<div class="card-columns">
-    @if (Locations == null)
-    {
-        <span>Loading...</span>
-    }
-    else
-    {
-        @foreach (var location in Locations)
+    <h1>Destinations</h1>
+
+    <div class="card-columns">
+        @if (Locations == null)
         {
-            <div class="card">
-                <img class="card-img-top" src="@location.ImageUrl" />
-                <div class="card-body">
-                    <h4 class="card-title">
-                        @location.Name
-                    </h4>
-                    <p class="card-text">
-                        @location.Description
-                    </p>
-                    <a href="/destination/@location.Id" class="card-link">View Details</a>
-                </div>
-            </div>
+            <span>Loading...</span>
         }
-    }
+        else
+        {
+            @foreach (var location in Locations)
+            {
+                <div class="card">
+                    <img class="card-img-top" src="@location.ImageUrl" />
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            @location.Name
+                        </h4>
+                        <p class="card-text">
+                            @location.Description
+                        </p>
+                        <a href="/destination/@location.Id" class="card-link">View Details</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
 </div>
 @code {
 

@@ -5,7 +5,7 @@
     }
 
     .card-title {
-        color: $body-bg;
+        color: $vintage-cream;
     }
 
     .card-text {
@@ -16,43 +16,61 @@
             display: block;
             color: $secondary;
             font-size: 2.5em;
+            font-family: 'Orbitron';
         }
 
-        .primary-highlight {
+        /*.primary-highlight {
             font-weight: bold;
             display: block;
             color: $accent;
             font-size: 2.5em;
-        }
+        }*/
 
         .meta {
             display: block;
             font-size: 2em;
         }
 
-        .meta-time--namepart {
+        /*.meta-time--namepart {
             font-size: 1.5em;
-        }
+        }*/
     }
 }
 
 .t-days, .t-hours, .t-minutes, .t-seconds {
-    font-weight:bold;
+    font-weight: bold;
     font-size: 2.5em;
     color: $secondary;
+    font-family: 'Orbitron';
 }
 .t-seperator {
     font-size: 2.5em;
     color: $body-bg;
+    font-weight: bold;
+    font-family: 'Orbitron';
 }
 
 .tt-days, .tt-hours, .tt-minutes, .tt-seconds {
     font-size: 2.5em;
     color: $secondary;
+    font-weight: bold;
+    font-family: 'Orbitron';
 }
 
 .tt-seperator {
     font-weight: bold;
     font-size: 1em;
     color: $body-bg;
+    font-family: 'Orbitron';
+}
+
+.blazeport-bg {
+    background-image: url("/img/blazeport-bg.jpg");
+    background-color: $vintage-cream;
+    background-size: 100%;
+    background-position-x: center;
+    background-position: top;
+    background-repeat-x: repeat;
+    background-repeat-y: no-repeat;
+    height: calc(100% - 90px);
 }

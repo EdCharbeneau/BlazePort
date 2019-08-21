@@ -15,7 +15,7 @@ else
     <ol>
         @foreach (var port in location.Ports)
         {
-            <li><a href="/port/@port.Id">@port.Name</a></li>
+            <li><a href="/port/@Id/@port.Id">@port.Name</a></li>
         }
     </ol>
 }
@@ -30,7 +30,6 @@ else
         // Not yet supported by EF.Cosmos
         //location = await dbContext.Locations.Include(p=>p.Ports).FirstAsync(l => l.Id == Id);
         location = await dbContext.Locations.FirstAsync(l => l.Id == Id);
-        location.Ports = await dbContext.PortDetails.Where(p => p.LocationId == location.Id).ToListAsync();
     }
 
 }

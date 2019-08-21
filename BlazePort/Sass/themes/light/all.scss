@@ -2,7 +2,21 @@
 @import "vendors";
 @import "components/all";
 
+h1, h2, h3, .h1, .h2, .h3 {
+    color: $accent;
+    font-family: 'Orbitron';
+}
 
+.k-window-title {
+    font-family: 'Orbitron';
+}
+
+.intro {
+    font-family: Yesteryear;
+    text-shadow: 2px 2px #13405d;
+    border-bottom: 1px solid;
+    margin-bottom: .5em;
+}
 
 .validation-message {
     @extend .text-danger;
@@ -12,16 +26,17 @@
     width:100%;
 }
 
-body, html, .content, .container-fluid {
-    height:calc(100% - 50px);
+body, html, .content {
+    height:100%;
 }
 
 body {
-    background-image: url("/img/blazeport-bg.jpg");
+    /*background-image: url("/img/blazeport-bg.jpg");
     background-color: $vintage-cream;
     background-size: 100%;
     background-position-x: center;
     background-position: top;
     background-repeat-x: repeat;
     background-repeat-y: no-repeat;
+    background-position-y:4em;*/
 }

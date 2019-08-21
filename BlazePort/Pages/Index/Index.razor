@@ -2,24 +2,25 @@
 @inherits BlazePort.Pages.IndexBase
 @using BlazePort.Components
 
-@if (totalPrice > 0)
-{
-    <TripOverview TripConfiguration="TripConfiguration" TotalPrice="totalPrice">
-        <ButtonTemplate>
-            <TelerikButton OnClick="ShowConfigurationPanel">Edit Trip</TelerikButton>
-            <TelerikButton Class="k-primary">Book Now</TelerikButton>
-        </ButtonTemplate>
-    </TripOverview>
-}
-else
-{
-    <TripEmptyState>
-        <ButtonTemplate>
-            <TelerikButton OnClick="ShowConfigurationPanel" Class="btn btn-block btn-lg k-primary">New Trip</TelerikButton>
-        </ButtonTemplate>
-    </TripEmptyState>
-}
-
+<div class="container-fluid blazeport-bg pt-5">
+    @if (totalPrice > 0)
+    {
+        <TripOverview TripConfiguration="TripConfiguration" TotalPrice="totalPrice">
+            <ButtonTemplate>
+                <TelerikButton OnClick="ShowConfigurationPanel">Edit Trip</TelerikButton>
+                <TelerikButton Class="k-primary">Book Now</TelerikButton>
+            </ButtonTemplate>
+        </TripOverview>
+    }
+    else
+    {
+        <TripEmptyState>
+            <ButtonTemplate>
+                <TelerikButton OnClick="ShowConfigurationPanel" Class="btn btn-block btn-lg k-primary">New Trip</TelerikButton>
+            </ButtonTemplate>
+        </TripEmptyState>
+    }
+</div>
 <FlyoutPanel Width="50%" @ref="ConfigurationPanel" @ref:suppressField>
     <TitleTemplate>
         Trip Options

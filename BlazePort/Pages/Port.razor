@@ -1,5 +1,5 @@
 @layout CenteredContentLayout
-@page "/port/{Id:int}"
+@page "/port/{LocationId:int}/{PortId:int}"
 @inject BlazePortContext dbContext
 @using Data;
 
@@ -9,7 +9,7 @@
 }
 else
 {
-    <h3>@port.Name</h3>
+    <h1>@port.Name</h1>
     <img src="@port.ImageUrl" />
     <p>@port.Description</p>
     <ol>
@@ -19,13 +19,15 @@ else
 }
 @code {
 
-    [Parameter] public int Id { get; set; }
+    [Parameter] public int LocationId { get; set; }
+    [Parameter] public int PortId { get; set; }
 
     PortDetails port;
 
     protected override async Task OnInitializedAsync()
     {
-        port = await dbContext.PortDetails.FirstAsync(p => p.Id == Id);
+        var locationDetails = await dbContext.Locations.FirstAsync(l => l.Id == LocationId);
+        port = locationDetails.Ports.First(p => p.Id == PortId);
     }
 
 }

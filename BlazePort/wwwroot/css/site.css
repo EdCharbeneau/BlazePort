@@ -4208,7 +4208,7 @@ kendo-sortable {
   border-top-color: #dee2e6; }
 
 .k-popup .k-list .k-item > .k-group {
-  color: #f2eabc;
+  color: #ffffff;
   background: #292b2c; }
 
 .k-popup .k-list .k-item > .k-group::before {
@@ -5133,7 +5133,7 @@ kendo-sortable {
     box-shadow: 0 0 0 3px rgba(66, 199, 194, 0.5); }
 
 .k-pane-wrapper .k-pane .k-mobile-list .k-item {
-  background-color: #f2eabc;
+  background-color: #ffffff;
   border-bottom: 1px solid rgba(33, 37, 41, 0.125); }
   .k-pane-wrapper .k-pane .k-mobile-list .k-item > .k-link:active,
   .k-pane-wrapper .k-pane .k-mobile-list .k-item > .k-label:active,
@@ -5151,7 +5151,7 @@ kendo-sortable {
   box-shadow: inset 0 1px 0 rgba(33, 37, 41, 0.125); }
 
 .k-pane-wrapper .k-pane .k-mobile-list.k-filter-menu .k-space-right > input {
-  background: #f2eabc;
+  background: #ffffff;
   border-color: #f0f0f0; }
   .k-pane-wrapper .k-pane .k-mobile-list.k-filter-menu .k-space-right > input:focus {
     box-shadow: 0 0 0 3px rgba(241, 137, 24, 0.5); }
@@ -7251,7 +7251,7 @@ kendo-toolbar.k-toolbar {
     border-radius: 0.25rem; }
   .k-spreadsheet-insert-image-dialog .k-spreadsheet-has-image:hover div,
   .k-spreadsheet-insert-image-dialog .k-spreadsheet-has-image.k-state-hovered div {
-    color: #f2eabc; }
+    color: #ffffff; }
 
 .k-spreadsheet-drawing.k-spreadsheet-active-drawing {
   outline-color: #42c7c2; }
@@ -9452,7 +9452,7 @@ div.k-scrollview .k-scrollview-nav {
 
 .k-datetime-container .k-date-tab .k-datetime-buttongroup,
 .k-datetime-container .k-date-tab .k-datetime-selector {
-  background-color: #f2eabc; }
+  background-color: #ffffff; }
 
 .k-datetime-container .k-time-tab .k-datetime-selector {
   transform: translateX(-100%); }
@@ -9676,7 +9676,7 @@ div.k-scrollview .k-scrollview-nav {
   background: transparent; }
 
 .k-time-highlight {
-  background-color: #f2eabc;
+  background-color: #ffffff;
   border-color: #dee2e6; }
 
 .k-datetimepicker .k-select {
@@ -13425,7 +13425,7 @@ kendo-scheduler .k-event,
     border-top-color: #ff0000; }
 
 .k-scheduler-header-wrap {
-  background-color: #f2eabc; }
+  background-color: #ffffff; }
 
 .k-scheduler-navigation .k-nav-today {
   border-radius: 0.25rem 0 0 0.25rem; }
@@ -14317,7 +14317,7 @@ kendo-scheduler .k-event,
   padding-right: 1rem; }
 
 .k-drawer-container {
-  background-color: #f2eabc;
+  background-color: #ffffff;
   color: #292b2c;
   border-color: #dee2e6; }
   .k-drawer-container,
@@ -14491,7 +14491,7 @@ kendo-scheduler .k-event,
     color: #212529;
     background-color: #42c7c2; }
   .k-progressbar .k-item {
-    border-color: #f2eabc; }
+    border-color: #ffffff; }
 
 .k-progressbar-indeterminate {
   border-color: transparent;
@@ -15401,7 +15401,7 @@ body {
   line-height: 1.5;
   color: #292b2c;
   text-align: left;
-  background-color: #f2eabc; }
+  background-color: #ffffff; }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
@@ -15739,7 +15739,7 @@ mark,
 
 .img-thumbnail {
   padding: 0.25rem;
-  background-color: #f2eabc;
+  background-color: #ffffff;
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
@@ -18132,11 +18132,11 @@ input[type="button"].btn-block {
   .custom-range:focus {
     outline: none; }
     .custom-range:focus::-webkit-slider-thumb {
-      box-shadow: 0 0 0 1px #f2eabc, 0 0 0 0.2rem rgba(66, 199, 194, 0.25); }
+      box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.2rem rgba(66, 199, 194, 0.25); }
     .custom-range:focus::-moz-range-thumb {
-      box-shadow: 0 0 0 1px #f2eabc, 0 0 0 0.2rem rgba(66, 199, 194, 0.25); }
+      box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.2rem rgba(66, 199, 194, 0.25); }
     .custom-range:focus::-ms-thumb {
-      box-shadow: 0 0 0 1px #f2eabc, 0 0 0 0.2rem rgba(66, 199, 194, 0.25); }
+      box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.2rem rgba(66, 199, 194, 0.25); }
   .custom-range::-moz-focus-outer {
     border: 0; }
   .custom-range::-webkit-slider-thumb {
@@ -24216,55 +24216,88 @@ a.text-dark:hover, a.text-dark:focus {
   .card.trip-configuration .card-title {
     color: #f2eabc; }
   .card.trip-configuration .card-text {
-    color: #42c7c2; }
+    color: #42c7c2;
+    /*.primary-highlight {
+            font-weight: bold;
+            display: block;
+            color: $accent;
+            font-size: 2.5em;
+        }*/
+    /*.meta-time--namepart {
+            font-size: 1.5em;
+        }*/ }
     .card.trip-configuration .card-text .primary {
       font-weight: bold;
       display: block;
       color: #f18918;
-      font-size: 2.5em; }
-    .card.trip-configuration .card-text .primary-highlight {
-      font-weight: bold;
-      display: block;
-      color: #42c7c2;
-      font-size: 2.5em; }
+      font-size: 2.5em;
+      font-family: 'Orbitron'; }
     .card.trip-configuration .card-text .meta {
       display: block;
       font-size: 2em; }
-    .card.trip-configuration .card-text .meta-time--namepart {
-      font-size: 1.5em; }
 
 .t-days, .t-hours, .t-minutes, .t-seconds {
   font-weight: bold;
   font-size: 2.5em;
-  color: #f18918; }
+  color: #f18918;
+  font-family: 'Orbitron'; }
 
 .t-seperator {
   font-size: 2.5em;
-  color: #f2eabc; }
+  color: #ffffff;
+  font-weight: bold;
+  font-family: 'Orbitron'; }
 
 .tt-days, .tt-hours, .tt-minutes, .tt-seconds {
   font-size: 2.5em;
-  color: #f18918; }
+  color: #f18918;
+  font-weight: bold;
+  font-family: 'Orbitron'; }
 
 .tt-seperator {
   font-weight: bold;
   font-size: 1em;
-  color: #f2eabc; }
+  color: #ffffff;
+  font-family: 'Orbitron'; }
 
-.content {
-  margin-top: 6em; }
-
-.k-datepicker {
-  width: 100%; }
-
-body, html, .content, .container-fluid {
-  height: calc(100% - 50px); }
-
-body {
+.blazeport-bg {
   background-image: url("/img/blazeport-bg.jpg");
   background-color: #f2eabc;
   background-size: 100%;
   background-position-x: center;
   background-position: top;
   background-repeat-x: repeat;
-  background-repeat-y: no-repeat; }
+  background-repeat-y: no-repeat;
+  height: calc(100% - 90px); }
+
+.content {
+  margin-top: 6em; }
+
+h1, h2, h3, .h1, .h2, .h3 {
+  color: #42c7c2;
+  font-family: 'Orbitron'; }
+
+.k-window-title {
+  font-family: 'Orbitron'; }
+
+.intro {
+  font-family: Yesteryear;
+  text-shadow: 2px 2px #13405d;
+  border-bottom: 1px solid;
+  margin-bottom: .5em; }
+
+.k-datepicker {
+  width: 100%; }
+
+body, html, .content {
+  height: 100%; }
+
+body {
+  /*background-image: url("/img/blazeport-bg.jpg");
+    background-color: $vintage-cream;
+    background-size: 100%;
+    background-position-x: center;
+    background-position: top;
+    background-repeat-x: repeat;
+    background-repeat-y: no-repeat;
+    background-position-y:4em;*/ }
