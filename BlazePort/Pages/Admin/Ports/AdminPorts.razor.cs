@@ -22,8 +22,9 @@ namespace BlazePort.Pages.Admin.Ports
 
         protected override async Task OnInitializedAsync()
         {
-            portsGridView = await LoadPortsViewModel();
             locations = await Db.Locations.ToArrayAsync();
+
+            portsGridView = locations.SelectMany(p => p.Ports).Select(p => PortDetailsGridView.FromPort(p)).ToArray();
         }
 
         protected async Task CloseEditor()
@@ -35,11 +36,6 @@ namespace BlazePort.Pages.Admin.Ports
         {
             await EditorPanel.ShowAsync();
         }
-
-        protected async Task<PortDetailsGridView[]> LoadPortsViewModel() =>
-                await Db.PortDetails.Include(p => p.Location)
-                    .Select(p => PortDetailsGridView.FromPort(p))
-                    .ToArrayAsync();
 
         protected async Task SaveLocation()
         {
@@ -54,7 +50,9 @@ namespace BlazePort.Pages.Admin.Ports
                 await FailNotification.Show();
             }
 
-            portsGridView = await LoadPortsViewModel();
+            locations = await Db.Locations.ToArrayAsync();
+
+            portsGridView = locations.SelectMany(p => p.Ports).Select(p => PortDetailsGridView.FromPort(p)).ToArray();
 
             portForm = new PortDetailsForm();
 
