@@ -2,6 +2,7 @@
 using BlazePort.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -41,18 +42,15 @@ namespace BlazePort.Pages.Admin.Ports
         {
             Db.PortDetails.Add(portForm.ToPortDetails());
 
-            try
-            {
-                await Db.SaveChangesAsync();
-            }
-            catch (System.Exception)
-            {
-                await FailNotification.Show();
-            }
+            await Db.SaveChangesAsync();
 
             locations = await Db.Locations.ToArrayAsync();
 
-            portsGridView = locations.SelectMany(p => p.Ports).Select(p => PortDetailsGridView.FromPort(p)).ToArray();
+            portsGridView = locations
+                .SelectMany(p => p.Ports)
+                .Where(AreValidRecords)
+                .Select(p => PortDetailsGridView.FromPort(p))
+                .ToArray();
 
             portForm = new PortDetailsForm();
 
@@ -60,5 +58,8 @@ namespace BlazePort.Pages.Admin.Ports
 
             await SuccessNotification.Show();
         }
+
+        // Cosmos or EF reports a false record with id of negative value
+        private Func<PortDetails, bool> AreValidRecords = (PortDetails port) => port.Id > 0;
     }
 }

@@ -2,75 +2,78 @@
 @using BlazePort.Components;
 @inherits AdminPortsBase
 
-<a href="/admin/index">Admin Home</a>
-<h3>Admin Ports</h3>
+<div class="container-fluid">
+    <a href="/admin/index">Admin Home</a>
+    <h3>Admin Ports</h3>
 
-<div class="my-2">
-    <TelerikButton OnClick="@OpenEditor" Icon="@IconName.PlusCircle">Add New Record</TelerikButton>
-</div>
+    <div class="my-2">
+        <TelerikButton OnClick="@OpenEditor" Icon="@IconName.PlusCircle">Add New Record</TelerikButton>
+    </div>
 
-<FlyoutPanel @ref="EditorPanel" @ref:suppressField>
-    <TitleTemplate>
-        <strong>New Port</strong>
-    </TitleTemplate>
-    <ContentTemplate>
-        <EditForm Model="portForm" OnValidSubmit="SaveLocation">
-            <DataAnnotationsValidator />
-            <div class="form-group">
-                <label>Name</label>
-                <InputText @bind-Value="portForm.Name" Class="form-control" />
-                <ValidationMessage For="@(()=> portForm.Name)"></ValidationMessage>
-            </div>
-            <div class="form-group">
-                <label>Description</label>
-                <InputTextArea @bind-Value="portForm.Description" Class="form-control" />
-                <ValidationMessage For="@(()=> portForm.Description)"></ValidationMessage>
-            </div>
-            <div class="form-group">
-                <label>Country</label>
-                <InputTextArea @bind-Value="portForm.Country" Class="form-control" />
-                <ValidationMessage For="@(()=> portForm.Country)"></ValidationMessage>
-            </div>
-            <div class="form-group">
-                <label>Image URL</label>
-                <InputText @bind-Value="portForm.ImageUrl" Class="form-control" />
-            </div>
-            <div class="form-group">
-                <label>Parent Location</label>
-                <InputSelect @bind-Value="portForm.SelectedLocation" Class="form-control">
-                    <option value="">--Select a location</option>
-                    @if (locations != null)
-                    {
-                        @foreach (var location in locations)
+    <FlyoutPanel @ref="EditorPanel">
+        <TitleTemplate>
+            <strong>New Port</strong>
+        </TitleTemplate>
+        <ContentTemplate>
+            <EditForm Model="portForm" OnValidSubmit="SaveLocation">
+                <DataAnnotationsValidator />
+                <div class="form-group">
+                    <label>Name</label>
+                    <InputText @bind-Value="portForm.Name" Class="form-control" />
+                    <ValidationMessage For="@(()=> portForm.Name)"></ValidationMessage>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <InputTextArea @bind-Value="portForm.Description" Class="form-control" />
+                    <ValidationMessage For="@(()=> portForm.Description)"></ValidationMessage>
+                </div>
+                <div class="form-group">
+                    <label>Country</label>
+                    <InputTextArea @bind-Value="portForm.Country" Class="form-control" />
+                    <ValidationMessage For="@(()=> portForm.Country)"></ValidationMessage>
+                </div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <InputText @bind-Value="portForm.ImageUrl" Class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Parent Location</label>
+                    <InputSelect @bind-Value="portForm.SelectedLocation" Class="form-control">
+                        <option value="">--Select a location</option>
+                        @if (locations != null)
                         {
-                            <option value="@location.Id">@location.Name</option>
+                            @foreach (var location in locations)
+                            {
+                                <option value="@location.Id">@location.Name</option>
+                            }
                         }
-                    }
-                </InputSelect>
-                <ValidationMessage For="@(()=> portForm.SelectedLocation)"></ValidationMessage>
-            </div>
-            <TelerikButton Icon="@IconName.Save">Save</TelerikButton>
-        </EditForm>
-    </ContentTemplate>
-</FlyoutPanel>
+                    </InputSelect>
+                    <ValidationMessage For="@(()=> portForm.SelectedLocation)"></ValidationMessage>
+                </div>
+                <TelerikButton Icon="@IconName.Save">Save</TelerikButton>
+            </EditForm>
+        </ContentTemplate>
+    </FlyoutPanel>
 
-<Notification @ref="SuccessNotification" @ref:suppressField Title="New Item" Theme="@Theme.Success">
-    <p>The new item saved successfully.</p>
-</Notification>
+    <Notification @ref="SuccessNotification" Title="New Item" Theme="@Theme.Success">
+        <p>The new item saved successfully.</p>
+    </Notification>
 
-<Notification @ref="FailNotification" @ref:suppressField Title="Error" Theme="@Theme.Danger">
-    <p>Failed to add item to database.</p>
-</Notification>
+    <Notification @ref="FailNotification" Title="Error" Theme="@Theme.Danger">
+        <p>Failed to add item to database.</p>
+    </Notification>
 
-<TelerikGrid Data="portsGridView"
-             Sortable="true"
-             Pageable="true"
-             FilterMode="FilterMode.FilterMenu">
-    <TelerikGridColumns>
-        <TelerikGridColumn Field="@nameof(PortDetailsGridView.Name)" />
-        <TelerikGridColumn Field="@nameof(PortDetailsGridView.LatLong)" />
-        <TelerikGridColumn Field="@nameof(PortDetailsGridView.Country)" />
-        <TelerikGridColumn Field="@nameof(PortDetailsGridView.LocationName)" />
-        <TelerikGridColumn Field="@nameof(PortDetailsGridView.ShortDescription)" />
-    </TelerikGridColumns>
-</TelerikGrid>
+    <TelerikGrid Data="portsGridView"
+                 Sortable="true"
+                 Pageable="true"
+                 FilterMode="FilterMode.FilterMenu">
+        <TelerikGridColumns>
+            <TelerikGridColumn Field="@nameof(PortDetailsGridView.Id)" />
+            <TelerikGridColumn Field="@nameof(PortDetailsGridView.Name)" />
+            <TelerikGridColumn Field="@nameof(PortDetailsGridView.LatLong)" />
+            <TelerikGridColumn Field="@nameof(PortDetailsGridView.Country)" />
+            <TelerikGridColumn Field="@nameof(PortDetailsGridView.LocationName)" />
+            <TelerikGridColumn Field="@nameof(PortDetailsGridView.ShortDescription)" />
+        </TelerikGridColumns>
+    </TelerikGrid>
+</div>
