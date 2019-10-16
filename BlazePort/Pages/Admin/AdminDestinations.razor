@@ -23,28 +23,13 @@
     <button>Save</button>
 </EditForm>
 
-<TelerikGrid Data="locations">
-    <TelerikGridColumns>
-        <TelerikGridColumn Field="@nameof(LocationDetails.Name)"/>
-        <TelerikGridColumn Field="@nameof(LocationDetails.Description)"/>
-    </TelerikGridColumns>
+<TelerikGrid Data="locations" Sortable="true" Pageable="true" Groupable="true"
+            FilterMode="GridFilterMode.FilterRow">
+    <GridColumns>
+        <GridColumn Field="@nameof(LocationDetails.Name)" />
+        <GridColumn Field="@nameof(LocationDetails.Description)" />
+    </GridColumns>
 </TelerikGrid>
-
-@*<ul>
-    @if (locations == null)
-    {
-        <span>Loading...</span>
-    }
-    else
-    {
-        @foreach (var location in locations)
-        {
-            <li>
-                @location.Name
-            </li>
-        }
-    }
-</ul>*@
 
 @code {
 

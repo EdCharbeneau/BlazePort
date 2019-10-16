@@ -24201,10 +24201,11 @@ a.text-dark:hover, a.text-dark:focus {
           color: #42c7c2; }
 
 .fly-out-panel > .k-animation-container {
-  height: 100%; }
+  height: 100%;
+  overflow: visible; }
 
 .fly-out-panel .k-child-animation-container {
-  width: calc(100% - 20px);
+  width: 100%;
   background-color: white;
   box-shadow: 5px 0px 10px -2px #888888; }
 

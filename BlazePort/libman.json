@@ -341,7 +341,7 @@
       ]
     },
     {
-      "library": "@progress/kendo-theme-bootstrap@latest",
+      "library": "@progress/kendo-theme-bootstrap@4.3.2",
       "destination": "Sass/vendors/progress/kendo-theme-bootstrap/",
       "files": [
         "scss/action-buttons/_layout.scss",

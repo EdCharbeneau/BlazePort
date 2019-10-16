@@ -94,6 +94,8 @@ namespace BlazePort.Pages.Index
 
         public LocationDetails[] ArrivalLocations { get; set; }
 
+        public string DropDownWidth { get; set; } = "100%";
+
         public string FormattedMiles =>
               TripDistance > 1 ? $"{TripDistance}mil. Miles" :
                     $"{TripDistance * 1000}k. Miles";
