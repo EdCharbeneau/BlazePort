@@ -1,76 +1,114 @@
-﻿.card.trip-configuration {
-    background-color: transparent;
-
-    .card-body {
+﻿#trip-empty-state .trip-empty-state-content {
+    @include media-breakpoint-up(md) {
+        width: 50% !important;
     }
 
-    .card-title {
+    @include media-breakpoint-up(xl) {
+        width: 25% !important;
+    }
+}
+
+.trip-configuration {
+    background-color: transparent;
+
+    .title {
+        font-size: 1em;
         color: $vintage-cream;
     }
 
-    .card-text {
+    .text {
         color: $accent;
 
         .primary {
             font-weight: bold;
             display: block;
             color: $secondary;
-            font-size: 2.5em;
+            font-size: 1.5em;
             font-family: 'Orbitron';
         }
 
-        /*.primary-highlight {
-            font-weight: bold;
-            display: block;
-            color: $accent;
-            font-size: 2.5em;
-        }*/
-
         .meta {
             display: block;
-            font-size: 2em;
+            font-size: 1.2em;
+        }
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .trip-configuration {
+
+        .title {
+            font-size: 1.2em;
         }
 
-        /*.meta-time--namepart {
-            font-size: 1.5em;
-        }*/
+        .text {
+
+            .primary {
+                font-size: 2.5em;
+            }
+
+            .meta {
+                font-size: 2em;
+            }
+        }
     }
 }
 
 .t-days, .t-hours, .t-minutes, .t-seconds {
     font-weight: bold;
-    font-size: 2.5em;
+    font-size: 1.25em;
     color: $secondary;
     font-family: 'Orbitron';
+
+    @include media-breakpoint-up(md) {
+        font-size: 2.5em;
+    }
 }
+
 .t-seperator {
-    font-size: 2.5em;
+    font-size: 1.25em;
     color: $body-bg;
     font-weight: bold;
     font-family: 'Orbitron';
+
+    @include media-breakpoint-up(md) {
+        font-size: 2.5em;
+    }
 }
 
 .tt-days, .tt-hours, .tt-minutes, .tt-seconds {
-    font-size: 2.5em;
+    font-size: 1.25em;
     color: $secondary;
     font-weight: bold;
     font-family: 'Orbitron';
+
+    @include media-breakpoint-up(md) {
+        font-size: 2.5em;
+    }
 }
 
 .tt-seperator {
     font-weight: bold;
-    font-size: 1em;
+    font-size: .5em;
     color: $body-bg;
     font-family: 'Orbitron';
+
+    @include media-breakpoint-up(md) {
+        font-size: 1em;
+    }
 }
 
 .blazeport-bg {
-    background-image: url("/img/blazeport-bg.jpg");
-    background-color: $vintage-cream;
+    background-color: $deep-space-blue;
     background-size: 100%;
     background-position-x: center;
     background-position: top;
     background-repeat-x: repeat;
     background-repeat-y: no-repeat;
-    height: calc(100% - 90px);
+
+    @include media-breakpoint-up(md) {
+        background-image: url("/img/blazeport-bg.jpg");
+        background-color: $vintage-cream;
+        height: calc(100% - 90px);
+    }
 }
