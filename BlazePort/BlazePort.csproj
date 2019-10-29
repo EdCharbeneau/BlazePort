@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <LangVersion>7.3</LangVersion>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
     <UserSecretsId>354ffa44-db29-440e-a90c-fe2fe2317dc5</UserSecretsId>
   </PropertyGroup>
 
@@ -15,17 +15,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BlazorSize" Version="1.0.3" />
     <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
     <PackageReference Include="GenFu" Version="1.5.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview9.19423.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="3.0.0-preview9.19423.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0-preview9.19423.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0-preview9.19423.6">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.0-preview9.19423.4" />
-    <PackageReference Include="Telerik.UI.for.Blazor" Version="1.7.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.0" />
+    <PackageReference Include="Telerik.UI.for.Blazor" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>

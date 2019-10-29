@@ -1,8 +1,6 @@
 ﻿@page "/"
-@inherits BlazePort.Pages.IndexBase
-@using BlazePort.Components
 
-<div class="container-fluid blazeport-bg pt-5">
+<div class="container h-100 py-5">
     @if (totalPrice > 0)
     {
         <TripOverview TripConfiguration="TripConfiguration" TotalPrice="totalPrice">
@@ -21,7 +19,7 @@
         </TripEmptyState>
     }
 </div>
-<FlyoutPanel Width="50%" @ref="ConfigurationPanel">
+<FlyoutPanel Width="@ConfigurationPanelWidth" @ref="ConfigurationPanel">
     <TitleTemplate>
         Trip Options
     </TitleTemplate>

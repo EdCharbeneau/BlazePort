@@ -3,20 +3,27 @@
 @inject BlazePortContext dbContext
 @using Data;
 
-@if (port == null)
-{
-    <span>Loading...</span>
-}
-else
-{
-    <h1>@port.Name</h1>
-    <img src="@port.ImageUrl" />
-    <p>@port.Description</p>
-    <ol>
-        <li>@port.Country</li>
-        <li>@port.Lat, @port.Long</li>
-    </ol>
-}
+
+<div class="container pt-5">
+    <div class="destination">
+
+        @if (port == null)
+        {
+            <span>Loading...</span>
+        }
+        else
+        {
+            <h1>@port.Name</h1>
+            <img src="@port.ImageUrl" />
+            <p>@port.Description</p>
+            <ol>
+                <li>@port.Country</li>
+                <li>@port.Lat, @port.Long</li>
+            </ol>
+        }
+    </div>
+</div>
+
 @code {
 
     [Parameter] public int LocationId { get; set; }

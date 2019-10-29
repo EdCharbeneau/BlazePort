@@ -20,7 +20,7 @@
                          ValueField="@nameof(LocationDetails.Id)"
                          TextField="@nameof(LocationDetails.Name)"
                          Width="100%"
-                         PopupWidth="@popupWidth">
+                         PopupWidth="@ViewModel.DropDownWidth">
     </TelerikDropDownList>
 
 </div>
@@ -31,7 +31,7 @@
                          ValueField="@nameof(PortDetails.Id)"
                          TextField="@nameof(PortDetails.Name)"
                          Width="100%"
-                         PopupWidth="@popupWidth">
+                         PopupWidth="@ViewModel.DropDownWidth">
     </TelerikDropDownList>
 
 </div>
@@ -43,7 +43,7 @@
                          ValueField="@nameof(LocationDetails.Id)"
                          TextField="@nameof(LocationDetails.Name)"
                          Width="100%"
-                         PopupWidth="@popupWidth">
+                         PopupWidth="@ViewModel.DropDownWidth">
     </TelerikDropDownList>
 </div>
 <div class="form-group">
@@ -53,15 +53,13 @@
                          ValueField="@nameof(PortDetails.Id)"
                          TextField="@nameof(PortDetails.Name)"
                          Width="100%"
-                         PopupWidth="@popupWidth">
+                         PopupWidth="@ViewModel.DropDownWidth">
     </TelerikDropDownList>
 </div>
 
 
 
 @code {
-
-    string popupWidth = "calc(50% - 48px)";
 
     [Parameter] public TripConfigurationModel ViewModel { get; set; }
 

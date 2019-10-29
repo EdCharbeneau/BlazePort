@@ -1,10 +1,10 @@
-﻿<div class="card-columns">
-    <div class="card trip-configuration">
-        <div class="card-body">
-            <h4 class="card-title">
+﻿<div class="trip-configuration">
+    <div class="row">
+        <div class="col-md">
+            <h4 class="title">
                 Departing from
             </h4>
-            <p class="card-text">
+            <p class="text">
                 <span class="primary">
                     @TripConfiguration.DepartureLocation?.Name
                 </span>
@@ -13,13 +13,12 @@
                 </span>
             </p>
         </div>
-    </div>
-    <div class="card trip-configuration">
-        <div class="card-body">
-            <h4 class="card-title">
+        <div class="col-md">
+
+            <h4 class="title">
                 Arriving to
             </h4>
-            <p class="card-text">
+            <p class="text">
                 <span class="primary">
                     @TripConfiguration.ArrivalLocation?.Name
                 </span>
@@ -28,47 +27,45 @@
                 </span>
             </p>
         </div>
-    </div>
-    <div class="card trip-configuration">
-        <div class="card-body">
-            <h4 class="card-title">
+        <div class="col-md">
+            <h4 class="title">
                 Next trip will launch in t-minus
             </h4>
-            <p class="card-text">
+            <p class="text">
                 <Countdown CountdownTo="@TripConfiguration.TripStart" />
                 <span class="meta">On @TripConfiguration.TripStart.ToShortDateString()</span>
             </p>
+
         </div>
     </div>
-    <div class="card trip-configuration">
-        <div class="card-body">
-            <h4 class="card-title">
+    <div class="row">
+
+        <div class="col-md">
+            <h4 class="title">
                 Estimated price
             </h4>
-            <p class="card-text">
+            <p class="text">
                 <span class="primary">@TotalPrice.ToString("C0")</span>
                 <span class="meta">Per Passenger</span>
                 <PassengerCount Count="TripConfiguration.PassengerCount" />
             </p>
+
         </div>
-    </div>
-    <div class="card trip-configuration">
-        <div class="card-body">
-            <h4 class="card-title">
+        <div class="col-md">
+            <h4 class="title">
                 Your trip will take
             </h4>
-            <p class="card-text">
+            <p class="text">
                 <TripTime TripDistance="TripConfiguration.TripDistance" />
                 <span class="meta">@TripConfiguration.FormattedMiles</span>
             </p>
+
         </div>
-    </div>
-    <div class="card trip-configuration">
-        <div class="card-body">
-            <h4 class="card-title">
+        <div class="col-md">
+            <h4 class="title">
                 Book your trip
             </h4>
-            <p class="card-text">
+            <p class="text">
                 @ButtonTemplate
             </p>
         </div>

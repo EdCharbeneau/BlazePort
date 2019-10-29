@@ -1,16 +1,21 @@
 ﻿using BlazePort.Components;
-using BlazePort.Pages.Index;
 using BlazePort.TripCost.Service;
 using BlazePort.TripCost.Service.DataStructures;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
+using BlazorSize;
+using System;
 
-namespace BlazePort.Pages
+namespace BlazePort.Pages.Home
 {
-    public class IndexBase : ComponentBase
+    public partial class Index : IDisposable
     {
-
+        [Inject] ResizeListener ResizeListener { get; set; }
         [Inject] ITripCostPredictionService TripCostService { get; set; }
+
+        bool IsMediumUpMedia;
+
+        protected string ConfigurationPanelWidth => IsMediumUpMedia ? "50%" : "100%";
 
         protected float totalPrice;
 
@@ -18,15 +23,11 @@ namespace BlazePort.Pages
 
         [Parameter] public TripConfigurationModel TripConfiguration { get; set; } = new TripConfigurationModel();
 
-        public void InvalidSubmit()
-        {
-           totalPrice = 0;
-        }
+        public void InvalidSubmit() => 
+            totalPrice = 0;
 
-        public async Task ShowConfigurationPanel()
-        {
+        public async Task ShowConfigurationPanel() =>
             await ConfigurationPanel.ShowAsync();
-        }
 
         public async Task OnTripEstimateTripCost()
         {
@@ -43,5 +44,24 @@ namespace BlazePort.Pages
             await ConfigurationPanel.HideAsync();
         }
 
+        protected override void OnAfterRender(bool firstRender)
+        {
+
+            if (firstRender)
+            {
+                ResizeListener.OnResized += WindowResized;
+            }
+        }
+
+        void IDisposable.Dispose()
+        {
+            ResizeListener.OnResized -= WindowResized;
+        }
+
+        async void WindowResized(object _, BrowserWindowSize window)
+        {
+            IsMediumUpMedia = await ResizeListener.MatchMedia(Breakpoints.MediumUp);
+            StateHasChanged();
+        }
     }
 }

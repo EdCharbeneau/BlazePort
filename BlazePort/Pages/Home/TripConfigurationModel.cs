@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 
-namespace BlazePort.Pages.Index
+namespace BlazePort.Pages.Home
 {
     public class TripConfigurationModel
     {
@@ -93,6 +93,8 @@ namespace BlazePort.Pages.Index
         public LocationDetails[] DepartureLocations { get; set; }
 
         public LocationDetails[] ArrivalLocations { get; set; }
+
+        public string DropDownWidth { get; set; } = "100%";
 
         public string FormattedMiles =>
               TripDistance > 1 ? $"{TripDistance}mil. Miles" :
