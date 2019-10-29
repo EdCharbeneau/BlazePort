@@ -99,16 +99,17 @@
 }
 
 .blazeport-bg {
-    background-color: $deep-space-blue;
-    background-size: 100%;
-    background-position-x: center;
-    background-position: top;
-    background-repeat-x: repeat;
-    background-repeat-y: no-repeat;
+    background-color: none;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
+        background-size: 100%;
         background-image: url("/img/blazeport-bg.jpg");
         background-color: $vintage-cream;
-        height: calc(100% - 90px);
+        background-position-x: center;
+        background-position: top;
+        background-position-y: 90px;
+        background-repeat-x: repeat;
+        background-repeat-y: no-repeat;
+        height: 100%;
     }
 }
