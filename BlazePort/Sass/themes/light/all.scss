@@ -2,6 +2,8 @@
 @import "vendors";
 @import "components/all";
 
+// TODO: Refactor to modules
+
 h1, h2, h3, .h1, .h2, .h3 {
     color: $accent;
     font-family: 'Orbitron';
@@ -26,19 +28,3 @@ h1, h2, h3, .h1, .h2, .h3 {
     width:100%;
 }
 
-body, html, .content {
-    height: 100%;
-    /*background: rgb(34,193,195);
-    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(19,64,93,1) 71%, rgba(0,0,0,1) 100%);*/
-}
-
-body:before {
-    content: '';
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: -1;
-    background: rgb(34,193,195);
-    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(19,64,93,1) 25%, rgba(14,48,69,1) 86%, rgba(0,0,0,1) 100%);
-}

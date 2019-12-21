@@ -61,6 +61,8 @@ namespace BlazePort.Pages.Home
         async void WindowResized(object _, BrowserWindowSize window)
         {
             IsMediumUpMedia = await ResizeListener.MatchMedia(Breakpoints.MediumUp);
+            TripConfiguration.DropDownWidth = IsMediumUpMedia ? "calc(50% - 48px)" : "calc(100% - 48px)";
+
             StateHasChanged();
         }
     }

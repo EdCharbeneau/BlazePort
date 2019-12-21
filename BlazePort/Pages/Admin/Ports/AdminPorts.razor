@@ -1,6 +1,5 @@
 @page "/admin/ports"
 @using BlazePort.Components;
-@inherits AdminPortsBase
 
 <div class="container-fluid">
     <a href="/admin/index">Admin Home</a>
@@ -68,7 +67,6 @@
                  Pageable="true"
                  FilterMode="GridFilterMode.FilterMenu">
         <GridColumns>
-            <GridColumn Field="@nameof(PortDetailsGridView.Id)" />
             <GridColumn Field="@nameof(PortDetailsGridView.Name)" />
             <GridColumn Field="@nameof(PortDetailsGridView.LatLong)" />
             <GridColumn Field="@nameof(PortDetailsGridView.Country)" />

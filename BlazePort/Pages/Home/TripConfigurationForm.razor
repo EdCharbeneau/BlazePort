@@ -65,7 +65,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        ViewModel.DepartureLocations = await dbContext.Locations.Include(l=> l.Ports).ToArrayAsync();
+        ViewModel.DepartureLocations = await dbContext.AllLocationDetails().ToArrayAsync();
     }
 
 }

@@ -1,0 +1,16 @@
+﻿<div class="container pt-5">
+    <div class="title-block"
+         style="@backgroundUrl">
+        <h1>
+            @Title
+        </h1>
+    </div>
+</div>
+
+@code {
+    string backgroundUrl => String.IsNullOrWhiteSpace(BackgroundUrl) ?
+        String.Empty : $"background-image:url(/img/locations/{BackgroundUrl})";
+
+    [Parameter] public string Title { get; set; }
+    [Parameter] public string BackgroundUrl { get; set; }
+}

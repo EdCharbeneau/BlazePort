@@ -1,5 +1,4 @@
 @page "/destinations"
-
 @using Data;
 @inject BlazePortContext dbContext;
 
@@ -8,28 +7,28 @@
     <h1>Destinations</h1>
 
     <div class="card-columns">
-        @if (Locations == null)
-        {
-            <span>Loading...</span>
-        }
-        else
-        {
-            @foreach (var location in Locations)
-            {
-                <div class="card">
-                    <img class="card-img-top" src="/img/locations/@location.ImageUrl" />
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            @location.Name
-                        </h4>
-                        <p class="card-text">
-                            @location.Description
-                        </p>
-                        <a href="/destination/@location.Id" class="card-link">View Details</a>
+        <SpaLoader IsLoading="@(Locations == null)">
+            <LoadingTemplate>
+                <span>Loading...</span>
+            </LoadingTemplate>
+            <ContentTemplate>
+                @foreach (var location in Locations)
+                {
+                    <div class="card">
+                        <img class="card-img-top" src="/img/locations/@location.ImageUrl" />
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                @location.Name
+                            </h4>
+                            <p class="card-text">
+                                @location.Description
+                            </p>
+                            <a href="/destination/@location.Id" class="k-button k-primary">View Details</a>
+                        </div>
                     </div>
-                </div>
-            }
-        }
+                }
+            </ContentTemplate>
+        </SpaLoader>
     </div>
 </div>
 @code {

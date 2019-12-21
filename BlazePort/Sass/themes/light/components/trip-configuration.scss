@@ -97,19 +97,3 @@
         font-size: 1em;
     }
 }
-
-.blazeport-bg {
-    background-color: none;
-
-    @include media-breakpoint-up(lg) {
-        background-size: 100%;
-        background-image: url("/img/blazeport-bg.jpg");
-        background-color: $vintage-cream;
-        background-position-x: center;
-        background-position: top;
-        background-position-y: 90px;
-        background-repeat-x: repeat;
-        background-repeat-y: no-repeat;
-        height: 100%;
-    }
-}

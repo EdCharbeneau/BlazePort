@@ -1,28 +1,35 @@
-@layout CenteredContentLayout
+@layout BlogPostLayout
 @page "/destination/{Id:int}"
 @using Data;
 @inject BlazePortContext dbContext
 
-<div class="container pt-5">
-    <div class="destination">
-        @if (location == null)
-        {
-            <span>Loading...</span>
-        }
-        else
-        {
-            <h1>@location.Name</h1>
-            <img src="/img/locations/@location.ImageUrl" />
-            <p>@location.Description</p>
-            <ol>
-                @foreach (var port in location.Ports)
-                {
-                    <li><a href="/port/@Id/@port.Id">@port.Name</a></li>
-                }
-            </ol>
-        }
-    </div>
-</div>
+<SpaLoader IsLoading="@(location == null)">
+    <LoadingTemplate>
+        <span>Loading...</span>
+    </LoadingTemplate>
+    <ContentTemplate>
+        <TitleBlock Title="@location.Name" BackgroundUrl="@location.ImageUrl" />
+        <div class="container no-bg pt-5">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>About @location.Name</h2>
+                    <p>@location.Description</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Ports</h3>
+                    <div class="list-group">
+                        @foreach (var port in location.Ports)
+                        {
+                            <a href="/port/@Id/@port.Id" class="list-group-item list-group-item-action">
+                                @port.Name
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ContentTemplate>
+</SpaLoader>
 
 @code {
 
@@ -33,8 +40,7 @@
     protected override async Task OnInitializedAsync()
     {
         // Not yet supported by EF.Cosmos
-        //location = await dbContext.Locations.Include(p=>p.Ports).FirstAsync(l => l.Id == Id);
-        location = await dbContext.Locations.FirstAsync(l => l.Id == Id);
+        location = await dbContext.AllLocationDetails().FirstAsync(l => l.Id == Id);
     }
 
 }

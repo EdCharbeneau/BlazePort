@@ -2,43 +2,44 @@
 using BlazePort.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BlazePort.Pages.Admin.Ports
 {
-    public class AdminPortsBase : ComponentBase
+    public partial class AdminPorts
     {
         [Inject] BlazePortContext Db { get; set; }
-        protected FlyoutPanel EditorPanel { get; set; }
-        protected Notification SuccessNotification { get; set; }
-        protected Notification FailNotification { get; set; }
+        FlyoutPanel EditorPanel { get; set; }
+        Notification SuccessNotification { get; set; }
+        Notification FailNotification { get; set; }
 
-        protected PortDetailsGridView[] portsGridView;
+        PortDetailsGridView[] portsGridView;
 
-        protected PortDetailsForm portForm = new PortDetailsForm();
+        PortDetailsForm portForm = new PortDetailsForm();
 
-        protected LocationDetails[] locations;
+        LocationDetails[] locations;
 
         protected override async Task OnInitializedAsync()
         {
-            locations = await Db.Locations.ToArrayAsync();
+            //locations = await Db.AllLocationDetails().ToArrayAsync();
 
-            portsGridView = locations.SelectMany(p => p.Ports).Select(p => PortDetailsGridView.FromPort(p)).ToArray();
+            //portsGridView = locations.SelectMany(p => p.Ports).Select(p => PortDetailsGridView.FromPort(p)).ToArray();
+            locations = await Db.Locations.ToArrayAsync();
+            portsGridView = Db.PortDetails.Select(p => PortDetailsGridView.FromPort(p)).ToArray();
         }
 
-        protected async Task CloseEditor()
+        async Task CloseEditor()
         {
             await EditorPanel.HideAsync();
         }
 
-        protected async Task OpenEditor()
+        async Task OpenEditor()
         {
             await EditorPanel.ShowAsync();
         }
 
-        protected async Task SaveLocation()
+        async Task SaveLocation()
         {
             Db.PortDetails.Add(portForm.ToPortDetails());
 
@@ -48,7 +49,7 @@ namespace BlazePort.Pages.Admin.Ports
 
             portsGridView = locations
                 .SelectMany(p => p.Ports)
-                .Where(AreValidRecords)
+                //.Where(AreValidRecords)
                 .Select(p => PortDetailsGridView.FromPort(p))
                 .ToArray();
 
@@ -60,6 +61,6 @@ namespace BlazePort.Pages.Admin.Ports
         }
 
         // Cosmos or EF reports a false record with id of negative value
-        private Func<PortDetails, bool> AreValidRecords = (PortDetails port) => port.Id > 0;
+        //private Func<PortDetails, bool> AreValidRecords = (PortDetails port) => port.Id > 0;
     }
 }

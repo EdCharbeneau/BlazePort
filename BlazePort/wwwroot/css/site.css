@@ -25245,6 +25245,42 @@ a.text-dark:hover, a.text-dark:focus {
     .tt-seperator {
       font-size: 1em; } }
 
+.no-bg {
+  background: white; }
+
+.content {
+  margin-top: 6em; }
+
+.blazeport-nobg {
+  background-color: white;
+  height: 100%; }
+
+.title-block {
+  width: 100%;
+  border-bottom-right-radius: 1em;
+  border-bottom-left-radius: 1em;
+  margin-top: -48px;
+  padding-top: 6em;
+  padding-bottom: 2em;
+  padding-left: 2em;
+  padding-left: 2em;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position: top center; }
+
+body, html, .content {
+  height: 100%; }
+
+body:before {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
+  background: #22c1c3;
+  background: linear-gradient(0deg, #22c1c3 0%, #13405d 25%, #0e3045 86%, black 100%); }
+
 .blazeport-bg {
   background-color: none; }
   @media (min-width: 992px) {
@@ -25258,14 +25294,6 @@ a.text-dark:hover, a.text-dark:focus {
       background-repeat-x: repeat;
       background-repeat-y: no-repeat;
       height: 100%; } }
-
-.content {
-  margin-top: 6em; }
-
-.destination {
-  padding: 1em;
-  background-color: white;
-  border-radius: 3px; }
 
 h1, h2, h3, .h1, .h2, .h3 {
   color: #42c7c2;
@@ -25282,18 +25310,3 @@ h1, h2, h3, .h1, .h2, .h3 {
 
 .k-datepicker {
   width: 100%; }
-
-body, html, .content {
-  height: 100%;
-  /*background: rgb(34,193,195);
-    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(19,64,93,1) 71%, rgba(0,0,0,1) 100%);*/ }
-
-body:before {
-  content: '';
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  z-index: -1;
-  background: #22c1c3;
-  background: linear-gradient(0deg, #22c1c3 0%, #13405d 25%, #0e3045 86%, black 100%); }

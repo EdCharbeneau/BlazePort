@@ -1,14 +1,4 @@
 ﻿@import "main-menu";
 @import "fly-out-panel";
 @import "trip-configuration";
-//Temp
-
-.content {
-    margin-top: 6em;
-}
-
-.destination {
-    padding: 1em;
-    background-color: white;
-    border-radius:3px;
-}
+@import "layouts";

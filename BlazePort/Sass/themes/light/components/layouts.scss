@@ -1,0 +1,57 @@
+﻿.no-bg {
+    background: white;
+}
+
+.content {
+    margin-top: 6em;
+}
+
+.blazeport-nobg {
+    background-color: white;
+    height: 100%;
+}
+
+.title-block {
+    width: 100%;
+    border-bottom-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    margin-top: -48px;
+    padding-top: 6em;
+    padding-bottom: 2em;
+    padding-left: 2em;
+    padding-left: 2em;
+    background-repeat: no-repeat;
+    background-color: black;
+    background-position: top center;
+}
+
+body, html, .content {
+    height: 100%;
+}
+
+body:before {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(19,64,93,1) 25%, rgba(14,48,69,1) 86%, rgba(0,0,0,1) 100%);
+}
+
+.blazeport-bg {
+    background-color: none;
+
+    @include media-breakpoint-up(lg) {
+        background-size: 100%;
+        background-image: url("/img/blazeport-bg.jpg");
+        background-color: $vintage-cream;
+        background-position-x: center;
+        background-position: top;
+        background-position-y: 90px;
+        background-repeat-x: repeat;
+        background-repeat-y: no-repeat;
+        height: 100%;
+    }
+}

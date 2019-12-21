@@ -1,28 +1,39 @@
-@layout CenteredContentLayout
+@layout BlogPostLayout
 @page "/port/{LocationId:int}/{PortId:int}"
-@inject BlazePortContext dbContext
 @using Data;
+@inject BlazePortContext dbContext
 
-
-<div class="container pt-5">
-    <div class="destination">
-
-        @if (port == null)
-        {
-            <span>Loading...</span>
-        }
-        else
-        {
-            <h1>@port.Name</h1>
-            <img src="@port.ImageUrl" />
-            <p>@port.Description</p>
-            <ol>
-                <li>@port.Country</li>
-                <li>@port.Lat, @port.Long</li>
-            </ol>
-        }
-    </div>
-</div>
+<SpaLoader IsLoading="@(port == null)">
+    <LoadingTemplate>
+        <span>Loading...</span>
+    </LoadingTemplate>
+    <ContentTemplate>
+        <TitleBlock Title="@port.Name" BackgroundUrl="@port.ImageUrl" />
+        <div class="container no-bg pt-5">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>About @port.Name</h2>
+                    <p>@port.Description</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Location</h3>
+                    <div class="list-group">
+                        <a href="/destination/@port.LocationId" class="list-group-item list-group-item-action">
+                            <TelerikIcon Icon="@IconName.MarkerPin" />
+                            @port.Location.Name, @port.Country
+                        </a>
+                        <span class="list-group-item">
+                            <TelerikIcon Icon="@IconName.MarkerPinTarget" />
+                            <span>@port.Lat, @port.Long</span>
+                        </span>
+                    </div>
+                    <ol>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </ContentTemplate>
+</SpaLoader>
 
 @code {
 

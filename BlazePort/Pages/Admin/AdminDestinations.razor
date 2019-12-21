@@ -3,35 +3,50 @@
 @using Microsoft.EntityFrameworkCore
 @inject BlazePortContext dbContext
 
-<a href="/admin/index">Admin Home</a>
-<h3>Admin Destinations</h3>
+<div class="container-fluid">
+    <a href="/admin/index">Admin Home</a>
+    <h3>Admin Destinations</h3>
 
-<EditForm Model="newLocation" OnValidSubmit="@SaveLocation">
+    <div class="my-2">
+        <TelerikButton OnClick="@OpenEditor" Icon="@IconName.PlusCircle">Add New Record</TelerikButton>
+    </div>
 
-    <div class="form-group">
-        <label>Name</label>
-        <InputText @bind-Value="@newLocation.Name" Class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Description</label>
-        <InputTextArea @bind-Value="@newLocation.Description" Class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Image URL</label>
-        <InputText @bind-Value="@newLocation.ImageUrl" Class="form-control" />
-    </div>
-    <button>Save</button>
-</EditForm>
+    <FlyoutPanel @ref="EditorPanel">
+        <TitleTemplate>
+            <strong>New Destination</strong>
+        </TitleTemplate>
+        <ContentTemplate>
+            <EditForm Model="newLocation" OnValidSubmit="@SaveLocation">
 
-<TelerikGrid Data="locations" Sortable="true" Pageable="true" Groupable="true"
-            FilterMode="GridFilterMode.FilterRow">
-    <GridColumns>
-        <GridColumn Field="@nameof(LocationDetails.Name)" />
-        <GridColumn Field="@nameof(LocationDetails.Description)" />
-    </GridColumns>
-</TelerikGrid>
+                <div class="form-group">
+                    <label>Name</label>
+                    <InputText @bind-Value="@newLocation.Name" Class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <InputTextArea @bind-Value="@newLocation.Description" Class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <InputText @bind-Value="@newLocation.ImageUrl" Class="form-control" />
+                </div>
+                <button>Save</button>
+            </EditForm>
+        </ContentTemplate>
+    </FlyoutPanel>
+
+    <TelerikGrid Data="locations" Sortable="true" Pageable="true" Groupable="true"
+                 FilterMode="GridFilterMode.FilterRow">
+        <GridColumns>
+            <GridColumn Field="@nameof(LocationDetails.Name)" />
+            <GridColumn Field="@nameof(LocationDetails.Description)" />
+        </GridColumns>
+    </TelerikGrid>
+</div>
 
 @code {
+
+    FlyoutPanel EditorPanel { get; set; }
 
     LocationDetails[] locations;
 
@@ -56,6 +71,17 @@
         newLocation = new LocationDetails();
 
         await LoadLocations();
+
+        await CloseEditor();
     }
 
+    async Task CloseEditor()
+    {
+        await EditorPanel.HideAsync();
+    }
+
+    async Task OpenEditor()
+    {
+        await EditorPanel.ShowAsync();
+    }
 }
