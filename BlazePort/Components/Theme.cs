@@ -11,7 +11,8 @@ namespace BlazePort.Components
 
         public const string Warning = "warning";
 
-        public const string Danger = "danger";
+        public const string Danger = "error";
+        public const string Error = "error";
 
         public const string Info = "info";
 

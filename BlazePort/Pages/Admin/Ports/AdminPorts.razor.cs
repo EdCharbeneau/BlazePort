@@ -2,8 +2,11 @@
 using BlazePort.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Telerik.Blazor.Components;
 
 namespace BlazePort.Pages.Admin.Ports
 {
@@ -15,50 +18,80 @@ namespace BlazePort.Pages.Admin.Ports
         Notification FailNotification { get; set; }
 
         PortDetailsGridView[] portsGridView;
-
-        PortDetailsForm portForm = new PortDetailsForm();
-
         LocationDetails[] locations;
+
+        IEnumerable<PortDetailsGridView> selectedItems = Enumerable.Empty<PortDetailsGridView>();
+
+        PortDetailsForm portForm;
+
+        PortDetails editItem;
+
+        string FormTitle => portForm.FormMode == FormMode.Edit ?
+            $"{editItem.Name} (editing)" : "New Port";
 
         protected override async Task OnInitializedAsync()
         {
-            //locations = await Db.AllLocationDetails().ToArrayAsync();
-
-            //portsGridView = locations.SelectMany(p => p.Ports).Select(p => PortDetailsGridView.FromPort(p)).ToArray();
             locations = await Db.Locations.ToArrayAsync();
-            portsGridView = Db.PortDetails.Select(p => PortDetailsGridView.FromPort(p)).ToArray();
+            await LoadGrid();
         }
 
-        async Task CloseEditor()
+        private async Task LoadGrid()
         {
-            await EditorPanel.HideAsync();
-        }
-
-        async Task OpenEditor()
-        {
-            await EditorPanel.ShowAsync();
+            portsGridView = await Db.PortDetails.Select(p => PortDetailsGridView.FromPort(p)).ToArrayAsync();
         }
 
         async Task SaveLocation()
         {
-            Db.PortDetails.Add(portForm.ToPortDetails());
-
-            await Db.SaveChangesAsync();
-
-            locations = await Db.Locations.ToArrayAsync();
-
-            portsGridView = locations
-                .SelectMany(p => p.Ports)
-                //.Where(AreValidRecords)
-                .Select(p => PortDetailsGridView.FromPort(p))
-                .ToArray();
-
-            portForm = new PortDetailsForm();
-
             await EditorPanel.HideAsync();
 
-            await SuccessNotification.Show();
+            await TrySaving(
+                OnSuccess: SuccessNotification.Show,
+                OnFail: FailNotification.Show
+                );
+
+            await LoadGrid();
+            ClearSelections();
         }
+
+        private async Task TrySaving(Func<Task> OnSuccess, Func<Task> OnFail)
+        {
+            try
+            {
+                if (portForm.FormMode == FormMode.New)
+                {
+                    Db.PortDetails.Add(portForm.ToPortDetails());
+                }
+                else
+                {
+                    editItem = portForm.ApplyFormToEntity(editItem);
+                }
+
+                await Db.SaveChangesAsync();
+                await OnSuccess();
+            }
+            catch (System.Exception)
+            {
+                // TODO: Logging
+                await OnFail();
+            }
+        }
+
+        async Task HandleCreate(GridCommandEventArgs _)
+        {
+            portForm = new PortDetailsForm(FormMode.New);
+            await EditorPanel.ShowAsync();
+        }
+
+        async Task HandleSelected(GridCommandEventArgs e)
+        {
+            editItem = await Db.PortDetails.FindAsync(selectedItems.First().Id);
+            portForm = PortDetailsForm.FromPortDetails(
+               port: editItem,
+               formMode: FormMode.Edit);
+            await EditorPanel.ShowAsync();
+        }
+
+        void ClearSelections() => selectedItems = Enumerable.Empty<PortDetailsGridView>();
 
         // Cosmos or EF reports a false record with id of negative value
         //private Func<PortDetails, bool> AreValidRecords = (PortDetails port) => port.Id > 0;

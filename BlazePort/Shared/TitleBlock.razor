@@ -1,11 +1,9 @@
-﻿<div class="container pt-5">
-    <div class="title-block"
-         style="@backgroundUrl">
-        <h1>
-            @Title
-        </h1>
+﻿    <div class="title-block" style="@backgroundUrl">
+            <h1>
+                @Title
+            </h1>
+        @ChildContent
     </div>
-</div>
 
 @code {
     string backgroundUrl => String.IsNullOrWhiteSpace(BackgroundUrl) ?
@@ -13,4 +11,6 @@
 
     [Parameter] public string Title { get; set; }
     [Parameter] public string BackgroundUrl { get; set; }
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
 }

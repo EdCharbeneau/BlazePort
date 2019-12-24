@@ -14,12 +14,8 @@
 .title-block {
     width: 100%;
     border-bottom-right-radius: 1em;
-    border-bottom-left-radius: 1em;
-    margin-top: -48px;
-    padding-top: 6em;
-    padding-bottom: 2em;
-    padding-left: 2em;
-    padding-left: 2em;
+    margin: -48px 0 15px -15px;
+    padding: 6em 0 2em 2em;
     background-repeat: no-repeat;
     background-color: black;
     background-position: top center;
@@ -54,4 +50,18 @@ body:before {
         background-repeat-y: no-repeat;
         height: 100%;
     }
+}
+
+.grid-outer {
+    padding: 15px;
+    background-color: #13405d;
+    border-radius: 1em;
+}
+
+.k-grid {
+    border-color: #13405d;
+}
+
+.k-grid tr, .k-grid-header {
+    border: transparent;
 }
