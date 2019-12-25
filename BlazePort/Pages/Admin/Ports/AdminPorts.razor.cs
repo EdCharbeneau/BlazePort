@@ -10,7 +10,7 @@ using Telerik.Blazor.Components;
 
 namespace BlazePort.Pages.Admin.Ports
 {
-    public partial class AdminPorts
+    public partial class AdminPorts : IFormBehaviors
     {
         [Inject] BlazePortContext Db { get; set; }
         FlyoutPanel EditorPanel { get; set; }
@@ -22,12 +22,12 @@ namespace BlazePort.Pages.Admin.Ports
 
         IEnumerable<PortDetailsGridView> selectedItems = Enumerable.Empty<PortDetailsGridView>();
 
-        PortDetailsForm portForm;
-
         PortDetails editItem;
 
-        string FormTitle => portForm.FormMode == FormMode.Edit ?
+        string FormTitle => FormMode == FormMode.Edit ?
             $"{editItem.Name} (editing)" : "New Port";
+
+        public FormMode FormMode { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -45,31 +45,32 @@ namespace BlazePort.Pages.Admin.Ports
             await EditorPanel.HideAsync();
 
             await TrySaving(
-                OnSuccess: SuccessNotification.Show,
+                OnSuccess: SuccessFullySaved,
                 OnFail: FailNotification.Show
                 );
+        }
 
-            await LoadGrid();
+        async Task SuccessFullySaved()
+        {
             ClearSelections();
+            await LoadGrid();
+            StateHasChanged();
+            await SuccessNotification.Show();
         }
 
         private async Task TrySaving(Func<Task> OnSuccess, Func<Task> OnFail)
         {
             try
             {
-                if (portForm.FormMode == FormMode.New)
+                if (FormMode == FormMode.New)
                 {
-                    Db.PortDetails.Add(portForm.ToPortDetails());
-                }
-                else
-                {
-                    editItem = portForm.ApplyFormToEntity(editItem);
+                    Db.PortDetails.Add(editItem);
                 }
 
                 await Db.SaveChangesAsync();
                 await OnSuccess();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 // TODO: Logging
                 await OnFail();
@@ -78,16 +79,15 @@ namespace BlazePort.Pages.Admin.Ports
 
         async Task HandleCreate(GridCommandEventArgs _)
         {
-            portForm = new PortDetailsForm(FormMode.New);
+            editItem = new PortDetails();
+            FormMode = FormMode.New;
             await EditorPanel.ShowAsync();
         }
 
         async Task HandleSelected(GridCommandEventArgs e)
         {
             editItem = await Db.PortDetails.FindAsync(selectedItems.First().Id);
-            portForm = PortDetailsForm.FromPortDetails(
-               port: editItem,
-               formMode: FormMode.Edit);
+            FormMode = FormMode.Edit;
             await EditorPanel.ShowAsync();
         }
 
