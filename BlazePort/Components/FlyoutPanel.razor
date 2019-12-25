@@ -1,6 +1,7 @@
 ﻿
 <div class="fly-out-panel">
     <TelerikAnimationContainer AnimationType="AnimationType.SlideRight" @ref="Panel"
+                               ParentInlineStyle="@HotFixStyle"
                                Top="0" Left="0" Height="100%" Width="@Width">
         <div class="k-window-titlebar k-dialog-titlebar k-header">
             <div class="k-window-title k-dialog-title">
@@ -23,14 +24,18 @@
 
     [Parameter] public RenderFragment ContentTemplate { get; set; }
 
+    string HotFixStyle = "pointer-events: none;";
+
     public async Task HideAsync()
     {
         await Panel.HideAsync();
+        HotFixStyle = "pointer-events: none;";
     }
 
     public async Task ShowAsync()
     {
         await Panel.ShowAsync();
+        HotFixStyle = "";
     }
 
 }
