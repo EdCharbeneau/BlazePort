@@ -2,7 +2,7 @@
 @layout BlogPostLayout
 
 <TitleBlock Title="Admin Ports">
-    <a href="/admin/index">Admin Home</a>
+    <a href="/admin/index"><TelerikIcon Icon="@IconName.ArrowRoot"/> Admin Home</a>
 </TitleBlock>
 
 <div class="container-fluid">
@@ -14,7 +14,6 @@
         <ContentTemplate>
             <EditForm Model="portForm" OnValidSubmit="SaveLocation">
                 <DataAnnotationsValidator />
-                <ValidationSummary></ValidationSummary>
                 <div class="form-group">
                     <label>Name</label>
                     <InputText @bind-Value="portForm.Name" class="form-control" />
@@ -48,7 +47,9 @@
                     </InputSelect>
                     <ValidationMessage For="@(()=> portForm.SelectedLocation)"></ValidationMessage>
                 </div>
-                <TelerikButton Icon="@IconName.Save">Save</TelerikButton>
+                <TelerikButton Primary=true Icon=@IconName.Save ButtonType=ButtonType.Submit>Save</TelerikButton>
+                <TelerikButton OnClick=HandleCancel Icon=@IconName.Cancel ButtonType=ButtonType.Button>Cancel</TelerikButton>
+
             </EditForm>
         </ContentTemplate>
     </FlyoutPanel>

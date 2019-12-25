@@ -93,6 +93,7 @@ namespace BlazePort.Pages.Admin.Ports
 
         void ClearSelections() => selectedItems = Enumerable.Empty<PortDetailsGridView>();
 
+        async Task HandleCancel() => await EditorPanel.HideAsync();
         // Cosmos or EF reports a false record with id of negative value
         //private Func<PortDetails, bool> AreValidRecords = (PortDetails port) => port.Id > 0;
     }
