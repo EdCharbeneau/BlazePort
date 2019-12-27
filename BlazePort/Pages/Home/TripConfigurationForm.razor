@@ -9,7 +9,7 @@
 
 <div class="form-group">
     <label>Passenger</label>
-    <TelerikNumericTextBox @bind-Value="ViewModel.PassengerCount"/>
+    <TelerikNumericTextBox @bind-Value="ViewModel.PassengerCount" Width="100%" Min="1"/>
     <ValidationMessage For="@(()=> ViewModel.PassengerCount)"></ValidationMessage>
 </div>
 

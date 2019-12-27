@@ -11,7 +11,7 @@ namespace BlazePort.Pages.Home
 
         [Required]
         [Range(1, 4)]
-        public int PassengerCount { get; set; }
+        public int PassengerCount { get; set; } = 1;
 
         [Required(AllowEmptyStrings = false)]
         public string SelectedDepartureLocationId

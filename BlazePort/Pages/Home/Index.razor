@@ -26,7 +26,6 @@
     <ContentTemplate>
         <EditForm Model="TripConfiguration" OnValidSubmit="@OnTripEstimateTripCost"
                   OnInvalidSubmit="@InvalidSubmit">
-            <ValidationSummary />
             <DataAnnotationsValidator />
 
             <TripConfigurationForm ViewModel="TripConfiguration"></TripConfigurationForm>
