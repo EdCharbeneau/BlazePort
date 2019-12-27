@@ -1,14 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlazePort.Data
 {
-    public partial class PortDetails
+    public class PortDetails
     {
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public string Country { get; set; }
@@ -20,11 +22,16 @@ namespace BlazePort.Data
 
         public LocationDetails Location { get; set; }
 
-        [NotMapped] // Form Field Only
-        [Required(AllowEmptyStrings = false)]
-        public string SelectedLocation {
-            get => LocationId == 0 ? string.Empty : LocationId.ToString();
-            set => LocationId = int.Parse(value);
+        public void Deconstruct(out int id, out string name)
+        {
+            id = Id;
+            name = Name;
+        }
+        public void Deconstruct(out int id, out string name, out string description)
+        {
+            id = Id;
+            name = Name;
+            description = Description;
         }
 
     }

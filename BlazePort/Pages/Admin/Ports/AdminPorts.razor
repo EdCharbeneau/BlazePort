@@ -12,30 +12,30 @@
             <strong>@FormTitle</strong>
         </TitleTemplate>
         <ContentTemplate>
-            <EditForm Model="editItem" OnValidSubmit="SaveLocation">
+            <EditForm Model="portForm" OnValidSubmit="SaveLocation">
                 <DataAnnotationsValidator />
                 <div class="form-group">
                     <label>Name</label>
-                    <InputText @bind-Value="editItem.Name" class="form-control" />
-                    <ValidationMessage For="@(()=> editItem.Name)"></ValidationMessage>
+                    <InputText @bind-Value="portForm.Name" class="form-control" />
+                    <ValidationMessage For="@(()=> portForm.Name)"></ValidationMessage>
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <InputTextArea @bind-Value="editItem.Description" class="form-control" />
-                    <ValidationMessage For="@(()=> editItem.Description)"></ValidationMessage>
+                    <InputTextArea @bind-Value="portForm.Description" class="form-control" />
+                    <ValidationMessage For="@(()=> portForm.Description)"></ValidationMessage>
                 </div>
                 <div class="form-group">
                     <label>Country</label>
-                    <InputTextArea @bind-Value="editItem.Country" class="form-control" />
-                    <ValidationMessage For="@(()=> editItem.Country)"></ValidationMessage>
+                    <InputTextArea @bind-Value="portForm.Country" class="form-control" />
+                    <ValidationMessage For="@(()=> portForm.Country)"></ValidationMessage>
                 </div>
                 <div class="form-group">
                     <label>Image URL</label>
-                    <InputText @bind-Value="editItem.ImageUrl" class="form-control" />
+                    <InputText @bind-Value="portForm.ImageUrl" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label>Parent Location</label>
-                    <InputSelect @bind-Value="editItem.SelectedLocation" class="form-control">
+                    <InputSelect @bind-Value="portForm.SelectedLocation" class="form-control">
                         <option value="">--Select a location</option>
                         @if (locations != null)
                         {
@@ -45,7 +45,7 @@
                             }
                         }
                     </InputSelect>
-                    <ValidationMessage For="@(()=> editItem.SelectedLocation)"></ValidationMessage>
+                    <ValidationMessage For="@(()=> portForm.SelectedLocation)"></ValidationMessage>
                 </div>
                 <TelerikButton Primary=true Icon=@IconName.Save ButtonType=ButtonType.Submit>Save</TelerikButton>
                 <TelerikButton OnClick=HandleCancel Icon=@IconName.Cancel ButtonType=ButtonType.Button>Cancel</TelerikButton>
@@ -53,6 +53,7 @@
             </EditForm>
         </ContentTemplate>
     </FlyoutPanel>
+
 
     <div class="grid-outer">
         <TelerikGrid Data="portsGridView"
