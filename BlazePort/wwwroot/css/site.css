@@ -26894,7 +26894,8 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fly-out-panel > .k-animation-container {
   height: 100%;
-  padding-right: 1em; }
+  padding-right: 1em;
+  position: fixed; }
 
 .fly-out-panel > .k-animation-container > div {
   width: 100%;
