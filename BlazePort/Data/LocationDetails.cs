@@ -1,32 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BlazePort.Data
 {
     public class LocationDetails
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public string ImageUrl { get; set; }
+        [Required]
         public float Distance { get; set; }
 
         public List<PortDetails> Ports { get; set; }
-
-        public void Deconstruct(out int id, out string name)
-        {
-            id = Id;
-            name = Name;
-        }
-        public void Deconstruct(out int id, out string name, out string description)
-        {
-            id = Id;
-            name = Name;
-            description = Description;
-        }
 
     }
 }

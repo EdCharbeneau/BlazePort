@@ -8,28 +8,32 @@
 
 <div class="container-fluid">
 
-    <div class="my-2">
-        <TelerikButton OnClick="@OpenEditor" Icon="@IconName.PlusCircle">Add New Record</TelerikButton>
-    </div>
-
     <FlyoutPanel @ref="EditorPanel">
         <TitleTemplate>
             <strong>New Destination</strong>
         </TitleTemplate>
         <ContentTemplate>
-            <EditForm Model="newLocation" OnValidSubmit="@SaveLocation">
-
+            <EditForm Model="editItem" OnValidSubmit=@SaveLocation>
+                <DataAnnotationsValidator />
                 <div class="form-group">
                     <label>Name</label>
-                    <InputText @bind-Value="@newLocation.Name" Class="form-control" />
+                    <InputText @bind-Value=@editItem.Name Class="form-control" />
+                    <ValidationMessage For="@(()=> editItem.Name)"></ValidationMessage>
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <InputTextArea @bind-Value="@newLocation.Description" Class="form-control" />
+                    <InputTextArea @bind-Value=@editItem.Description Class="form-control" />
+                    <ValidationMessage For="@(()=> editItem.Description)"></ValidationMessage>
                 </div>
                 <div class="form-group">
                     <label>Image URL</label>
-                    <InputText @bind-Value="@newLocation.ImageUrl" Class="form-control" />
+                    <InputText @bind-Value=@editItem.ImageUrl Class="form-control" />
+                    <ValidationMessage For="@(()=> editItem.ImageUrl)"></ValidationMessage>
+                </div>
+                <div class="form-group">
+                    <label>Distance from Earth</label>
+                    <TelerikNumericTextBox @bind-Value=@editItem.Distance Decimals="3" Format="##0.### Mil Miles" Class="form-control" />
+                    <ValidationMessage For="@(()=> editItem.Distance)"></ValidationMessage>
                 </div>
                 <TelerikButton Primary=true Icon=@IconName.Save ButtonType=ButtonType.Submit>Save</TelerikButton>
                 <TelerikButton OnClick=HandleCancel Icon=@IconName.Cancel ButtonType=ButtonType.Button>Cancel</TelerikButton>
@@ -50,14 +54,14 @@
                 <GridCommandButton OnClick=HandleSelected Command="Edit" Icon="edit" Enabled="@(selectedItems.Any())">Edit</GridCommandButton>
             </GridToolBar>
             <GridColumns>
-                <GridColumn Field="@nameof(LocationDetails.Name)" />
-                <GridColumn Field="@nameof(LocationDetails.Description)" />
+                <GridColumn Field=@nameof(LocationDetails.Name) />
+                <GridColumn Field=@nameof(LocationDetails.Description) />
             </GridColumns>
         </TelerikGrid>
     </div>
 </div>
 
-<Notification @ref="SuccessNotification" Title="New Item" Theme=@Theme.Success>
+<Notification @ref="SuccessNotification" Title="Saved Item" Theme=@Theme.Success>
     <p>The item saved successfully.</p>
 </Notification>
 
