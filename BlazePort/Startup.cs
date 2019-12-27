@@ -1,4 +1,5 @@
 using BlazePort.Data;
+using BlazePort.Pages.Home;
 using BlazePort.TripCost.Service;
 using BlazorSize;
 using Microsoft.AspNetCore.Builder;
@@ -8,7 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Configuration;
 using System.IO;
 
 namespace BlazePort
@@ -32,6 +32,7 @@ namespace BlazePort
             string modelPath = Path.Combine(Environment.CurrentDirectory, "MLModels", "TripCostModel.zip"); ;
             services.AddSingleton<ITripCostPredictionService>(new TripCostPredictionService(modelPath));
             services.AddDbContext<BlazePortContext>(options => options.UseSqlite("Data Source=BlazePort.db"));
+            services.AddScoped<TripConfigurationState>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

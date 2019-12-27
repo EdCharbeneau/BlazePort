@@ -1,9 +1,9 @@
 ﻿@page "/"
 
 <div class="container">
-    @if (totalPrice > 0)
+    @if (State.TotalPrice > 0)
     {
-        <TripOverview TripConfiguration="TripConfiguration" TotalPrice="totalPrice">
+        <TripOverview TripConfiguration="State.TripConfiguration" TotalPrice="State.TotalPrice">
             <ButtonTemplate>
                 <TelerikButton OnClick="ShowConfigurationPanel">Edit Trip</TelerikButton>
                 <TelerikButton Class="k-primary">Book Now</TelerikButton>
@@ -24,11 +24,11 @@
         Trip Options
     </TitleTemplate>
     <ContentTemplate>
-        <EditForm Model="TripConfiguration" OnValidSubmit="@OnTripEstimateTripCost"
+        <EditForm Model="State.TripConfiguration" OnValidSubmit="@OnTripEstimateTripCost"
                   OnInvalidSubmit="@InvalidSubmit">
             <DataAnnotationsValidator />
 
-            <TripConfigurationForm ViewModel="TripConfiguration"></TripConfigurationForm>
+            <TripConfigurationForm ViewModel="State.TripConfiguration"></TripConfigurationForm>
 
             <div class="form-group">
                 <TelerikButton Class="btn btn-block btn-lg k-primary">Estimate Trip Cost</TelerikButton>
