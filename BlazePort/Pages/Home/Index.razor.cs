@@ -3,19 +3,12 @@ using BlazePort.TripCost.Service;
 using BlazePort.TripCost.Service.DataStructures;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using BlazorSize;
-using System;
 
 namespace BlazePort.Pages.Home
 {
-    public partial class Index : IDisposable
+    public partial class Index
     {
-        [Inject] ResizeListener ResizeListener { get; set; }
         [Inject] ITripCostPredictionService TripCostService { get; set; }
-
-        bool IsMediumUpMedia;
-
-        protected string ConfigurationPanelWidth => IsMediumUpMedia ? "50%" : "100%";
 
         protected float totalPrice;
 
@@ -44,26 +37,5 @@ namespace BlazePort.Pages.Home
             await ConfigurationPanel.HideAsync();
         }
 
-        protected override void OnAfterRender(bool firstRender)
-        {
-
-            if (firstRender)
-            {
-                ResizeListener.OnResized += WindowResized;
-            }
-        }
-
-        void IDisposable.Dispose()
-        {
-            ResizeListener.OnResized -= WindowResized;
-        }
-
-        async void WindowResized(object _, BrowserWindowSize window)
-        {
-            IsMediumUpMedia = await ResizeListener.MatchMedia(Breakpoints.MediumUp);
-            TripConfiguration.DropDownWidth = IsMediumUpMedia ? "calc(50% - 48px)" : "calc(100% - 48px)";
-
-            StateHasChanged();
-        }
     }
 }

@@ -1,10 +1,14 @@
-﻿#trip-empty-state .trip-empty-state-content {
-    @include media-breakpoint-up(md) {
-        width: 50% !important;
-    }
+﻿#trip-empty-state {
+    margin-top: 18%;
 
-    @include media-breakpoint-up(xl) {
-        width: 25% !important;
+    .trip-empty-state-content {
+        @include media-breakpoint-up(md) {
+            width: 50% !important;
+        }
+
+        @include media-breakpoint-up(xl) {
+            width: 25% !important;
+        }
     }
 }
 

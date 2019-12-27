@@ -1,12 +1,13 @@
 ﻿.fly-out-panel > .k-animation-container {
     height: 100%;
-    overflow: visible;
+    padding-right:1em;
 }
 
 .fly-out-panel > .k-animation-container > div {
     width: 100%;
     background-color: white;
     box-shadow: 5px 0px 10px -2px #888888;
+    overflow: auto !important;
 }
 
 .fly-out-panel .k-window-titlebar {

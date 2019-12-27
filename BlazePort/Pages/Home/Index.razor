@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-<div class="container h-100 py-5">
+<div class="container">
     @if (totalPrice > 0)
     {
         <TripOverview TripConfiguration="TripConfiguration" TotalPrice="totalPrice">
@@ -19,7 +19,7 @@
         </TripEmptyState>
     }
 </div>
-<FlyoutPanel Width="@ConfigurationPanelWidth" @ref="ConfigurationPanel">
+<FlyoutPanel @ref="ConfigurationPanel">
     <TitleTemplate>
         Trip Options
     </TitleTemplate>

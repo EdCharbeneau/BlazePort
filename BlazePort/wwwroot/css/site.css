@@ -26894,23 +26894,25 @@ a.text-dark:hover, a.text-dark:focus {
 
 .fly-out-panel > .k-animation-container {
   height: 100%;
-  overflow: visible; }
+  padding-right: 1em; }
 
 .fly-out-panel > .k-animation-container > div {
   width: 100%;
   background-color: white;
-  box-shadow: 5px 0px 10px -2px #888888; }
+  box-shadow: 5px 0px 10px -2px #888888;
+  overflow: auto !important; }
 
 .fly-out-panel .k-window-titlebar {
   border-radius: 0; }
 
-@media (min-width: 768px) {
-  #trip-empty-state .trip-empty-state-content {
-    width: 50% !important; } }
-
-@media (min-width: 1200px) {
-  #trip-empty-state .trip-empty-state-content {
-    width: 25% !important; } }
+#trip-empty-state {
+  margin-top: 18%; }
+  @media (min-width: 768px) {
+    #trip-empty-state .trip-empty-state-content {
+      width: 50% !important; } }
+  @media (min-width: 1200px) {
+    #trip-empty-state .trip-empty-state-content {
+      width: 25% !important; } }
 
 .trip-configuration {
   background-color: transparent; }

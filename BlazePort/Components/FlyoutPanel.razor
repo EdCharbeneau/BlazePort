@@ -1,8 +1,11 @@
-﻿
+﻿@implements IDisposable
+@using BlazorSize
+@inject ResizeListener ResizeListener
+
 <div class="fly-out-panel">
     <TelerikAnimationContainer AnimationType="AnimationType.SlideRight" @ref="Panel"
                                ParentInlineStyle="@HotFixStyle"
-                               Top="0" Left="0" Height="100%" Width="@Width">
+                               Top="0" Left="0" Height="100vh" Width="@Width">
         <div class="k-window-titlebar k-dialog-titlebar k-header">
             <div class="k-window-title k-dialog-title">
                 @TitleTemplate
@@ -16,9 +19,12 @@
 </div>
 
 @code {
-    TelerikAnimationContainer Panel { get; set; }
 
-    [Parameter] public string Width { get; set; } = "50%";
+    bool IsMediumUpMedia;
+
+    protected string Width => IsMediumUpMedia ? "50%" : "100%";
+
+    TelerikAnimationContainer Panel { get; set; }
 
     [Parameter] public RenderFragment TitleTemplate { get; set; }
 
@@ -36,6 +42,30 @@
     {
         await Panel.ShowAsync();
         HotFixStyle = "";
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            ResizeListener.OnResized += WindowResized;
+        }
+    }
+
+    void IDisposable.Dispose()
+    {
+        ResizeListener.OnResized -= WindowResized;
+    }
+
+    async void WindowResized(object _, BrowserWindowSize window)
+    {
+        IsMediumUpMedia = await ResizeListener.MatchMedia(Breakpoints.MediumUp);
+        StateHasChanged();
+        
+        //https://github.com/telerik/blazor/issues/630
+        // Define drop down widths after bug fixed
+        //TripConfiguration.DropDownWidth = IsMediumUpMedia ? "calc(50% - 48px)" : "calc(100% - 48px)";
+
     }
 
 }
