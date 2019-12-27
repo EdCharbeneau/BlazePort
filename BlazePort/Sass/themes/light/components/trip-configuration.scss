@@ -14,6 +14,7 @@
 
 .trip-configuration {
     background-color: transparent;
+    padding-top:2em;
 
     .title {
         font-size: 1em;
@@ -40,6 +41,7 @@
 
 @include media-breakpoint-up(md) {
     .trip-configuration {
+        padding-top: 4em;
 
         .title {
             font-size: 1.2em;

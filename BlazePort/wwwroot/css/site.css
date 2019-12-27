@@ -26916,7 +26916,8 @@ a.text-dark:hover, a.text-dark:focus {
       width: 25% !important; } }
 
 .trip-configuration {
-  background-color: transparent; }
+  background-color: transparent;
+  padding-top: 2em; }
   .trip-configuration .title {
     font-size: 1em;
     color: #f2eabc; }
@@ -26933,12 +26934,14 @@ a.text-dark:hover, a.text-dark:focus {
       font-size: 1.2em; }
 
 @media (min-width: 768px) {
-  .trip-configuration .title {
-    font-size: 1.2em; }
-  .trip-configuration .text .primary {
-    font-size: 2.5em; }
-  .trip-configuration .text .meta {
-    font-size: 2em; } }
+  .trip-configuration {
+    padding-top: 4em; }
+    .trip-configuration .title {
+      font-size: 1.2em; }
+    .trip-configuration .text .primary {
+      font-size: 2.5em; }
+    .trip-configuration .text .meta {
+      font-size: 2em; } }
 
 .t-days, .t-hours, .t-minutes, .t-seconds {
   font-weight: bold;
