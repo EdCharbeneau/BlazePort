@@ -26907,7 +26907,7 @@ a.text-dark:hover, a.text-dark:focus {
   border-radius: 0; }
 
 #trip-empty-state {
-  margin-top: 18%; }
+  margin-top: 14%; }
   @media (min-width: 768px) {
     #trip-empty-state .trip-empty-state-content {
       width: 50% !important; } }
