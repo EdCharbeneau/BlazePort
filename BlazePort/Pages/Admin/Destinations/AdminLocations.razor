@@ -1,0 +1,66 @@
+﻿@page "/admin/Destinations"
+@using BlazePort.Data;
+@layout BlogPostLayout
+
+<TitleBlock Title="Admin Locations">
+    <a href="/admin/index"><TelerikIcon Icon="@IconName.ArrowRoot" /> Admin Home</a>
+</TitleBlock>
+
+<div class="container-fluid">
+
+    <div class="my-2">
+        <TelerikButton OnClick="@OpenEditor" Icon="@IconName.PlusCircle">Add New Record</TelerikButton>
+    </div>
+
+    <FlyoutPanel @ref="EditorPanel">
+        <TitleTemplate>
+            <strong>New Destination</strong>
+        </TitleTemplate>
+        <ContentTemplate>
+            <EditForm Model="newLocation" OnValidSubmit="@SaveLocation">
+
+                <div class="form-group">
+                    <label>Name</label>
+                    <InputText @bind-Value="@newLocation.Name" Class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <InputTextArea @bind-Value="@newLocation.Description" Class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <InputText @bind-Value="@newLocation.ImageUrl" Class="form-control" />
+                </div>
+                <TelerikButton Primary=true Icon=@IconName.Save ButtonType=ButtonType.Submit>Save</TelerikButton>
+                <TelerikButton OnClick=HandleCancel Icon=@IconName.Cancel ButtonType=ButtonType.Button>Cancel</TelerikButton>
+            </EditForm>
+        </ContentTemplate>
+    </FlyoutPanel>
+
+    <div class="grid-outer">
+        <TelerikGrid Data="locations"
+                     Sortable="true"
+                     Pageable="true"
+                     Groupable="true"
+                     SelectionMode=GridSelectionMode.Single
+                     @bind-SelectedItems=@selectedItems
+                     FilterMode=GridFilterMode.FilterMenu>
+            <GridToolBar>
+                <GridCommandButton OnClick=HandleCreate Command="Create" Icon="add">Add Port</GridCommandButton>
+                <GridCommandButton OnClick=HandleSelected Command="Edit" Icon="edit" Enabled="@(selectedItems.Any())">Edit</GridCommandButton>
+            </GridToolBar>
+            <GridColumns>
+                <GridColumn Field="@nameof(LocationDetails.Name)" />
+                <GridColumn Field="@nameof(LocationDetails.Description)" />
+            </GridColumns>
+        </TelerikGrid>
+    </div>
+</div>
+
+<Notification @ref="SuccessNotification" Title="New Item" Theme=@Theme.Success>
+    <p>The item saved successfully.</p>
+</Notification>
+
+<Notification @ref="FailNotification" Title="Error" Theme=@Theme.Danger>
+    <p>Failed to update database.</p>
+</Notification>
