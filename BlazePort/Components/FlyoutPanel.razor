@@ -2,21 +2,17 @@
 @using BlazorSize
 @inject ResizeListener ResizeListener
 
-<div class="fly-out-panel">
-    <TelerikAnimationContainer AnimationType="AnimationType.SlideRight" @ref="Panel"
-                               ParentInlineStyle="@HotFixStyle"
-                               Top="0" Left="0" Height="100vh" Width="@Width">
-        <div class="k-window-titlebar k-dialog-titlebar k-header">
-            <div class="k-window-title k-dialog-title">
-                @TitleTemplate
-            </div>
-            <TelerikButton Icon="close" OnClick="HideAsync"></TelerikButton>
-        </div>
-        <div class="k-content k-window-content k-dialog-content">
-            @ContentTemplate
-        </div>
-    </TelerikAnimationContainer>
-</div>
+<TelerikWindow Class="fly-out-panel" Width="@Width" Height="100vh" Top="0" Left="0" Modal="true" Visible="@Visible">
+    <WindowTitle>
+        @TitleTemplate
+    </WindowTitle>
+    <WindowActions>
+        <WindowAction Name="Close" />
+    </WindowActions>
+    <WindowContent>
+        @ContentTemplate
+    </WindowContent>
+</TelerikWindow>
 
 @code {
 
@@ -24,25 +20,11 @@
 
     protected string Width => IsMediumUpMedia ? "50%" : "100%";
 
-    TelerikAnimationContainer Panel { get; set; }
+    [Parameter]public bool Visible { get; set; }
 
     [Parameter] public RenderFragment TitleTemplate { get; set; }
 
     [Parameter] public RenderFragment ContentTemplate { get; set; }
-
-    string HotFixStyle = "pointer-events: none;";
-
-    public async Task HideAsync()
-    {
-        await Panel.HideAsync();
-        HotFixStyle = "pointer-events: none;";
-    }
-
-    public async Task ShowAsync()
-    {
-        await Panel.ShowAsync();
-        HotFixStyle = "";
-    }
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -61,11 +43,6 @@
     {
         IsMediumUpMedia = await ResizeListener.MatchMedia(Breakpoints.MediumUp);
         StateHasChanged();
-        
-        //https://github.com/telerik/blazor/issues/630
-        // Define drop down widths after bug fixed
-        //TripConfiguration.DropDownWidth = IsMediumUpMedia ? "calc(50% - 48px)" : "calc(100% - 48px)";
-
     }
 
 }

@@ -1,8 +1,6 @@
-﻿using BlazePort.Components;
-using BlazePort.TripCost.Service;
+﻿using BlazePort.TripCost.Service;
 using BlazePort.TripCost.Service.DataStructures;
 using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
 
 namespace BlazePort.Pages.Home
 {
@@ -12,13 +10,13 @@ namespace BlazePort.Pages.Home
 
         [Inject] TripConfigurationState State { get; set; }
 
-        [Parameter] public FlyoutPanel ConfigurationPanel { get; set; }
+        bool configurationPanelVisible;
 
         public void InvalidSubmit() => State.TotalPrice = 0;
 
-        public async Task ShowConfigurationPanel() => await ConfigurationPanel.ShowAsync();
+        public void ShowConfigurationPanel() => configurationPanelVisible = true;
 
-        public async Task OnTripEstimateTripCost()
+        public void OnTripEstimateTripCost()
         {
             Trip trip = new Trip
             {
@@ -30,7 +28,7 @@ namespace BlazePort.Pages.Home
             };
 
             State.TotalPrice = TripCostService.PredictFare(trip).FareAmount;
-            await ConfigurationPanel.HideAsync();
+            configurationPanelVisible = false;
         }
 
     }

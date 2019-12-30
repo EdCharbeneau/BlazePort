@@ -12,8 +12,8 @@ namespace BlazePort.Pages.Admin.Destinations
 {
     public partial class AdminLocations : IFormBehaviors
     {
+        bool editorPanelVisible;
         [Inject] BlazePortContext Db { get; set; }
-        FlyoutPanel EditorPanel { get; set; }
         Notification SuccessNotification { get; set; }
         Notification FailNotification { get; set; }
         public FormMode FormMode { get; set; }
@@ -36,7 +36,7 @@ namespace BlazePort.Pages.Admin.Destinations
 
         async Task SaveLocation()
         {
-            await EditorPanel.HideAsync();
+            editorPanelVisible = false;
 
             await TrySaving(
                 OnSuccess: SuccessFullySaved,
@@ -71,23 +71,24 @@ namespace BlazePort.Pages.Admin.Destinations
             }
         }
 
-        async Task HandleCreate(GridCommandEventArgs _)
+        void HandleCreate(GridCommandEventArgs _)
         {
             editItem = new LocationDetails();
             FormMode = FormMode.New;
-            await EditorPanel.ShowAsync();
+            editorPanelVisible = true;
         }
 
         async Task HandleSelected(GridCommandEventArgs e)
         {
             editItem = await Db.Locations.FindAsync(selectedItems.First().Id);
             FormMode = FormMode.Edit;
-            await EditorPanel.ShowAsync();
+            editorPanelVisible = true;
         }
 
         void ClearSelections() => selectedItems = Enumerable.Empty<LocationDetails>();
 
-        async Task HandleCancel() => await EditorPanel.HideAsync();
+        void HandleCancel() => editorPanelVisible = false;
+
 
     }
 }

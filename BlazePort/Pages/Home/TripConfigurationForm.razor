@@ -2,58 +2,50 @@
 @inject BlazePortContext dbContext
 
 <div class="form-group">
-    <label>Dates</label>
+    <label class="w-100">Dates</label>
     <TelerikDatePicker @bind-Value="ViewModel.TripStart" Min="@DateTime.Now.AddDays(1)" />
     <ValidationMessage For="@(()=> ViewModel.TripStart)"></ValidationMessage>
 </div>
 
 <div class="form-group">
-    <label>Passenger</label>
-    <TelerikNumericTextBox @bind-Value="ViewModel.PassengerCount" Width="100%" Min="1"/>
+    <label class="w-100">Passenger</label>
+    <TelerikNumericTextBox @bind-Value="ViewModel.PassengerCount" Min="1"/>
     <ValidationMessage For="@(()=> ViewModel.PassengerCount)"></ValidationMessage>
 </div>
 
 <div class="form-group">
-    <label>Departing from</label>
+    <label class="w-100">Departing from</label>
     <TelerikDropDownList Data="ViewModel.DepartureLocations"
                          @bind-Value="ViewModel.SelectedDepartureLocationId"
                          ValueField="@nameof(LocationDetails.Id)"
-                         TextField="@nameof(LocationDetails.Name)"
-                         Width="100%"
-                         PopupWidth="calc(50% - 48px)">
+                         TextField="@nameof(LocationDetails.Name)">
     </TelerikDropDownList>
 
 </div>
 <div class="form-group">
-    <label>Departure Port</label>
+    <label class="w-100">Departure Port</label>
     <TelerikDropDownList Data="ViewModel.DepartureLocation.Ports"
                          @bind-Value="ViewModel.SelectedDeparturePortId"
                          ValueField="@nameof(PortDetails.Id)"
-                         TextField="@nameof(PortDetails.Name)"
-                         Width="100%"
-                         PopupWidth="calc(50% - 48px)">
+                         TextField="@nameof(PortDetails.Name)">
     </TelerikDropDownList>
 
 </div>
 
 <div class="form-group">
-    <label>Arriving to</label>
+    <label class="w-100">Arriving to</label>
     <TelerikDropDownList Data="ViewModel.ArrivalLocations"
                          @bind-Value="ViewModel.SelectedArrivalLocationId"
                          ValueField="@nameof(LocationDetails.Id)"
-                         TextField="@nameof(LocationDetails.Name)"
-                         Width="100%"
-                         PopupWidth="calc(50% - 48px)">
+                         TextField="@nameof(LocationDetails.Name)">
     </TelerikDropDownList>
 </div>
 <div class="form-group">
-    <label>Departure Port</label>
+    <label class="w-100">Departure Port</label>
     <TelerikDropDownList Data="ViewModel.ArrivalLocation.Ports"
                          @bind-Value="ViewModel.SelectedArrivalPortId"
                          ValueField="@nameof(PortDetails.Id)"
-                         TextField="@nameof(PortDetails.Name)"
-                         Width="100%"
-                         PopupWidth="calc(50% - 48px)">
+                         TextField="@nameof(PortDetails.Name)">
     </TelerikDropDownList>
 </div>
 

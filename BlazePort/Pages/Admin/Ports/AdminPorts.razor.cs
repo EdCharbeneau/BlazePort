@@ -13,7 +13,8 @@ namespace BlazePort.Pages.Admin.Ports
     public partial class AdminPorts : IFormBehaviors
     {
         [Inject] BlazePortContext Db { get; set; }
-        FlyoutPanel EditorPanel { get; set; }
+
+        bool editorPanelVisible;
         Notification SuccessNotification { get; set; }
         Notification FailNotification { get; set; }
 
@@ -42,7 +43,7 @@ namespace BlazePort.Pages.Admin.Ports
 
         async Task SaveLocation()
         {
-            await EditorPanel.HideAsync();
+            editorPanelVisible = false;
 
             await TrySaving(
                 OnSuccess: SuccessFullySaved,
@@ -77,23 +78,25 @@ namespace BlazePort.Pages.Admin.Ports
             }
         }
 
-        async Task HandleCreate(GridCommandEventArgs _)
+        void HandleCreate(GridCommandEventArgs _)
         {
             editItem = new PortDetails();
             FormMode = FormMode.New;
-            await EditorPanel.ShowAsync();
+            editorPanelVisible = true;
+
         }
 
         async Task HandleSelected(GridCommandEventArgs e)
         {
             editItem = await Db.PortDetails.FindAsync(selectedItems.First().Id);
             FormMode = FormMode.Edit;
-            await EditorPanel.ShowAsync();
+            editorPanelVisible = true;
         }
 
         void ClearSelections() => selectedItems = Enumerable.Empty<PortDetailsGridView>();
 
-        async Task HandleCancel() => await EditorPanel.HideAsync();
+        void HandleCancel() => editorPanelVisible = false;
+
         // Cosmos or EF reports a false record with id of negative value
         //private Func<PortDetails, bool> AreValidRecords = (PortDetails port) => port.Id > 0;
     }
