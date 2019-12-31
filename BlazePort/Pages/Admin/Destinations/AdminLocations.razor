@@ -16,22 +16,22 @@
             <EditForm Model="editItem" OnValidSubmit=@SaveLocation>
                 <DataAnnotationsValidator />
                 <div class="form-group">
-                    <label>Name</label>
+                    <label class="w-100">Name</label>
                     <InputText @bind-Value=@editItem.Name Class="form-control" />
                     <ValidationMessage For="@(()=> editItem.Name)"></ValidationMessage>
                 </div>
                 <div class="form-group">
-                    <label>Description</label>
+                    <label class="w-100">Description</label>
                     <InputTextArea @bind-Value=@editItem.Description Class="form-control" />
                     <ValidationMessage For="@(()=> editItem.Description)"></ValidationMessage>
                 </div>
                 <div class="form-group">
-                    <label>Image URL</label>
+                    <label class="w-100">Image URL</label>
                     <InputText @bind-Value=@editItem.ImageUrl Class="form-control" />
                     <ValidationMessage For="@(()=> editItem.ImageUrl)"></ValidationMessage>
                 </div>
                 <div class="form-group">
-                    <label>Distance from Earth</label>
+                    <label class="w-100">Distance from Earth</label>
                     <TelerikNumericTextBox @bind-Value=@editItem.Distance Decimals=3 Format="##0.### Mil Miles" Class="form-control" />
                     <ValidationMessage For="@(()=> editItem.Distance)"></ValidationMessage>
                 </div>

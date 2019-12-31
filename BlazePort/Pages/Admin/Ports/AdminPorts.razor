@@ -15,26 +15,26 @@
             <EditForm Model="editItem" OnValidSubmit="SaveLocation">
                 <DataAnnotationsValidator />
                 <div class="form-group">
-                    <label>Name</label>
+                    <label class="w-100">Name</label>
                     <InputText @bind-Value="editItem.Name" class="form-control" />
                     <ValidationMessage For="@(()=> editItem.Name)"></ValidationMessage>
                 </div>
                 <div class="form-group">
-                    <label>Description</label>
+                    <label class="w-100">Description</label>
                     <InputTextArea @bind-Value="editItem.Description" class="form-control" />
                     <ValidationMessage For="@(()=> editItem.Description)"></ValidationMessage>
                 </div>
                 <div class="form-group">
-                    <label>Country</label>
+                    <label class="w-100">Country</label>
                     <InputTextArea @bind-Value="editItem.Country" class="form-control" />
                     <ValidationMessage For="@(()=> editItem.Country)"></ValidationMessage>
                 </div>
                 <div class="form-group">
-                    <label>Image URL</label>
+                    <label class="w-100">Image URL</label>
                     <InputText @bind-Value="editItem.ImageUrl" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label>Parent Location</label>
+                    <label class="w-100">Parent Location</label>
                     <InputSelect @bind-Value="editItem.SelectedLocation" class="form-control">
                         <option value="">--Select a location</option>
                         @if (locations != null)
