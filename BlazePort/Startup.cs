@@ -31,8 +31,14 @@ namespace BlazePort
             services.AddServerSideBlazor();
             string modelPath = Path.Combine(Environment.CurrentDirectory, "MLModels", "TripCostModel.zip"); ;
             services.AddSingleton<ITripCostPredictionService>(new TripCostPredictionService(modelPath));
-            services.AddDbContext<BlazePortContext>(options => options.UseSqlite("Data Source=BlazePort.db"));
             services.AddScoped<TripConfigurationState>();
+            services.AddScoped<DbContext, BlazePortContext>();
+            //services.AddDbContext<BlazePortContext>(options => options.UseSqlite("Data Source=BlazePort.db"));
+            services.AddDbContext<BlazePortContext>(options => options.UseCosmos(
+                    accountEndpoint: Configuration["CosmosSettings:AccountEndpoint"],
+                    accountKey: Configuration["CosmosSettings:AccountKey"],
+                    databaseName: Configuration["CosmosSettings:DatabaseName"]
+            ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

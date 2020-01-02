@@ -23,6 +23,7 @@ namespace BlazePort.Pages.Admin.Ports
 
         IEnumerable<PortDetailsGridView> selectedItems = Enumerable.Empty<PortDetailsGridView>();
 
+        LocationDetails locationEditItem;
         PortDetails editItem;
 
         string FormTitle => FormMode == FormMode.Edit ?
@@ -33,12 +34,16 @@ namespace BlazePort.Pages.Admin.Ports
         protected override async Task OnInitializedAsync()
         {
             locations = await Db.Locations.ToArrayAsync();
-            await LoadGrid();
+            LoadGrid();
         }
 
-        private async Task LoadGrid()
+        private void LoadGrid()
         {
-            portsGridView = await Db.PortDetails.Select(p => PortDetailsGridView.FromPort(p)).ToArrayAsync();
+
+            portsGridView = locations
+                .SelectMany(p => p.Ports)
+                .Select(p => PortDetailsGridView.FromPort(p))
+                .ToArray();
         }
 
         async Task SaveLocation()
@@ -54,7 +59,7 @@ namespace BlazePort.Pages.Admin.Ports
         async Task SuccessFullySaved()
         {
             ClearSelections();
-            await LoadGrid();
+            LoadGrid();
             StateHasChanged();
             await SuccessNotification.Show();
         }
@@ -71,9 +76,10 @@ namespace BlazePort.Pages.Admin.Ports
                 await Db.SaveChangesAsync();
                 await OnSuccess();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 // TODO: Logging
+                Console.WriteLine(e);
                 await OnFail();
             }
         }
@@ -88,7 +94,10 @@ namespace BlazePort.Pages.Admin.Ports
 
         async Task HandleSelected(GridCommandEventArgs e)
         {
-            editItem = await Db.PortDetails.FindAsync(selectedItems.First().Id);
+            /// Find the location to edit
+            locationEditItem = await Db.Locations.FindAsync(selectedItems.First().LocationId);
+            /// Get Port node
+            editItem = locationEditItem.Ports.Find(p => p.Id == selectedItems.First().Id);
             FormMode = FormMode.Edit;
             editorPanelVisible = true;
         }
@@ -96,8 +105,5 @@ namespace BlazePort.Pages.Admin.Ports
         void ClearSelections() => selectedItems = Enumerable.Empty<PortDetailsGridView>();
 
         void HandleCancel() => editorPanelVisible = false;
-
-        // Cosmos or EF reports a false record with id of negative value
-        //private Func<PortDetails, bool> AreValidRecords = (PortDetails port) => port.Id > 0;
     }
 }

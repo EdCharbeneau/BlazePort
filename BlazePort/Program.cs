@@ -8,7 +8,7 @@ namespace BlazePort
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
@@ -17,7 +17,12 @@ namespace BlazePort
             using (var scope = scopeFactory.CreateScope())// Seed COSMOS, disable after seeding
             {
                 var db = scope.ServiceProvider.GetRequiredService<BlazePort.Data.BlazePortContext>();
-                db.Database.Migrate();
+                // Uncomment to seed Cosmos
+                //await db.InitializeContainerAsync();
+                // End Seed Code
+                // prefetch: Ping Cosmos to pool connection and avoid dealy on Index
+               await db.Locations.FirstAsync();
+
             }
 
             host.Run();

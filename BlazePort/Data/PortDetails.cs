@@ -14,8 +14,6 @@ namespace BlazePort.Data
         public string Country { get; set; }
         public double Lat { get; set; }
         public double Long { get; set; }
-
-        [Required]
         public int LocationId { get; set; }
 
         public LocationDetails Location { get; set; }

@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label class="w-100">Parent Location</label>
-                    <InputSelect @bind-Value="editItem.SelectedLocation" class="form-control">
+                    <InputSelect @bind-Value="editItem.SelectedLocation" class="form-control" disabled="@(FormMode != Data.FormMode.New)">
                         <option value="">--Select a location</option>
                         @if (locations != null)
                         {

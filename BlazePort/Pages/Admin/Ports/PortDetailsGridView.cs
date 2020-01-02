@@ -18,7 +18,8 @@ namespace BlazePort.Pages.Admin
                 Long = port.Long,
                 Country = port.Country,
                 ImageUrl = port.ImageUrl,
-                LocationName = port.Location.Name
+                LocationName = port.Location.Name,
+                LocationId = port.Location.Id
             };
 
         public int Id { get; set; }
@@ -33,5 +34,6 @@ namespace BlazePort.Pages.Admin
         public string LatLong => $"{Lat}, {Long}";
 
         public string LocationName { get; set; }
+        public int LocationId { get; set; }
     }
 }

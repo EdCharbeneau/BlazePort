@@ -64,7 +64,7 @@ namespace BlazePort.Pages.Admin.Destinations
                 await Db.SaveChangesAsync();
                 await OnSuccess();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 // TODO: Logging
                 await OnFail();
