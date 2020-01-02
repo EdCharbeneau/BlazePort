@@ -1,5 +1,5 @@
 @layout BlogPostLayout
-@page "/destination/{Id:int}"
+@page "/destination/{Id}"
 @using Data;
 @inject BlazePortContext dbContext
 
@@ -33,14 +33,14 @@
 
 @code {
 
-    [Parameter] public int Id { get; set; }
+    [Parameter] public string Id { get; set; }
 
     LocationDetails location;
 
     protected override async Task OnInitializedAsync()
     {
         // Not yet supported by EF.Cosmos
-        location = await dbContext.AllLocationDetails().FirstAsync(l => l.Id == Id);
+        location = await dbContext.AllLocationDetails().FirstAsync(l => l.Id == Guid.Parse(Id));
     }
 
 }

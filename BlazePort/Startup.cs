@@ -34,6 +34,7 @@ namespace BlazePort
             services.AddScoped<TripConfigurationState>();
             services.AddScoped<DbContext, BlazePortContext>();
             //services.AddDbContext<BlazePortContext>(options => options.UseSqlite("Data Source=BlazePort.db"));
+            services.AddEntityFrameworkCosmos();
             services.AddDbContext<BlazePortContext>(options => options.UseCosmos(
                     accountEndpoint: Configuration["CosmosSettings:AccountEndpoint"],
                     accountKey: Configuration["CosmosSettings:AccountKey"],

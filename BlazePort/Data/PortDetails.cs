@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BlazePort.Data
@@ -14,15 +15,15 @@ namespace BlazePort.Data
         public string Country { get; set; }
         public double Lat { get; set; }
         public double Long { get; set; }
-        public int LocationId { get; set; }
+        public Guid LocationId { get; set; }
 
         public LocationDetails Location { get; set; }
 
         [NotMapped] // Form Field Only
         [Required(AllowEmptyStrings = false)]
         public string SelectedLocation {
-            get => LocationId == 0 ? string.Empty : LocationId.ToString();
-            set => LocationId = int.Parse(value);
+            get => LocationId == null ? string.Empty : LocationId.ToString();
+            set => LocationId = string.IsNullOrWhiteSpace(value) ? Guid.Empty : Guid.Parse(value);
         }
 
     }

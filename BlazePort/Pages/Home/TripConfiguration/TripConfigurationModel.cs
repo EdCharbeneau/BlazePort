@@ -22,7 +22,7 @@ namespace BlazePort.Pages.Home
                 selectedDepartureLocationId = value;
                 if (!string.IsNullOrEmpty(value))
                 {
-                    DepartureLocation = DepartureLocations.First(l => l.Id == int.Parse(value));
+                    DepartureLocation = DepartureLocations.First(l => l.Id == Guid.Parse(value));
                     SelectedDeparturePortId = DepartureLocation.Ports.First().Id.ToString();
                     ClearDestinations(value);
                 }
@@ -31,7 +31,7 @@ namespace BlazePort.Pages.Home
 
         private void ClearDestinations(string selectedValue)
         {
-            ArrivalLocations = DepartureLocations.Where(loc => loc.Id != int.Parse(selectedValue)).ToArray();
+            ArrivalLocations = DepartureLocations.Where(loc => loc.Id != Guid.Parse(selectedValue)).ToArray();
             SelectedArrivalLocationId = ArrivalLocations.First().Id.ToString();
         }
 
@@ -56,7 +56,7 @@ namespace BlazePort.Pages.Home
                 selectedArrivalLocationId = value;
                 if (!string.IsNullOrEmpty(value))
                 {
-                    ArrivalLocation = ArrivalLocations.First(l => l.Id == int.Parse(value));
+                    ArrivalLocation = ArrivalLocations.First(l => l.Id == Guid.Parse(value));
                     SelectedArrivalPortId = ArrivalLocation.Ports.First().Id.ToString();
                 }
             }

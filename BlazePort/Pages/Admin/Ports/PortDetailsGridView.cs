@@ -34,6 +34,6 @@ namespace BlazePort.Pages.Admin
         public string LatLong => $"{Lat}, {Long}";
 
         public string LocationName { get; set; }
-        public int LocationId { get; set; }
+        public Guid LocationId { get; set; }
     }
 }

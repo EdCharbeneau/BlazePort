@@ -1,5 +1,5 @@
 @layout BlogPostLayout
-@page "/port/{LocationId:int}/{PortId:int}"
+@page "/port/{LocationId}/{PortId:int}"
 @using Data;
 @inject BlazePortContext dbContext
 
@@ -37,14 +37,14 @@
 
 @code {
 
-    [Parameter] public int LocationId { get; set; }
+    [Parameter] public string LocationId { get; set; }
     [Parameter] public int PortId { get; set; }
 
     PortDetails port;
 
     protected override async Task OnInitializedAsync()
     {
-        var locationDetails = await dbContext.Locations.FirstAsync(l => l.Id == LocationId);
+        var locationDetails = await dbContext.Locations.FirstAsync(l => l.Id == Guid.Parse(LocationId));
         port = locationDetails.Ports.First(p => p.Id == PortId);
     }
 

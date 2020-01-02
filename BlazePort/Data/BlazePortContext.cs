@@ -22,10 +22,9 @@ namespace BlazePort.Data
             //modelBuilder.Entity<LocationDetails>().HasData(GenerateLocations());
             //modelBuilder.Entity<PortDetails>().HasData(GeneratePorts());
             modelBuilder.Entity<LocationDetails>()
-                .OwnsMany<PortDetails>(p => p.Ports);
-                
+                        .OwnsMany<PortDetails>(p => p.Ports);
             base.OnModelCreating(modelBuilder);
-            
+
         }
 
 
@@ -36,9 +35,10 @@ namespace BlazePort.Data
 
         public async Task InitializeContainerAsync()
         {
+            await Database.EnsureDeletedAsync();
             await Database.EnsureCreatedAsync();
             Locations.AddRange(GenerateLocations());
-            PortDetails.AddRange(GeneratePorts());
+            //PortDetails.AddRange(GeneratePorts());
             var changed = await SaveChangesAsync();
             Console.WriteLine($"created {changed} records");
         }
@@ -48,33 +48,37 @@ namespace BlazePort.Data
             var locations = new List<LocationDetails>();
             locations.Add(new LocationDetails
             {
+                Id = Guid.NewGuid(),
                 Name = "Earth",
                 Description = "Earth is the third planet from the Sun, and the only astronomical object known to harbor life. According to radiometric dating and other sources of evidence, Earth formed over 4.5 billion years ago. Earth's gravity interacts with other objects in space, especially the Sun and the Moon, Earth's only natural satellite. Earth orbits around the Sun in 365.26 days, a period known as an Earth year. During this time, Earth rotates about its axis about 366.26 times.",
                 Distance = 0,
-                ImageUrl = "earth-600.jpg"
+                ImageUrl = "earth-600.jpg",
+                Ports = GenerateEarthPorts()
             });
 
             locations.Add(new LocationDetails
             {
+                Id = Guid.NewGuid(),
                 Name = "Earth's Moon",
                 Description = "The Moon is an astronomical body that orbits planet Earth and is Earth's only permanent natural satellite. It is the fifth-largest natural satellite in the Solar System, and the largest among planetary satellites relative to the size of the planet that it orbits (its primary). The Moon is after Jupiter's satellite Io the second-densest satellite in the Solar System among those whose densities are known.",
                 Distance = 0.239F,
-                ImageUrl = "moon-513.jpg"
-
+                ImageUrl = "moon-513.jpg",
+                Ports = GenerateMoonPorts()
             });
 
             locations.Add(new LocationDetails
             {
+                Id = Guid.NewGuid(),
                 Name = "Mars",
                 Description = "Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System after Mercury. In English, Mars carries a name of the Roman god of war, and is often referred to as the \"Red Planet\" because the iron oxide prevalent on its surface gives it a reddish appearance that is distinctive among the astronomical bodies visible to the naked eye.[17] Mars is a terrestrial planet with a thin atmosphere, having surface features reminiscent both of the impact craters of the Moon and the valleys, deserts, and polar ice caps of Earth.",
                 Distance = 140F,
-                ImageUrl = "mars-540.jpg"
-
+                ImageUrl = "mars-540.jpg",
+                Ports = GenerateMarsPorts()
             });
 
             return locations;
         }
-        private static List<PortDetails> GeneratePorts()
+        private static List<PortDetails> GenerateEarthPorts()
         {
             var ports = new List<PortDetails>();
 
@@ -86,7 +90,6 @@ namespace BlazePort.Data
                 Country = "United States",
                 Lat = 28.3922,
                 Long = 80.6077,
-                LocationId = 6,
                 ImageUrl = ""
 
             });
@@ -99,7 +102,6 @@ namespace BlazePort.Data
                 Country = "United States",
                 Lat = 34.7420,
                 Long = 120.5724,
-                LocationId = 6,
                 ImageUrl = ""
 
             });
@@ -112,7 +114,6 @@ namespace BlazePort.Data
                 Country = "Kazakhstan",
                 Lat = 45.9646,
                 Long = 63.3052,
-                LocationId = 6,
                 ImageUrl = ""
 
             });
@@ -125,7 +126,6 @@ namespace BlazePort.Data
                 Country = "France",
                 Lat = 5.1673,
                 Long = 52.6832,
-                LocationId = 6,
                 ImageUrl = ""
 
             });
@@ -138,7 +138,6 @@ namespace BlazePort.Data
                 Country = "India",
                 Lat = 13.7331,
                 Long = 80.2047,
-                LocationId = 6,
                 ImageUrl = ""
 
             });
@@ -151,7 +150,6 @@ namespace BlazePort.Data
                 Country = "Australia",
                 Lat = 31.1656,
                 Long = 136.8193,
-                LocationId = 6,
                 ImageUrl = ""
 
             });
@@ -164,10 +162,15 @@ namespace BlazePort.Data
                 Country = "China",
                 Lat = 28.2409,
                 Long = 102.0226,
-                LocationId = 6,
                 ImageUrl = ""
 
             });
+
+            return ports;
+        }
+        private static List<PortDetails> GenerateMoonPorts()
+        {
+            var ports = new List<PortDetails>();
 
             ports.Add(new PortDetails
             {
@@ -176,10 +179,15 @@ namespace BlazePort.Data
                 Description = "Mare Tranquillitatis (Latin for Sea of Tranquillity or Sea of Tranquility; see spelling differences) is a lunar mare that sits within the Tranquillitatis basin on the Moon. The mare material within the basin consists of basalt formed in the intermediate to young age group of the Upper Imbrian epoch. The surrounding mountains are thought to be of the Lower Imbrian epoch, but the actual basin is probably Pre-Nectarian. The basin has irregular margins and lacks a defined multiple-ringed structure. The irregular topography in and near this basin results from the intersection of the Tranquillitatis, Nectaris, Crisium, Fecunditatis, and Serenitatis basins with two throughgoing rings of the Procellarum basin. Palus Somni, on the northeastern rim of the mare, is filled with the basalt that spilled over from Tranquillitatis.",
                 Lat = 20.16,
                 Long = 30.77,
-                LocationId = 7,
                 ImageUrl = ""
 
             });
+
+            return ports;
+        }
+        private static List<PortDetails> GenerateMarsPorts()
+        {
+            var ports = new List<PortDetails>();
 
             ports.Add(new PortDetails
             {
@@ -188,7 +196,6 @@ namespace BlazePort.Data
                 Description = "Mount Sharp, officially Aeolis Mons, is a mountain on Mars. It forms the central peak within Gale crater and is located around 5.08°S 137.85°E, rising 5.5 km (18,000 ft) high from the valley floor. It has the ID of 15,000 in the Gazetteer of Planetary Nomenclature from the US Geological Survey.",
                 Lat = 4.5,
                 Long = 137.4,
-                LocationId = 8,
                 ImageUrl = ""
 
             });

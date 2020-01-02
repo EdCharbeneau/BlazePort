@@ -17,11 +17,11 @@ namespace BlazePort
             using (var scope = scopeFactory.CreateScope())// Seed COSMOS, disable after seeding
             {
                 var db = scope.ServiceProvider.GetRequiredService<BlazePort.Data.BlazePortContext>();
-                // Uncomment to seed Cosmos
-                //await db.InitializeContainerAsync();
-                // End Seed Code
                 // prefetch: Ping Cosmos to pool connection and avoid dealy on Index
-               await db.Locations.FirstAsync();
+                // Uncomment to seed Cosmos
+                await db.InitializeContainerAsync();
+                // End Seed Code
+                await db.Locations.FirstOrDefaultAsync();
 
             }
 

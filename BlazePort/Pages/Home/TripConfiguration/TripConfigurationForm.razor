@@ -67,6 +67,7 @@
     protected override async Task OnInitializedAsync()
     {
         ViewModel.DepartureLocations = await dbContext.AllLocationDetails().ToArrayAsync();
+        Console.WriteLine("Loaded All Locations");
     }
 
 }
