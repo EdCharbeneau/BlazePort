@@ -13,66 +13,66 @@ namespace BlazePort.Pages.Home
         [Range(1, 4)]
         public int PassengerCount { get; set; } = 1;
 
+        private Guid selectedDepartureLocationId;
         [Required(AllowEmptyStrings = false)]
-        public string SelectedDepartureLocationId
+        public Guid SelectedDepartureLocationId
         {
             get => selectedDepartureLocationId;
             set
             {
                 selectedDepartureLocationId = value;
-                if (!string.IsNullOrEmpty(value))
+                if (value != Guid.Empty)
                 {
-                    DepartureLocation = DepartureLocations.First(l => l.Id == Guid.Parse(value));
-                    SelectedDeparturePortId = DepartureLocation.Ports.First().Id.ToString();
+                    DepartureLocation = DepartureLocations.First(l => l.Id == value);
+                    SelectedDeparturePortId = DepartureLocation.Ports.First().Id;
                     ClearDestinations(value);
                 }
             }
         }
 
-        private void ClearDestinations(string selectedValue)
+        private void ClearDestinations(Guid selectedValue)
         {
-            ArrivalLocations = DepartureLocations.Where(loc => loc.Id != Guid.Parse(selectedValue)).ToArray();
-            SelectedArrivalLocationId = ArrivalLocations.First().Id.ToString();
+            ArrivalLocations = DepartureLocations.Where(loc => loc.Id != selectedValue).ToArray();
+            SelectedArrivalLocationId = ArrivalLocations.First().Id;
         }
 
+        private int selectedDeparturePortId;
         [Required(AllowEmptyStrings = false)]
-        public string SelectedDeparturePortId
+        public int SelectedDeparturePortId
         {
             get => selectedDeparturePortId;
             set
             {
                 selectedDeparturePortId = value;
-                if (!string.IsNullOrEmpty(value))
-                    DeparturePort = DepartureLocation.Ports.First(p => p.Id == int.Parse(value));
+                DeparturePort = DepartureLocation.Ports.First(p => p.Id == value);
             }
         }
 
+        private Guid selectedArrivalLocationId;
         [Required(AllowEmptyStrings = false)]
-        public string SelectedArrivalLocationId
+        public Guid SelectedArrivalLocationId
         {
             get => selectedArrivalLocationId;
             set
             {
                 selectedArrivalLocationId = value;
-                if (!string.IsNullOrEmpty(value))
+                if (value != Guid.Empty)
                 {
-                    ArrivalLocation = ArrivalLocations.First(l => l.Id == Guid.Parse(value));
-                    SelectedArrivalPortId = ArrivalLocation.Ports.First().Id.ToString();
+                    ArrivalLocation = ArrivalLocations.First(l => l.Id == value);
+                    SelectedArrivalPortId = ArrivalLocation.Ports.First().Id;
                 }
             }
         }
 
+        private int selectedArrivalPortId;
         [Required(AllowEmptyStrings = false)]
-        public string SelectedArrivalPortId
+        public int SelectedArrivalPortId
         {
             get => selectedArrivalPortId;
             set
             {
                 selectedArrivalPortId = value;
-                if (!string.IsNullOrEmpty(value))
-                {
-                    ArrivalPort = ArrivalLocation.Ports.First(p => p.Id == int.Parse(value));
-                }
+                ArrivalPort = ArrivalLocation.Ports.First(p => p.Id == value);
             }
         }
         public float TripDistance => ArrivalLocation == null || DepartureLocation == null ? 0 :
@@ -98,9 +98,6 @@ namespace BlazePort.Pages.Home
               TripDistance > 1 ? $"{TripDistance}mil. Miles" :
                     $"{TripDistance * 1000}k. Miles";
 
-        private string selectedDepartureLocationId;
-        private string selectedDeparturePortId;
-        private string selectedArrivalLocationId;
-        private string selectedArrivalPortId;
+
     }
 }
