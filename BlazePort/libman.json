@@ -5,7 +5,7 @@
     {
       "provider": "filesystem",
       "library": "../BlazePort.TripCost.Trainer/MLModels/",
-      "destination": "MLModels/"
+      "destination": "wwwroot/MLModels/"
     },
     {
       "library": "@progress/kendo-theme-bootstrap@latest",

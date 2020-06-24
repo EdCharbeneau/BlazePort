@@ -29,7 +29,7 @@ namespace BlazePort
             services.AddTelerikBlazor();
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            string modelPath = Path.Combine(Environment.CurrentDirectory, "MLModels", "TripCostModel.zip"); ;
+            string modelPath = Path.Combine(Environment.CurrentDirectory, "wwwroot", "MLModels", "TripCostModel.zip");
             services.AddSingleton<ITripCostPredictionService>(new TripCostPredictionService(modelPath));
             services.AddScoped<TripConfigurationState>();
             services.AddScoped<DbContext, BlazePortContext>();

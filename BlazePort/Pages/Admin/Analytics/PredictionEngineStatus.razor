@@ -1,0 +1,50 @@
+﻿@page "/admin/ml"
+@layout BlogPostLayout
+@using BlazePort.TripCost.Service
+@using System.IO
+
+<TitleBlock Title="Admin: Prediction Engine">
+    <a href="/admin/index"><TelerikIcon Icon=@IconName.ArrowRoot /> Admin Home</a>
+</TitleBlock>
+
+<div class="container no-bg pt-5">
+    @if (testResults != null)
+    {
+        <ul class="list-group">
+            <li class="list-group-item">RMSE: @testResults.RootMeansSquaredError</li>
+            <li class="list-group-item">MAE: @testResults.MeanAbsoluteError</li>
+            <li class="list-group-item">MSE: @testResults.MeanSquaredError</li>
+            <li class="list-group-item">R<sup>2</sup>: @testResults.RSquared</li>
+        </ul>
+
+        <TelerikChart Width="1000px">
+            <ChartSeriesItems>
+
+                <ChartSeries Type="ChartSeriesType.ScatterLine" Data="@testResults.MinimizedSquareError"
+                             XField="@nameof(DataPoint.X)"
+                             YField="@nameof(DataPoint.Y)"
+                             Name="Minimized Square Error">
+                </ChartSeries>
+                <ChartSeries Type="ChartSeriesType.Scatter"
+                             Data="@testResults.ResultSet"
+                             XField="@nameof(TestDataPoint.Actual)"
+                             YField="@nameof(TestDataPoint.Predicted)">
+                    <ChartSeriesMarkers Type="ChartSeriesMarkersType.Cross" Size="3"></ChartSeriesMarkers>
+                </ChartSeries>
+            </ChartSeriesItems>
+        </TelerikChart>
+    }
+</div>
+
+@code {
+
+    TestDataResults testResults;
+
+    protected override async Task OnInitializedAsync()
+    {
+        string path = Path.Combine(Environment.CurrentDirectory, "wwwroot", "MLModels", "analysis.json");
+        string json = await File.ReadAllTextAsync(path);
+        testResults = System.Text.Json.JsonSerializer.Deserialize<TestDataResults>(json);
+    }
+
+}

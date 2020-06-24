@@ -7,9 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <Compile Remove="MLModels\**" />
     <Compile Remove="Services\**" />
+    <Content Remove="Migrations\**" />
+    <Content Remove="MLModels\**" />
     <Content Remove="Services\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <EmbeddedResource Remove="MLModels\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="Migrations\**" />
+    <None Remove="MLModels\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 
@@ -31,16 +39,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
     <PackageReference Include="Telerik.UI.for.Blazor" Version="2.8.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazePort.TripCost.Service\BlazePort.TripCost.Service.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-    <Folder Include="MLModels\" />
   </ItemGroup>
 
 </Project>
