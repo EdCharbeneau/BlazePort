@@ -24,7 +24,7 @@ namespace BlazePort.Pages.Home
                 PaymentType = State.TripConfiguration.paymentType,
                 TripDistance = State.TripConfiguration.TripDistance,
                 VendorId = State.TripConfiguration.vendor,
-                RateCode = State.TripConfiguration.rateCode.ToString()
+                RateCode = State.TripConfiguration.rateCode
             };
 
             State.TotalPrice = TripCostService.PredictFare(trip).FareAmount;

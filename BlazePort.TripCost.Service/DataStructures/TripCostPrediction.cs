@@ -7,4 +7,12 @@ namespace BlazePort.TripCost.Service.DataStructures
         [ColumnName("Score")]
         public float FareAmount;
     }
+
+    public class TestDataPoint
+    {
+        [ColumnName("fare_amount"), LoadColumn(6)]
+        public float Actual { get; set; }
+        [ColumnName("Score")]
+        public float Predicted { get; set; }
+    }
 }

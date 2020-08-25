@@ -18,7 +18,7 @@ namespace BlazePort.TripCost.Service
                 .Select(x => new Trip()
                 {
                     VendorId = x[0],
-                    RateCode = x[1],
+                    RateCode = float.Parse(x[1]),
                     PassengerCount = float.Parse(x[2]),
                     //TripTime = float.Parse(x[3]),
                     TripDistance = float.Parse(x[4]),
@@ -40,12 +40,6 @@ namespace BlazePort.TripCost.Service
             });
             return new TestDataResults(result);
         }
-    }
-
-    public class TestDataPoint
-    {
-        public double Actual { get; set; }
-        public double Predicted { get; set; }
     }
 
     public class DataPoint

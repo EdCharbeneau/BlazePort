@@ -1,17 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using PLplot;
-using System.Diagnostics;
-using Microsoft.ML;
-//using Microsoft.ML.Data;
-//using Microsoft.Data.DataView;
-//using static Microsoft.ML.Transforms.NormalizingEstimator;
-using Common;
+﻿using BlazePort.TripCost.Service;
 using BlazePort.TripCost.Service.DataStructures;
-using BlazePort.TripCost.Service;
+using Microsoft.ML;
 using Microsoft.ML.Data;
+using Microsoft.ML.Trainers.FastTree;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace BlazePort.TripCost.Trainer
 {
@@ -20,84 +15,51 @@ namespace BlazePort.TripCost.Trainer
         //private static string AppPath => Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
 
         private static readonly string RootPath = Path.GetFullPath(@"../../../../BlazePort.TripCost.Trainer");
-        private static readonly string TrainDataPath = Path.Combine(RootPath, "Data", "taxi-fare-train.csv");
+        private static readonly string TRAIN_DATA_FILEPATH = Path.Combine(RootPath, "Data", "taxi-fare-train.csv");
         private static readonly string TestDataPath = Path.Combine(RootPath, "Data", "taxi-fare-test.csv");
-        private static readonly string ModelPath = Path.Combine(RootPath, "MLModels", "TripCostModel.zip");
+        private static readonly string MODEL_FILEPATH = Path.Combine(RootPath, "MLModels", "TripCostModel.zip");
 
-        static void Main(string[] args) //If args[0] == "svg" a vector-based chart will be created instead a .png chart
+        private static MLContext mlContext = new MLContext(seed: 1);
+        static void Main(string[] args)
         {
-
-            //Create ML Context with seed for repeteable/deterministic results
-            MLContext mlContext = new MLContext(seed: 0);
-
-            // Create, Train, Evaluate and Save a model
-            BuildTrainEvaluateAndSaveModel(mlContext);
-
-            // Paint regression distribution chart for a number of elements read from a Test DataSet file
-            // TODO: Remove PLplot and replace with something more stable https://github.com/surban/PLplotNet/issues/2
-            // PlotRegressionChart(mlContext, TestDataPath, 100, args);
-
-            Console.WriteLine("Press any key to exit..");
-            Console.ReadLine();
+            CreateModel();
         }
-
-        private static ITransformer Train(MLContext mlContext, IDataView trainingDataView, IDataView testDataView)
+        public static void CreateModel()
         {
+            // Load Data
+            IDataView trainingDataView = mlContext.Data.LoadFromTextFile<Trip>(
+                                            path: TRAIN_DATA_FILEPATH,
+                                            hasHeader: true,
+                                            separatorChar: ',',
+                                            allowQuoting: true,
+                                            allowSparse: false);
 
-            // STEP 2: Common data process configuration with pipeline data transformations
-            var dataProcessPipeline = mlContext.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: nameof(Trip.FareAmount))
-                            .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "VendorIdEncoded", inputColumnName: nameof(Trip.VendorId)))
-                            .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "RateCodeEncoded", inputColumnName: nameof(Trip.RateCode)))
-                            .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "PaymentTypeEncoded", inputColumnName: nameof(Trip.PaymentType)))
-                            .Append(mlContext.Transforms.NormalizeMeanVariance(nameof(Trip.PassengerCount)))
-                            .Append(mlContext.Transforms.NormalizeMeanVariance(outputColumnName: nameof(Trip.TripDistance)))
-                            .Append(mlContext.Transforms.Concatenate("Features", "VendorIdEncoded", "RateCodeEncoded", "PaymentTypeEncoded", nameof(Trip.PassengerCount)
-                            , nameof(Trip.TripDistance)));
+            // Build training pipeline
+            IEstimator<ITransformer> trainingPipeline = BuildTrainingPipeline(mlContext);
 
-            // (OPTIONAL) Peek data (such as 5 records) in training DataView after applying the ProcessPipeline's transformations into "Features" 
-            ConsoleHelper.PeekDataViewInConsole(mlContext, trainingDataView, dataProcessPipeline, 5);
-            ConsoleHelper.PeekVectorColumnDataInConsole(mlContext, "Features", trainingDataView, dataProcessPipeline, 5);
+            // Train Model
+            ITransformer mlModel = TrainModel(mlContext, trainingDataView, trainingPipeline);
 
-            // STEP 3: Set the training algorithm, then create and config the modelBuilder - Selected Trainer (SDCA Regression algorithm)                            
-            //var trainer = mlContext.Regression.Trainers.StochasticDualCoordinateAscent(labelColumnName: "Label", featureColumnName: "Features");
-            var trainer = mlContext.Regression.Trainers.FastTree();
-            var trainingPipeline = dataProcessPipeline.Append(trainer);
-
-            // STEP 4: Train the model fitting to the DataSet
-            //The pipeline is trained on the dataset that has been loaded and transformed.
-            Console.WriteLine("=============== Training the model ===============");
-            return trainingPipeline.Fit(trainingDataView);
-        }
-
-        private static RegressionMetrics Evaluate(MLContext mlContext, ITransformer trainedModel, IDataView testDataView)
-        {
-            Console.WriteLine("===== Evaluating Model's accuracy with Test data =====");
-
-            IDataView predictions = trainedModel.Transform(testDataView);
-            var metrics = mlContext.Regression.Evaluate(predictions, "Label", "Score");
-
-            ConsoleHelper.PrintRegressionMetrics("FastTree Regression Trainer", metrics);
-            return metrics;
-        }
-        private static void BuildTrainEvaluateAndSaveModel(MLContext mlContext)
-        {
-            // Common data loading configuration
-            IDataView baseTrainingDataView = mlContext.Data.LoadFromTextFile<Trip>(TrainDataPath, hasHeader: true, separatorChar: ',');
-            IDataView testDataView = mlContext.Data.LoadFromTextFile<Trip>(TestDataPath, hasHeader: true, separatorChar: ',');
-            IDataView trainingDataView = mlContext.Data.FilterRowsByColumn(baseTrainingDataView, nameof(Trip.FareAmount), lowerBound: 1, upperBound: 150);
-
-            ITransformer trainedModel = Train(mlContext, trainingDataView, testDataView);
-            // Evaluate the model and show accuracy stats
-            var metrics = Evaluate(mlContext, trainedModel, testDataView);
-
-            // Save/persist the trained model to a .ZIP file
-            SaveModelToDisk(mlContext, trainedModel, trainingDataView);
+            // Evaluate quality of Model
+            Evaluate(mlContext, trainingDataView, trainingPipeline);
 
             void SaveRegressionMetrics()
             {
-                var predFunction = mlContext.Model.CreatePredictionEngine<Trip, TripCostPrediction>(trainedModel);
-                var data = PredictionAnalysis.GetTestDataFromCsv(TestDataPath, 1000);
-                var result = PredictionAnalysis.GetAnalysis(data, predFunction);
+                IDataView testDataView = mlContext.Data.LoadFromTextFile<Trip>(
+                                path: TRAIN_DATA_FILEPATH,
+                                hasHeader: true,
+                                separatorChar: ',',
+                                allowQuoting: true,
+                                allowSparse: false);
+
+                IDataView predictions = mlModel.Transform(testDataView);
+
+                var data = mlContext.Data
+                    .CreateEnumerable<TestDataPoint>(predictions, false)
+                    .Take(1000);
+                TestDataResults result = new TestDataResults(data);
+                var metrics = mlContext.Regression.Evaluate(predictions, "fare_amount", "Score");
+
                 // Save to JSON
                 result.RSquared = metrics.RSquared;
                 result.RootMeansSquaredError = metrics.RootMeanSquaredError;
@@ -108,30 +70,60 @@ namespace BlazePort.TripCost.Trainer
             }
 
             SaveRegressionMetrics();
+
+
+            // Save model
+            SaveModel(mlContext, mlModel, MODEL_FILEPATH, trainingDataView.Schema);
         }
 
-        private static void SaveModelToDisk(MLContext mlContext, ITransformer trainedModel, IDataView trainingDataView)
+        public static IEstimator<ITransformer> BuildTrainingPipeline(MLContext mlContext)
         {
-            mlContext.Model.Save(trainedModel, trainingDataView.Schema, ModelPath);
+            // Data process configuration with pipeline data transformations 
+            var dataProcessPipeline = mlContext.Transforms.Categorical.OneHotEncoding(new[] { new InputOutputColumnPair("vendor_id", "vendor_id"), new InputOutputColumnPair("payment_type", "payment_type") })
+                                      .Append(mlContext.Transforms.Concatenate("Features", new[] { "vendor_id", "payment_type", "rate_code", "passenger_count", "trip_distance" }));
+            // Set the training algorithm 
+            var trainer = mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options()
+            {
+                NumberOfLeaves = 33,
+                MinimumExampleCountPerLeaf = 1,
+                NumberOfTrees = 500,
+                LearningRate = 0.02962925f,
+                Shrinkage = 1.411393f,
+                LabelColumnName = "fare_amount",
+                FeatureColumnName = "Features"
+            });
 
-            Console.WriteLine("The model is saved to {0}", ModelPath);
+            var trainingPipeline = dataProcessPipeline.Append(trainer);
+
+            return trainingPipeline;
         }
 
-        //private static void TestSinglePrediction()
-        //{
-        //    //Sample: 
-        //    //vendor_id,rate_code,passenger_count,trip_time_in_secs,trip_distance,payment_type,fare_amount
-        //    //VTS,1,1,1140,3.75,CRD,15.5
+        public static ITransformer TrainModel(MLContext mlContext, IDataView trainingDataView, IEstimator<ITransformer> trainingPipeline)
+        {
+            Console.WriteLine("=============== Training  model ===============");
 
-        //    var taxiTripSample = SingleTripSample.TestTrip;
+            ITransformer model = trainingPipeline.Fit(trainingDataView);
 
-        //    var service = new TripCostPredictionService(ModelPath);
+            Console.WriteLine("=============== End of training process ===============");
+            return model;
+        }
 
+        private static void Evaluate(MLContext mlContext, IDataView trainingDataView, IEstimator<ITransformer> trainingPipeline)
+        {
+            // Cross-Validate with single dataset (since we don't have two datasets, one for training and for evaluate)
+            // in order to evaluate and get the model's accuracy metrics
+            Console.WriteLine("=============== Cross-validating to get model's accuracy metrics ===============");
+            var crossValidationResults = mlContext.Regression.CrossValidate(trainingDataView, trainingPipeline, numberOfFolds: 5, labelColumnName: "fare_amount");
+            PrintRegressionFoldsAverageMetrics(crossValidationResults);
+        }
 
-        //    Console.WriteLine($"**********************************************************************");
-        //    Console.WriteLine($"Predicted fare: {service.PredictFare(taxiTripSample).FareAmount:0.####}, actual fare: 15.5");
-        //    Console.WriteLine($"**********************************************************************");
-        //}
+        private static void SaveModel(MLContext mlContext, ITransformer mlModel, string modelRelativePath, DataViewSchema modelInputSchema)
+        {
+            // Save/persist the trained model to a .ZIP file
+            Console.WriteLine($"=============== Saving the model  ===============");
+            mlContext.Model.Save(mlModel, modelInputSchema, GetAbsolutePath(modelRelativePath));
+            Console.WriteLine("The model is saved to {0}", GetAbsolutePath(modelRelativePath));
+        }
 
         public static string GetAbsolutePath(string relativePath)
         {
@@ -142,6 +134,42 @@ namespace BlazePort.TripCost.Trainer
 
             return fullPath;
         }
+
+        public static void PrintRegressionMetrics(RegressionMetrics metrics)
+        {
+            Console.WriteLine($"*************************************************");
+            Console.WriteLine($"*       Metrics for Regression model      ");
+            Console.WriteLine($"*------------------------------------------------");
+            Console.WriteLine($"*       LossFn:        {metrics.LossFunction:0.##}");
+            Console.WriteLine($"*       R2 Score:      {metrics.RSquared:0.##}");
+            Console.WriteLine($"*       Absolute loss: {metrics.MeanAbsoluteError:#.##}");
+            Console.WriteLine($"*       Squared loss:  {metrics.MeanSquaredError:#.##}");
+            Console.WriteLine($"*       RMS loss:      {metrics.RootMeanSquaredError:#.##}");
+            Console.WriteLine($"*************************************************");
+        }
+
+        public static void PrintRegressionFoldsAverageMetrics(IEnumerable<TrainCatalogBase.CrossValidationResult<RegressionMetrics>> crossValidationResults)
+        {
+            var L1 = crossValidationResults.Select(r => r.Metrics.MeanAbsoluteError);
+            var L2 = crossValidationResults.Select(r => r.Metrics.MeanSquaredError);
+            var RMS = crossValidationResults.Select(r => r.Metrics.RootMeanSquaredError);
+            var lossFunction = crossValidationResults.Select(r => r.Metrics.LossFunction);
+            var R2 = crossValidationResults.Select(r => r.Metrics.RSquared);
+
+            Console.WriteLine($"*************************************************************************************************************");
+            Console.WriteLine($"*       Metrics for Regression model      ");
+            Console.WriteLine($"*------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine($"*       Average L1 Loss:       {L1.Average():0.###} ");
+            Console.WriteLine($"*       Average L2 Loss:       {L2.Average():0.###}  ");
+            Console.WriteLine($"*       Average RMS:           {RMS.Average():0.###}  ");
+            Console.WriteLine($"*       Average Loss Function: {lossFunction.Average():0.###}  ");
+            Console.WriteLine($"*       Average R-squared:     {R2.Average():0.###}  ");
+            Console.WriteLine($"*************************************************************************************************************");
+        }
+
+
     }
 
+
 }
+

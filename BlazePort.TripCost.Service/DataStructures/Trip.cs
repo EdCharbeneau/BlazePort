@@ -4,25 +4,27 @@ namespace BlazePort.TripCost.Service.DataStructures
 {
     public class Trip
     {
-        [LoadColumn(0)]
+        [ColumnName("vendor_id"), LoadColumn(0)]
         public string VendorId;
 
-        [LoadColumn(1)]
-        public string RateCode;
+        [ColumnName("rate_code"), LoadColumn(1)]
+        public float RateCode;
 
-        [LoadColumn(2)]
+        [ColumnName("passenger_count"), LoadColumn(2)]
         public float PassengerCount;
 
-        //[LoadColumn(3)]
-        //public float TripTime;
+        [ColumnName("trip_time_in_secs"), LoadColumn(3)]
+        public float Trip_time_in_secs { get; set; }
 
-        [LoadColumn(4)]
+        [ColumnName("trip_distance"), LoadColumn(4)]
         public float TripDistance;
 
-        [LoadColumn(5)]
+        [ColumnName("payment_type"), LoadColumn(5)]
         public string PaymentType;
 
-        [LoadColumn(6)]
+        [ColumnName("fare_amount"), LoadColumn(6)]
         public float FareAmount;
+
     }
+
 }
