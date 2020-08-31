@@ -1,0 +1,23 @@
+﻿@inherits TestComponentBase
+
+<SnapshotTest Description="On initial load, empty state is shown" Setup="TestSetup.RegisterServices" >
+    <TestInput>
+        <TelerikRootComponent>
+            <Index />
+        </TelerikRootComponent>
+    </TestInput>
+    <ExpectedOutput>
+        <div class="container">
+            <div id="trip-empty-state" class="row">
+                <div class="col-sm-12 my-auto">
+                    <div class="trip-empty-state-content mx-auto">
+                        <h1 class="intro text-center">Launch your next adventure.</h1>
+                        <button class="btn btn-block btn-lg k-primary k-button telerik-blazor" tabindex="0" aria-disabled="false" type="submit">
+                            Start Trip
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ExpectedOutput>
+</SnapshotTest>

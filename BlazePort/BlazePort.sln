@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazePort.TripCost.Trainer"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazePort.TripCost.Service", "..\BlazePort.TripCost.Service\BlazePort.TripCost.Service.csproj", "{0A7DA808-43C2-4739-8BF4-24F5B77CF1D8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazePort.Tests", "..\BlazePort.Tests\BlazePort.Tests.csproj", "{0D6EE5C3-2903-4853-A285-073EAC412699}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0A7DA808-43C2-4739-8BF4-24F5B77CF1D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A7DA808-43C2-4739-8BF4-24F5B77CF1D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A7DA808-43C2-4739-8BF4-24F5B77CF1D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D6EE5C3-2903-4853-A285-073EAC412699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D6EE5C3-2903-4853-A285-073EAC412699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D6EE5C3-2903-4853-A285-073EAC412699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D6EE5C3-2903-4853-A285-073EAC412699}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

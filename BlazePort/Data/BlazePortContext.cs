@@ -43,7 +43,7 @@ namespace BlazePort.Data
             Console.WriteLine($"created {changed} records");
         }
 
-        private List<LocationDetails> GenerateLocations()
+        public static List<LocationDetails> GenerateLocations()
         {
             var locations = new List<LocationDetails>();
             locations.Add(new LocationDetails
@@ -78,7 +78,7 @@ namespace BlazePort.Data
 
             return locations;
         }
-        private static List<PortDetails> GenerateEarthPorts()
+        public static List<PortDetails> GenerateEarthPorts()
         {
             var ports = new List<PortDetails>();
 
@@ -168,7 +168,7 @@ namespace BlazePort.Data
 
             return ports;
         }
-        private static List<PortDetails> GenerateMoonPorts()
+        public static List<PortDetails> GenerateMoonPorts()
         {
             var ports = new List<PortDetails>();
 
@@ -185,7 +185,7 @@ namespace BlazePort.Data
 
             return ports;
         }
-        private static List<PortDetails> GenerateMarsPorts()
+        public static List<PortDetails> GenerateMarsPorts()
         {
             var ports = new List<PortDetails>();
 

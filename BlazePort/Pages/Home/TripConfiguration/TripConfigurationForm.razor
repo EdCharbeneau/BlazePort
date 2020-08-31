@@ -31,7 +31,7 @@
                          Width="100%"
                          PopupWidth=@commonWidth
                          @bind-Value="ViewModel.SelectedDeparturePortId"
-                         ValueField="@nameof(PortDetails.Id)"
+                         ValueField="@nameof(PortDetails.Name)"
                          TextField="@nameof(PortDetails.Name)">
     </TelerikDropDownList>
 
@@ -53,7 +53,7 @@
                          Width="100%"
                          PopupWidth=@commonWidth
                          @bind-Value="ViewModel.SelectedArrivalPortId"
-                         ValueField="@nameof(PortDetails.Id)"
+                         ValueField="@nameof(PortDetails.Name)"
                          TextField="@nameof(PortDetails.Name)">
     </TelerikDropDownList>
 </div>
