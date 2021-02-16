@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <UserSecretsId>354ffa44-db29-440e-a90c-fe2fe2317dc5</UserSecretsId>
   </PropertyGroup>
@@ -40,7 +40,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.7" />
     <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
-    <PackageReference Include="Telerik.UI.for.Blazor" Version="2.16.0" />
+    <PackageReference Include="Telerik.UI.for.Blazor" Version="2.21.1" />
   </ItemGroup>
 
   <ItemGroup>

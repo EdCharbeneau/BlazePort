@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>
 
@@ -17,11 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="bunit.core" Version="1.0.0-beta-9" />
-    <PackageReference Include="bunit.web" Version="1.0.0-beta-9" />
-    <PackageReference Include="bunit.xunit" Version="1.0.0-beta-9" />
-    <PackageReference Include="FluentAssertions" Version="6.0.0-alpha0001" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0-preview-20200812-03" />
+    <PackageReference Include="bunit.core" Version="1.0.0-preview-01" />
+    <PackageReference Include="bunit.web" Version="1.0.0-preview-01" />
+    <PackageReference Include="bunit.xunit" Version="1.0.0-preview-01" />
+    <PackageReference Include="FluentAssertions" Version="6.0.0-alpha0002" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.0-preview-20210127-04" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>
