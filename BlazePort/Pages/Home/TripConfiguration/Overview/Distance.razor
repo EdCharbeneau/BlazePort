@@ -1,0 +1,13 @@
+﻿<div class="trip-configuration-item dist">
+    <h4 class="title">
+        Your trip will take
+    </h4>
+    <p class="text">
+        <TripTime TripDistance="TripConfiguration.TripDistance" />
+        <span class="meta">@TripConfiguration.FormattedMiles</span>
+    </p>
+</div>
+
+@code {
+    [Parameter] public TripConfigurationModel TripConfiguration { get; set; }
+} 

@@ -1,0 +1,15 @@
+﻿<div class="trip-configuration-item price">
+    <h4 class="title">
+        Estimated price
+    </h4>
+    <p class="text">
+        <span class="primary">@TotalPrice.ToString("C0")</span>
+        <span class="meta">Per Passenger</span>
+        <PassengerCount Count="TripConfiguration.PassengerCount" />
+    </p>
+</div>
+
+@code {
+    [Parameter] public TripConfigurationModel TripConfiguration { get; set; }
+    [Parameter] public float TotalPrice { get; set; }
+}

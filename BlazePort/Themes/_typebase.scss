@@ -1,0 +1,57 @@
+:root {
+    --font-weight-headings: 500;
+    --font-size-root: 16px;
+    --font-size-lg: 1.25rem;
+    --font-size-sm: .875rem;
+    --font-size-xs: .75rem;
+    --line-height-lg: 3rem;
+    --line-height-base: 1.5rem;
+    --line-height-sm: 1.25rem;
+    --font-size-h1: 2.5rem;
+    --font-size-h2: 2rem;
+    --font-size-h3: 1.75rem;
+    --font-size-h4: 1.5rem;
+    --font-size-h5: 1.25rem;
+    --font-size-h6: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-family-headings);
+    font-weight: var(--font-weight-headings);
+}
+
+p {
+    line-height: 1.5rem;
+}
+
+h1, .h1 { 
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-lg);
+}
+h2, .h2 { 
+    font-size: var(--font-size-h2); 
+    line-height: var(--line-height-lg);
+}
+h3, .h3 { 
+    font-size: var(--font-size-h3); 
+    line-height: var(--line-height-lg);
+}
+h4, .h4 { 
+    font-size: var(--font-size-h4); 
+    line-height: var(--line-height-sm);
+}
+h5, .h5 { 
+    font-size: var(--font-size-h5); 
+    line-height: var(--line-height-sm);
+}
+h6, .h6 { 
+    font-size: var(--font-size-h6); 
+    line-height: var(--line-height-sm);
+}
+
+small,
+.small {
+  font-size: var(--font-size-small);
+  font-weight: normal;
+}

@@ -1,9 +1,7 @@
 ﻿@page "/"
-
-<div class="container">
     @if (State.TotalPrice > 0)
     {
-        <TripOverview TripConfiguration="State.TripConfiguration" TotalPrice="State.TotalPrice">
+        <TripOverview Model="State.TripConfiguration" TotalPrice="State.TotalPrice">
             <ButtonTemplate>
                 <TelerikButton OnClick="ShowConfigurationPanel">Edit Trip</TelerikButton>
                 <TelerikButton Class="k-primary">Book Now</TelerikButton>
@@ -20,7 +18,7 @@
             </ButtonTemplate>
         </TripEmptyState>
     }
-</div>
+
 <FlyoutPanel Visible=configurationPanelVisible>
     <TitleTemplate>
         Trip Options

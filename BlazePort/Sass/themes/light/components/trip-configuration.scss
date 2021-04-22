@@ -1,18 +1,4 @@
-﻿#trip-empty-state {
-            margin-top: 14%;
-
-    .trip-empty-state-content {
-        @include media-breakpoint-up(md) {
-            width: 50% !important;
-        }
-
-        @include media-breakpoint-up(xl) {
-            width: 25% !important;
-        }
-    }
-}
-
-.trip-configuration {
+﻿.trip-configuration {
     background-color: transparent;
     padding-top:2em;
 

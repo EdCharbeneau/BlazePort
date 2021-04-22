@@ -1,0 +1,43 @@
+﻿
+nav {
+    display: flex;
+    align-items: center;
+    grid-column: 1;
+    grid-row: 2 / 4;
+    padding: 0.5rem;
+    border-bottom-left-radius: 1rem;
+    z-index: 600;
+    background-color: var(--brand-primary);
+
+
+    a {
+        display: block;
+        padding: .5rem 1rem;
+        color: var(--white);
+        border-radius: .25rem;
+        white-space: nowrap;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    a:hover {
+        background-color: var(--white);
+        color: var(--brand-second);
+    }
+
+    ul {
+        margin: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    nav {
+        grid-column: 6 / span 12;
+        grid-row: 1 / 4;
+        border-bottom-left-radius: 1rem;
+    }
+}

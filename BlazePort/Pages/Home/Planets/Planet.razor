@@ -1,0 +1,14 @@
+﻿<article class="planet-wrap planet-wrap--@planetName" style="--planet-size: @Size">
+    <div class="planet-wrap__planet">
+        <div class="planet__atmosphere">
+            <div class="planet__surface"></div>
+        </div>
+    </div>
+</article>
+
+@code {
+    // TODO: Refactor, this is a temporary fix
+    string planetName => Name.Contains("Moon") ? "moon" : Name.ToLowerInvariant();
+    [Parameter] public string Name { get; set; }
+    [Parameter] public string Size { get; set; } = "190px";
+}

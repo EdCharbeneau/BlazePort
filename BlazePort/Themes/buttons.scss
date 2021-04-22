@@ -1,0 +1,83 @@
+.btn.btn-filled:hover {
+    background-color: var(--brand-background);
+    color: var(--brand-primary)
+}
+.btn.btn-filled {
+    background-color: var(--brand-primary);
+    color: var(--brand-background);
+    border-color: var(--brand-primary);
+}
+
+.btn:hover {
+    background-color: var(--brand-primary);
+    transition: all 0.2s;
+}
+.btn:active, .btn.active {
+    background-image: none;
+    outline: 0;
+}
+.btn:focus, .btn:hover {
+    text-decoration: none;
+}
+a:focus, a:hover {
+    color: var(--brand-background);
+    border-color: var(--brand-primary-darker);
+    text-decoration: underline;
+}
+
+a:active, a:hover {
+    outline-width: 0;
+}
+
+.btn {
+    color: var(--brand-primary);
+    border: .1rem solid var(--brand-primary);
+    background-color: transparent;
+    transition: all 0.2s;
+    padding: 1rem 2rem;
+    border-radius: .25rem;
+    display: inline-block;
+    font-weight: normal;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1rem;
+}
+a {
+    transition: all 0.2s;
+}
+a, area, button, [role="button"], input, label, select, summary, textarea {
+    touch-action: manipulation;
+}
+
+.btn.second {
+    color: var(--brand-second);
+    border-color: var(--brand-second);
+}
+
+.btn.second:hover { 
+    color: var(--brand-background);
+    background-color: var(--brand-second);
+}
+
+.btn.second a:focus, .btn.second a:hover {
+    border-color: var(--brand-second-darker);
+}
+
+.btn.third {
+    color: var(--brand-third);
+    border-color: var(--brand-third);
+}
+
+.btn.third:hover { 
+    color: var(--brand-background);
+    background-color: var(--brand-third);
+}
+
+.btn.third a:focus, .btn.third a:hover {
+    border-color: var(--brand-third-darker);
+}

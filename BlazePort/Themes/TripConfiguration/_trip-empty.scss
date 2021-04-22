@@ -1,0 +1,17 @@
+﻿#trip-empty-state {
+	grid-column: 2 / span 1;
+	align-self: center;
+	justify-self: center;
+	display: flex;
+	flex-direction: column;
+
+	background-color: rgba(0, 0, 0, 0.33);
+	border-radius: 1rem;
+	padding: 2rem;
+	height:max-content;
+
+	h1 {
+		font-family: Yesteryear;
+		color: $primary;
+	}
+}

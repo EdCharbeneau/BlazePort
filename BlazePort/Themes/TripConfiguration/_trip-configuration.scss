@@ -1,0 +1,105 @@
+﻿.trip-configuration {
+    grid-column: 2/span 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "time time time" "dept dept price" "dist dist book";
+    grid-template-rows: max-content;
+    height: max-content;
+    gap: 1rem;
+}
+
+@keyframes bg-scrolling-reverse {
+    0% {
+        background-position: 0 40px;
+    }
+}
+
+.trip-configuration-item {
+    background-color: rgba(0, 0, 0, 0.33);
+    border-radius: 1rem;
+    padding: 2rem;
+
+    &.time {
+        grid-area: time;
+    }
+
+    &.dept {
+        grid-area: dept;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        .from {
+            background-image: radial-gradient(#42c7c2 20%, transparent 10%);
+            background-position: 0 0;
+            background-size: 20px 20px;
+            background-repeat-y: no-repeat;
+            background-position: center;
+            animation: bg-scrolling-reverse 5s linear infinite;
+        }
+    }
+    
+    &.dist {
+        grid-area: dist;
+    }
+
+    &.book {
+        grid-area: book;
+    }
+
+    .title {
+        font-size: 1em;
+        color: $vintage-cream;
+    }
+
+    .text {
+        color: $accent;
+
+        .primary {
+            font-weight: bold;
+            display: block;
+            color: $secondary;
+            font-size: 1.5em;
+            font-family: 'Orbitron';
+        }
+
+        .meta {
+            display: block;
+            font-size: 1.2em;
+        }
+    }
+}
+.calendar-page {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    grid-auto-rows: max-content;
+}
+
+.calendar-page > p {
+    display: block;
+    background-color: #42c7c2; 
+    text-align: center;
+    font-size: 1.2em;
+    padding: 0 2rem;
+    margin: 0;
+    color: black;
+}
+
+.calendar-page > p:nth-child(even) {
+    background: transparent;
+    color: #42c7c2;
+    border: 3px solid #42c7c2;
+    font-size: 4em;
+    line-height: initial;
+}
+
+.calendar-page > p:last-child {
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.countdown-wrap {
+    display: flex;
+}
+

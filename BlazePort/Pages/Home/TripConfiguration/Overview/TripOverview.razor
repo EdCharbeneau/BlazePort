@@ -1,0 +1,26 @@
+﻿@namespace BlazePort.Pages.Home
+<div class="trip-configuration">
+    
+    <Departure TripConfiguration="Model"/>
+    <Price TotalPrice="TotalPrice" TripConfiguration="Model"/>
+    <Time TripConfiguration="Model"/>
+    <Distance TripConfiguration="Model"/>
+
+    <div class="trip-configuration-item book">
+        <h4 class="title">
+            Book your trip
+        </h4>
+        <p class="text">
+            @ButtonTemplate
+        </p>
+    </div>
+
+</div>
+
+@code {
+    [Parameter] public TripConfigurationModel Model { get; set; }
+
+    [Parameter] public RenderFragment ButtonTemplate { get; set; }
+
+    [Parameter] public float TotalPrice { get; set; }
+}

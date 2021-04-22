@@ -1,0 +1,68 @@
+﻿:root {
+    /*hsl(178deg 54% 52%)*/
+    --brand-primary-h: 16; /* Hue        */
+    --brand-primary-s: 75%; /* Saturation */
+    --brand-primary-l: 51%; /* Lightness  */
+
+    --brand-third-h: 288; /* Hue        */
+    --brand-third-s: 58%; /* Saturation */
+    --brand-third-l: 36%; /* Lightness  */
+
+    --brand-second-h: 178; /* Hue        */
+    --brand-second-s: 54%; /* Saturation */
+    --brand-second-l: 52%; /* Lightness  */
+
+    --brand-primary: hsl( var(--brand-primary-h), var(--brand-primary-s), var(--brand-primary-l) );
+    --brand-primary-darker: hsl( var(--brand-primary-h), var(--brand-primary-s), calc(var(--brand-primary-l) - var(--brand-primary-l) * 0.3 ) );
+    --brand-second: hsl( var(--brand-second-h), var(--brand-second-s), var(--brand-second-l) );
+    --brand-second-darker: hsl( var(--brand-second-h), var(--brand-second-s), calc(var(--brand-second-l) - var(--brand-second-l) * 0.3 ) );
+    --brand-third: hsl( var(--brand-third-h), var(--brand-third-s), var(--brand-third-l) );
+    --brand-third-darker: hsl( var(--brand-third-h), var(--brand-third-s), calc(var(--brand-third-l) - var(--brand-third-l) * 0.3 ) );
+    /* --brand-second:              #0CA0C6; */
+    /* --brand-third:               #d82c99; */
+    --brand-success: #5cb85c;
+    --brand-info: #0CA0C6;
+    --brand-warning: #f0ad4e;
+    --brand-danger: #7C2791;
+    --brand-inverse: var(--gray-dark);
+    --brand-background: var(--gray-lightest);
+    --gray-dark: #373a3c;
+    --gray: #55595c;
+    --gray-light: #818a91;
+    --gray-lighter: #eceeef;
+    --gray-lightest: #f7f7f9;
+    --font-family-base: Muli, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-family-headings: Orbitron, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --white: #fff;
+    --text-color: #444;
+    --text-color-light: #999;
+    --border-color: #E6E6E6;
+}
+
+$deep-space-blue: #13405d;
+$blazing-blue: #42c7c2;
+$bus-stop-orange: #f18918;
+$vintage-cream: #f2eabc;
+
+$base-theme: Bootstrap;
+$skin-name: BlazePort;
+$swatch-name: Bootstrap;
+$border-radius: 0.25rem;
+$accent: $blazing-blue;
+$secondary: $bus-stop-orange;
+$info: #17a2b8;
+$success: #28a745;
+$warning: #ffc107;
+$error: #dc3545;
+$body-bg: #ffffff;
+$body-color: #292b2c;
+$component-bg: #ffffff;
+$component-color: #292b2c;
+$card-cap-bg: $deep-space-blue;
+$card-cap-color: #e4e7eb;
+$series-a: #0275d8;
+$series-b: #5bc0de;
+$series-c: #5cb85c;
+$series-d: #f0ad4e;
+$series-e: #e67d4a;
+$series-f: #d9534f;

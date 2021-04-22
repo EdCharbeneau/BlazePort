@@ -1,0 +1,18 @@
+﻿<div class="trip-configuration-item time">
+    <h4 class="title">
+        Next trip will launch in t-minus
+    </h4>
+    <div class="countdown-wrap text">
+        <Countdown CountdownTo="@TripConfiguration.TripStart" />
+        @*<span class="meta">On @TripConfiguration.TripStart.ToShortDateString()</span>*@
+        <div class="calendar-page">
+            <p>@TripConfiguration.TripStart.Month</p>
+            <p>@TripConfiguration.TripStart.Day</p>
+            <p>@TripConfiguration.TripStart.Year</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public TripConfigurationModel TripConfiguration { get; set; }
+}

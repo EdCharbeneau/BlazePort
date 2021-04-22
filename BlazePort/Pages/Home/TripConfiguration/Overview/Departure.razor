@@ -1,0 +1,38 @@
+﻿@using BlazePort.Pages.Home.Planets
+
+<div class="trip-configuration-item dept">
+    <div>
+        <h4 class="title">
+            Departing from
+        </h4>
+        <p class="text">
+            <span class="primary">
+                @TripConfiguration.DepartureLocation?.Name
+            </span>
+            <span class="meta">
+                @TripConfiguration.DeparturePort?.Name
+            </span>
+        </p>
+    </div>
+    <div>
+        <h4 class="title">
+            Arriving to
+        </h4>
+        <p class="text">
+            <span class="primary">
+                @TripConfiguration.ArrivalLocation?.Name
+            </span>
+            <span class="meta">
+                @TripConfiguration.ArrivalPort?.Name
+            </span>
+        </p>
+    </div>
+    <div class="from">
+        <Planet Name="@TripConfiguration.DepartureLocation?.Name" Size="100px" />
+    </div>
+    <Planet Name="@TripConfiguration.ArrivalLocation?.Name" Size="100px" />
+</div>
+
+@code {
+    [Parameter] public TripConfigurationModel TripConfiguration { get; set; }
+} 

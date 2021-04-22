@@ -1,0 +1,18 @@
+body {
+    font-family: var(--font-family-base);
+    font-size: 16px;
+}
+
+@media only screen and (min-width: 768px) { 
+    .container {
+       display: grid;
+       grid-template-columns: minmax(1rem, 1fr) auto minmax(1rem, 1fr);
+       grid-template-rows: max-content auto max-content;
+       height: 100vh;
+    }
+}
+@media only screen and (min-width: 1200px) { 
+    .container {
+        grid-template-columns: minmax(1rem, 1fr) 1140px minmax(1rem, 1fr);
+    }
+}

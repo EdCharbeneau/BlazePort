@@ -1,0 +1,24 @@
+﻿@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+@import "./variables";
+@import "../node_modules/@progress/kendo-theme-default/scss/all.scss";
+@import "./typebase";
+@import "./page-main";
+@import "./page-header";
+@import "./nav";
+@import "./page-home";
+@import "./TripConfiguration/trip-empty";
+@import "./TripConfiguration/trip-configuration";
+@import "_planets";
+
+.blazeport-bg {
+    //background-color: var(--brand-third-darker);
+    background-size: 100%;
+    background-image: url("/img/blazeport-bg.jpg");
+    background-position: bottom;
+    background-repeat-x: repeat;
+    background-repeat-y: no-repeat;
+    height: 100%;
+}
+body {
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(19,64,93,1) 25%, rgba(14,48,69,1) 86%, rgba(0,0,0,1) 100%);
+}
