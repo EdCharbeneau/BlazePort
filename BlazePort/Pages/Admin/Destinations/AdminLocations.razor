@@ -3,17 +3,17 @@
 @layout BlogPostLayout
 
 <TitleBlock Title="Admin Locations">
-    <a href="/admin/index"><TelerikIcon Icon=@IconName.ArrowRoot /> Admin Home</a>
+    <a href="/admin/index"><TelerikIcon Icon="arrow-root" /> Admin Home</a>
 </TitleBlock>
 
 <div class="container-fluid">
 
-    <FlyoutPanel Visible=editorPanelVisible>
+    <FlyoutPanel Visible="editorPanelVisible">
         <TitleTemplate>
             <strong>New Destination</strong>
         </TitleTemplate>
         <ContentTemplate>
-            <EditForm Model="editItem" OnValidSubmit=@SaveLocation>
+            <EditForm Model="editItem" OnValidSubmit="@SaveLocation">
                 <DataAnnotationsValidator />
                 <div class="form-group">
                     <label class="w-100">Name</label>
@@ -35,8 +35,8 @@
                     <TelerikNumericTextBox @bind-Value=@editItem.Distance Decimals=3 Format="##0.### Mil Miles" Class="form-control" />
                     <ValidationMessage For="@(()=> editItem.Distance)"></ValidationMessage>
                 </div>
-                <TelerikButton Primary=true Icon=@IconName.Save ButtonType=ButtonType.Submit>Save</TelerikButton>
-                <TelerikButton OnClick=HandleCancel Icon=@IconName.Cancel ButtonType=ButtonType.Button>Cancel</TelerikButton>
+                <TelerikButton Primary=true Icon="save" ButtonType=ButtonType.Submit>Save</TelerikButton>
+                <TelerikButton OnClick=HandleCancel Icon="cancel" ButtonType=ButtonType.Button>Cancel</TelerikButton>
             </EditForm>
         </ContentTemplate>
     </FlyoutPanel>

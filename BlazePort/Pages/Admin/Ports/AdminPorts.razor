@@ -2,7 +2,7 @@
 @layout BlogPostLayout
 
 <TitleBlock Title="Admin Ports">
-    <a href="/admin/index"><TelerikIcon Icon="@IconName.ArrowRoot"/> Admin Home</a>
+    <a href="/admin/index"><TelerikIcon Icon="arrow-root"/> Admin Home</a>
 </TitleBlock>
 
 <div class="container-fluid">
@@ -47,8 +47,8 @@
                     </InputSelect>
                     <ValidationMessage For="@(()=> editItem.SelectedLocation)"></ValidationMessage>
                 </div>
-                <TelerikButton Primary=true Icon=@IconName.Save ButtonType=ButtonType.Submit>Save</TelerikButton>
-                <TelerikButton OnClick=HandleCancel Icon=@IconName.Cancel ButtonType=ButtonType.Button>Cancel</TelerikButton>
+                <TelerikButton Primary=true Icon="save" ButtonType=ButtonType.Submit>Save</TelerikButton>
+                <TelerikButton OnClick=HandleCancel Icon="cancel" ButtonType=ButtonType.Button>Cancel</TelerikButton>
 
             </EditForm>
         </ContentTemplate>
