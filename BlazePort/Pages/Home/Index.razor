@@ -1,39 +1,85 @@
-﻿@page "/"
-    @if (State.TotalPrice > 0)
-    {
-        <TripOverview Model="State.TripConfiguration" TotalPrice="State.TotalPrice">
-            <ButtonTemplate>
-                <TelerikButton OnClick="ShowConfigurationPanel">Edit Trip</TelerikButton>
-                <TelerikButton Class="k-primary">Book Now</TelerikButton>
-            </ButtonTemplate>
-        </TripOverview>
-    }
-    else
-    {
-        <TripEmptyState>
-            <ButtonTemplate>
-                <TelerikButton OnClick="ShowConfigurationPanel" Class="btn btn-block btn-lg k-primary">
-                    Start Trip
-                </TelerikButton>
-            </ButtonTemplate>
-        </TripEmptyState>
-    }
+﻿@using BlazePort.Data
 
-<FlyoutPanel Visible=configurationPanelVisible>
+@page "/"
+@if (State.TotalPrice > 0)
+{
+    <TripOverview Model="Model" TotalPrice="State.TotalPrice">
+        <ButtonTemplate>
+            <TelerikButton OnClick="ShowConfigurationPanel">Edit Trip</TelerikButton>
+            <TelerikButton Class="k-primary">Book Now</TelerikButton>
+        </ButtonTemplate>
+    </TripOverview>
+}
+else
+{
+    <TripEmptyState>
+        <ButtonTemplate>
+            <TelerikButton OnClick="ShowConfigurationPanel" Class="btn btn-block btn-lg k-primary">
+                Start Trip
+            </TelerikButton>
+        </ButtonTemplate>
+    </TripEmptyState>
+}
+
+<FlyoutPanel Visible="configurationPanelVisible">
     <TitleTemplate>
         Trip Options
     </TitleTemplate>
     <ContentTemplate>
-        <EditForm Model="State.TripConfiguration" OnValidSubmit="@OnTripEstimateTripCost"
-                  OnInvalidSubmit="@InvalidSubmit">
-            <DataAnnotationsValidator />
-
-            <TripConfigurationForm ViewModel="State.TripConfiguration"></TripConfigurationForm>
-
-            <div class="form-group">
-                <TelerikButton Class="btn btn-block btn-lg k-primary">Estimate Trip Cost</TelerikButton>
-            </div>
-
-        </EditForm>
+        <TelerikForm Model="@Model"
+                     OnValidSubmit="@OnTripEstimateTripCost"
+                     OnInvalidSubmit="@InvalidSubmit">
+            <FormItems>
+                <FormItem Field="@nameof(TripConfigurationModel.TripStart)" />
+                <FormItem Field="@nameof(TripConfigurationModel.PassengerCount)" />
+                <FormItem Field="@nameof(TripConfigurationModel.SelectedDepartureLocationId)">
+                    <Template>
+                        <label for="SelectedDepartureLocationId">Departing from</label>
+                        <TelerikDropDownList Data="Model.DepartureLocations"
+                                             Width="100%"
+                                             @bind-Value="Model.SelectedDepartureLocationId"
+                                             ValueField="@nameof(LocationDetails.Id)"
+                                             TextField="@nameof(LocationDetails.Name)">
+                        </TelerikDropDownList>
+                    </Template>
+                </FormItem>
+                <FormItem Field="@nameof(TripConfigurationModel.SelectedDeparturePortId)">
+                    <Template>
+                        <label for="SelectedDeparturePortId">Departure Port</label>
+                        <TelerikDropDownList Data="Model.DepartureLocation.Ports"
+                                             Width="100%"
+                                             @bind-Value="Model.SelectedDeparturePortId"
+                                             ValueField="@nameof(PortDetails.Name)"
+                                             TextField="@nameof(PortDetails.Name)">
+                        </TelerikDropDownList>
+                    </Template>
+                </FormItem>
+                <FormItem Field="@nameof(TripConfigurationModel.SelectedArrivalLocationId)">
+                    <Template>
+                        <label for="SelectedArrivalLocationId">Arriving to</label>
+                        <TelerikDropDownList Data="Model.ArrivalLocations"
+                                             Width="100%"
+                                             @bind-Value="Model.SelectedArrivalLocationId"
+                                             ValueField="@nameof(LocationDetails.Id)"
+                                             TextField="@nameof(LocationDetails.Name)">
+                        </TelerikDropDownList>
+                    </Template>
+                </FormItem>
+                <FormItem Field="@nameof(TripConfigurationModel.SelectedArrivalPortId)">
+                    <Template>
+                        <label for="SelectedArrivalPortId">Arrival Port</label>
+                        <TelerikDropDownList Data="Model.ArrivalLocation.Ports"
+                                             Width="100%"
+                                             @bind-Value="Model.SelectedArrivalPortId"
+                                             ValueField="@nameof(PortDetails.Name)"
+                                             TextField="@nameof(PortDetails.Name)">
+                        </TelerikDropDownList>
+                    </Template>
+                </FormItem>
+            </FormItems>
+            <FormValidation>
+                <DataAnnotationsValidator/>
+            </FormValidation>
+        </TelerikForm>
     </ContentTemplate>
 </FlyoutPanel>

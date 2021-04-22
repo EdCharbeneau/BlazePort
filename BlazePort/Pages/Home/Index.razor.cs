@@ -1,14 +1,19 @@
-﻿using BlazePort.TripCost.Service;
+﻿using BlazePort.Data;
+using BlazePort.TripCost.Service;
 using BlazePort.TripCost.Service.DataStructures;
 using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace BlazePort.Pages.Home
 {
     public partial class Index
     {
         [Inject] ITripCostPredictionService TripCostService { get; set; }
-
+        [Inject] BlazePortContext dbContext { get; set; }
         [Inject] TripConfigurationState State { get; set; }
+
+        TripConfigurationModel Model => State.TripConfiguration;
 
         bool configurationPanelVisible;
 
@@ -16,19 +21,24 @@ namespace BlazePort.Pages.Home
 
         public void ShowConfigurationPanel() => configurationPanelVisible = true;
 
-        public void OnTripEstimateTripCost()
+        void OnTripEstimateTripCost()
         {
             Trip trip = new Trip
             {
-                PassengerCount = State.TripConfiguration.PassengerCount,
-                PaymentType = State.TripConfiguration.paymentType,
-                TripDistance = State.TripConfiguration.TripDistance,
-                VendorId = State.TripConfiguration.vendor,
-                RateCode = State.TripConfiguration.rateCode
+                PassengerCount = Model.PassengerCount,
+                PaymentType = Model.paymentType,
+                TripDistance = Model.TripDistance,
+                VendorId = Model.vendor,
+                RateCode = Model.rateCode
             };
 
             State.TotalPrice = TripCostService.PredictFare(trip).FareAmount;
             configurationPanelVisible = false;
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            Model.DepartureLocations = await dbContext.AllLocationDetails().ToArrayAsync();
         }
 
     }
