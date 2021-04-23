@@ -1,8 +1,4 @@
-﻿@implements IDisposable
-@using BlazorSize
-@inject ResizeListener ResizeListener
-
-<TelerikWindow Class="fly-out-panel" Width="@Width" Height="100vh" Top="0" Left="0" Modal="true" Visible="@Visible">
+﻿<TelerikWindow Class="fly-out-panel" Width="@Width" Height="100vh" Top="0" Left="0" Modal="true" Visible="@Visible" Draggable="false">
     <WindowTitle>
         @TitleTemplate
     </WindowTitle>
@@ -14,35 +10,18 @@
     </WindowContent>
 </TelerikWindow>
 
+<TelerikMediaQuery Media="(min-width: 768px)" OnChange="@(match => IsMediumUp = match)"/>
+
 @code {
 
-    bool IsMediumUpMedia;
+    bool IsMediumUp;
 
-    protected string Width => IsMediumUpMedia ? "481px" : "100%";
+    protected string Width => IsMediumUp ? "481px" : "100%";
 
     [Parameter]public bool Visible { get; set; }
 
     [Parameter] public RenderFragment TitleTemplate { get; set; }
 
     [Parameter] public RenderFragment ContentTemplate { get; set; }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-            ResizeListener.OnResized += WindowResized;
-        }
-    }
-
-    void IDisposable.Dispose()
-    {
-        ResizeListener.OnResized -= WindowResized;
-    }
-
-    async void WindowResized(object _, BrowserWindowSize window)
-    {
-        IsMediumUpMedia = await ResizeListener.MatchMedia(Breakpoints.MediumUp);
-        StateHasChanged();
-    }
 
 }

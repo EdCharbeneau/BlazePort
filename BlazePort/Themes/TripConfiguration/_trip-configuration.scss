@@ -37,7 +37,7 @@
             animation: bg-scrolling-reverse 5s linear infinite;
         }
     }
-    
+
     &.dist {
         grid-area: dist;
     }
@@ -47,7 +47,8 @@
     }
 
     .title {
-        font-size: 1em;
+        line-height: var(--line-height-sm);
+        font-size: var(--font-size-h4);
         color: $vintage-cream;
     }
 
@@ -55,16 +56,18 @@
         color: $accent;
 
         .primary {
+            line-height: var(--line-height-lg);
+            font-size: var(--font-size-h2);
             font-weight: bold;
             display: block;
             color: $secondary;
-            font-size: 1.5em;
             font-family: 'Orbitron';
         }
 
         .meta {
+            line-height: var(--line-height-sm);
+            font-size: var(--font-size-h6);
             display: block;
-            font-size: 1.2em;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using BlazePort.Pages.Home;
 using BlazePort.TripCost.Service;
-using BlazorSize;
 using Bunit;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,7 +14,6 @@ namespace BlazePort.Tests
             string modelPath = Path.Combine(Environment.CurrentDirectory, "Data", "TripCostModel.zip");
             test.Services.AddSingleton<ITripCostPredictionService>(new TripCostPredictionService(modelPath));
             test.Services.AddScoped<TripConfigurationState>();
-            test.Services.AddScoped<ResizeListener>();
             test.Services.AddTelerikBlazor();
         }
     }

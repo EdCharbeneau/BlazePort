@@ -31,6 +31,7 @@
     --gray-light: #818a91;
     --gray-lighter: #eceeef;
     --gray-lightest: #f7f7f9;
+    --font-size-root: 16px;
     --font-family-base: Muli, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-family-headings: Orbitron, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --white: #fff;
@@ -66,3 +67,8 @@ $series-c: #5cb85c;
 $series-d: #f0ad4e;
 $series-e: #e67d4a;
 $series-f: #d9534f;
+
+$font-size: 16px;
+$button-padding-x: 2rem;
+$button-padding-y: 1rem;
+$dialog-titlebar-bg: $deep-space-blue;

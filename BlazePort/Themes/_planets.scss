@@ -18,19 +18,19 @@ $solarSystem: ( /*"mercury", "venus",*/ "earth", "moon", "mars", /*"jupiter", "s
     --mercury-tilt: rotate(0.034deg);
     --mercury-day: 1407.6;
     --mercury-color: #999999;
-    --moon-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/332937/mercury2.jpg);
-    --moon-tilt: rotate(0.034deg);
-    --moon-day: 1407.6;
+    --moon-image: url(/img/locations/moon-texture.jpg);
+    --moon-tilt: rotate(6.7deg);
+    --moon-day: 655.7;
     --moon-color: #999999;
     --venus-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/332937/venus2.jpg);
     --venus-tilt: rotate(177.3deg);
     --venus-day: 5832.5;
     --venus-color: #e8cda2;
-    --earth-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/332937/earth.jpg);
+    --earth-image: url(/img/locations/earth-texture.jpg);
     --earth-tilt: rotate(23.26deg);
     --earth-day: 23.9;
     --earth-color: #b3caff;
-    --mars-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/332937/mars.jpg);
+    --mars-image: url(/img/locations/mars-texture.jpg);
     --mars-tilt: rotate(25.2deg);
     --mars-day: 24.6;
     --mars-color: #c07158;
@@ -66,7 +66,16 @@ $solarSystem: ( /*"mercury", "venus",*/ "earth", "moon", "mars", /*"jupiter", "s
     @each $planet in $solarSystem {
         &--#{$planet} {
             .planet__atmosphere {
-                box-shadow: inset 10px 0px 12px -2px rgba(255,255,255,.2), inset -30px 0px 20px 0px black, -5px 0px 10px -4px var(--#{$planet}-color);
+                // Adjusted from the original example so the planets could be resized and maintain their atmospheres
+                // x, y, blur, spread, color
+                --light-crest: inset calc(var(--planet-size) * 0.05) 0px calc(var(--planet-size) * 0.06) -2px rgba(255,255,255,.4);
+                // The Inner Crest (inner left): inset 10px 0px 12px -2px rgba(255,255,255,.2)
+                --dark-crest: inset calc(var(--planet-size) * -0.40) 0px calc(var(--planet-size) * 0.25) 0px black;
+                // The Dark Side (inner right): inset -70px 0px 50px 0px black
+                --atmosphere: -5px 0px 10px -4px var(--#{$planet}-color);
+                // The Atmosphere (outer left): -5px 0px 10px -4px var(--mars-color)
+                // Spherical Spotlight (inner middle): radial-gradient(circle at 30% 50%, rgba(255,255,255,.2) 0%, rgba(255,255,255,0);
+                box-shadow: var(--light-crest), var(--dark-crest), var(--atmosphere);
             }
 
             .planet__surface {
@@ -111,6 +120,10 @@ $solarSystem: ( /*"mercury", "venus",*/ "earth", "moon", "mars", /*"jupiter", "s
     position: relative;
     z-index: 999;
     @include planetization;
+}
+
+.k-item .planet-wrap {
+    margin-right:1rem;
 }
 
 .planet-wrap__planet {

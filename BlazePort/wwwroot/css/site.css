@@ -39,6 +39,7 @@
   --gray-light: #818a91;
   --gray-lighter: #eceeef;
   --gray-lightest: #f7f7f9;
+  --font-size-root: 16px;
   --font-family-base: Muli, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-family-headings: Orbitron, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --white: #fff;
@@ -743,7 +744,7 @@ div.k-scrollview ::selection, .k-pdf-viewer ::selection, .k-mediaplayer ::select
   border-width: 1px;
   border-style: solid;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 16px;
   font-family: inherit;
   line-height: 1.4285714286;
   display: inline-flex;
@@ -8620,20 +8621,20 @@ div.k-scrollview ::selection, .k-pdf-viewer ::selection, .k-mediaplayer ::select
 }
 
 .k-typography {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   font-weight: 400;
 }
 .k-typography p {
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .k-h1 {
   font-family: inherit;
-  font-size: 28px;
+  font-size: 32px;
   line-height: normal;
   font-weight: 300;
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .k-h2 {
@@ -8641,15 +8642,15 @@ div.k-scrollview ::selection, .k-pdf-viewer ::selection, .k-mediaplayer ::select
   font-size: 18px;
   line-height: normal;
   font-weight: 400;
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .k-h3 {
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: normal;
   font-weight: 700;
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .k-h4 {
@@ -8657,7 +8658,7 @@ div.k-scrollview ::selection, .k-pdf-viewer ::selection, .k-mediaplayer ::select
   font-size: 12px;
   line-height: normal;
   font-weight: 700;
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .k-h5 {
@@ -8665,7 +8666,7 @@ div.k-scrollview ::selection, .k-pdf-viewer ::selection, .k-mediaplayer ::select
   font-size: 12px;
   line-height: normal;
   font-weight: 400;
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .k-h6 {
@@ -8673,33 +8674,33 @@ div.k-scrollview ::selection, .k-pdf-viewer ::selection, .k-mediaplayer ::select
   font-size: 12px;
   line-height: normal;
   font-weight: 400;
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .k-display-1 {
   font-family: inherit;
-  font-size: 84px;
+  font-size: 96px;
   line-height: 1.2;
   font-weight: 300;
 }
 
 .k-display-2 {
   font-family: inherit;
-  font-size: 70px;
+  font-size: 80px;
   line-height: 1.2;
   font-weight: 300;
 }
 
 .k-display-3 {
   font-family: inherit;
-  font-size: 56px;
+  font-size: 64px;
   line-height: 1.2;
   font-weight: 300;
 }
 
 .k-display-4 {
   font-family: inherit;
-  font-size: 42px;
+  font-size: 48px;
   line-height: 1.2;
   font-weight: 300;
 }
@@ -8720,7 +8721,7 @@ div.k-scrollview ::selection, .k-pdf-viewer ::selection, .k-mediaplayer ::select
 .k-avatar-text,
 .k-avatar-initials {
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
 }
 
@@ -10009,11 +10010,11 @@ kendo-badge-container {
 
 .k-button {
   border-radius: 0.25rem;
-  padding: 4px 8px;
+  padding: 1rem 2rem;
   box-sizing: border-box;
   border-width: 1px;
   border-style: solid;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   font-family: inherit;
   text-align: center;
@@ -10068,9 +10069,9 @@ kendo-badge-container {
 
 .k-icon-button,
 .k-button.k-button-icon {
-  padding: 4px;
-  width: calc( 1.4285714286em + 8px + 2px );
-  height: calc( 1.4285714286em + 8px + 2px );
+  padding: 1rem;
+  width: calc( 1.4285714286em + 2rem + 2px );
+  height: calc( 1.4285714286em + 2rem + 2px );
   gap: 0;
 }
 .k-icon-button > .k-text,
@@ -10085,9 +10086,9 @@ kendo-badge-container {
 }
 
 .k-button.k-button-icon {
-  padding: 4px;
-  width: calc( 1.4285714286em + 8px + 2px );
-  height: calc( 1.4285714286em + 8px + 2px );
+  padding: 1rem;
+  width: calc( 1.4285714286em + 2rem + 2px );
+  height: calc( 1.4285714286em + 2rem + 2px );
 }
 
 .k-menu-button,
@@ -10178,7 +10179,7 @@ kendo-badge-container {
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
   margin-inline-start: -1px;
-  padding: 4px;
+  padding: 1rem;
   width: auto;
   flex: none;
 }
@@ -10550,7 +10551,7 @@ kendo-badge-container {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  height: calc( 1.4285714286em + 8px );
+  height: calc( 1.4285714286em + 2rem );
 }
 .k-input-prefix > *,
 .k-input-suffix > * {
@@ -10558,8 +10559,8 @@ kendo-badge-container {
 }
 .k-input-prefix > .k-icon,
 .k-input-suffix > .k-icon {
-  width: calc( 20px + 8px );
-  height: calc( 20px + 8px );
+  width: calc( 22.8571428571px + 8px );
+  height: calc( 22.8571428571px + 8px );
   display: inline-flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -10568,8 +10569,8 @@ kendo-badge-container {
 }
 .k-input-prefix > .k-clear-value,
 .k-input-suffix > .k-clear-value {
-  width: calc( 20px + 8px );
-  height: calc( 20px + 8px );
+  width: calc( 22.8571428571px + 8px );
+  height: calc( 22.8571428571px + 8px );
   position: relative;
 }
 .k-input-prefix > .k-clear-value::after,
@@ -10600,7 +10601,7 @@ kendo-badge-container {
 
 .k-input-icon {
   width: calc( 16px + 8px );
-  height: calc( 20px + 8px );
+  height: calc( 22.8571428571px + 8px );
   display: inline-flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -10620,7 +10621,7 @@ kendo-badge-container {
 
 .k-clear-value {
   width: calc( 16px + 8px );
-  height: calc( 20px + 8px );
+  height: calc( 22.8571428571px + 8px );
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -10695,7 +10696,7 @@ kendo-badge-container {
   border-width: 1px;
   border-style: solid;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-direction: column;
@@ -10764,8 +10765,8 @@ kendo-badge-container {
 
 .k-popup .k-list .k-item > .k-group {
   padding: 0 0.5em;
-  font-size: 9.996px;
-  line-height: 14px;
+  font-size: 11.424px;
+  line-height: 16px;
   text-transform: uppercase;
   position: absolute;
   top: 0;
@@ -10774,14 +10775,14 @@ kendo-badge-container {
 
 .k-popup .k-list .k-item > .k-group::before {
   content: "";
-  width: 14px;
-  height: 14px;
-  border-width: 7px;
+  width: 16px;
+  height: 16px;
+  border-width: 8px;
   border-style: solid;
   box-sizing: border-box;
   display: block;
   position: absolute;
-  left: -14px;
+  left: -16px;
   bottom: 0;
 }
 
@@ -11095,7 +11096,7 @@ kendo-badge-container {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   list-style: none;
   display: flex;
@@ -11113,7 +11114,7 @@ kendo-badge-container {
 }
 .k-toolbar::before {
   content: "";
-  height: calc( 1.4285714286em + 8px + 2px );
+  height: calc( 1.4285714286em + 2rem + 2px );
   margin-inline-start: -8px;
 }
 .k-toolbar.k-toolbar-resizable {
@@ -11145,7 +11146,7 @@ kendo-badge-container {
   border-radius: 0;
   margin: 0;
   padding: 8px;
-  width: calc( calc( 1.4285714286em + 8px + 2px ) + 16px );
+  width: calc( calc( 1.4285714286em + 2rem + 2px ) + 16px );
   height: 100%;
   border-width: 0;
   border-color: inherit;
@@ -11255,7 +11256,7 @@ kendo-toolbar-renderer {
 
 .k-form,
 .k-form-inline {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
 }
 
@@ -11808,7 +11809,7 @@ kendo-label > .k-label {
   padding: 0;
   border-width: 1px;
   border-style: solid;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   list-style: none;
   display: flex;
@@ -12635,7 +12636,7 @@ kendo-label.k-radio-label > .k-label {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: block;
   position: relative;
@@ -12661,7 +12662,7 @@ kendo-label.k-radio-label > .k-label {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   height: 100%;
@@ -13397,7 +13398,7 @@ kendo-label.k-radio-label > .k-label {
   border-width: 0 0 0 4px;
   border-style: solid;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
 }
 .k-messagebox a {
@@ -13531,7 +13532,7 @@ kendo-label.k-radio-label > .k-label {
 
 .k-textbox-container,
 .k-floating-label-container {
-  padding-top: calc( 1.4285714286 * 14px );
+  padding-top: calc( 1.4285714286 * 16px );
   width: 12.4em;
   display: inline-flex;
   vertical-align: middle;
@@ -13542,12 +13543,12 @@ kendo-label.k-radio-label > .k-label {
 .k-textbox-container > .k-label,
 .k-floating-label-container > .k-label {
   max-width: 90%;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   white-space: nowrap;
   text-overflow: ellipsis;
   position: absolute;
-  top: calc( calc( 1.4285714286 * 14px ) + 1px + 4px );
+  top: calc( calc( 1.4285714286 * 16px ) + 1px + 4px );
   left: calc( 8px + 1px );
   overflow: hidden;
   cursor: text;
@@ -13564,7 +13565,7 @@ kendo-label.k-radio-label > .k-label {
 }
 .k-textbox-container.k-state-empty > .k-label,
 .k-floating-label-container.k-state-empty > .k-label {
-  top: calc( calc( 1.4285714286 * 14px ) + 1px + 4px );
+  top: calc( calc( 1.4285714286 * 16px ) + 1px + 4px );
   left: calc( 8px + 1px );
   transform: scale(1);
 }
@@ -13621,7 +13622,7 @@ kendo-label.k-radio-label > .k-label {
   border-style: solid;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   box-sizing: border-box;
   box-shadow: none;
@@ -13645,8 +13646,8 @@ kendo-label.k-radio-label > .k-label {
   color: #666666;
 }
 .k-textbox .k-button-clear {
-  width: calc( 1.4285714286em + 8px );
-  height: calc( 1.4285714286em + 8px );
+  width: calc( 1.4285714286em + 2rem );
+  height: calc( 1.4285714286em + 2rem );
   border: 0;
 }
 .k-textbox .k-textbox-separator {
@@ -13710,7 +13711,7 @@ input.k-textbox {
   border-style: solid;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   box-sizing: border-box;
   box-shadow: none;
@@ -13808,7 +13809,7 @@ textarea.k-textarea {
   background-repeat: repeat-x;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.25;
   display: inline-flex;
   flex-flow: row nowrap;
@@ -13826,7 +13827,7 @@ textarea.k-textarea {
 
 .k-tooltip-title {
   margin-bottom: 0.25em;
-  font-size: 17.5px;
+  font-size: 20px;
   line-height: 1;
 }
 
@@ -13968,7 +13969,7 @@ textarea.k-textarea {
   box-sizing: border-box;
   color: inherit;
   background-color: transparent;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   font-family: inherit;
   text-align: center;
@@ -14480,7 +14481,7 @@ textarea.k-textarea {
   outline: 0;
   box-sizing: border-box;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   white-space: nowrap;
   display: inline-flex;
@@ -14498,7 +14499,7 @@ textarea.k-textarea {
 }
 .k-autocomplete .k-i-loading {
   width: calc( 16px + 8px );
-  height: calc( 20px + 8px );
+  height: calc( 22.8571428571px + 8px );
 }
 .k-autocomplete .k-clear-value {
   visibility: hidden;
@@ -14547,7 +14548,7 @@ textarea.k-textarea {
   outline: 0;
   background: none;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   text-align: left;
   white-space: nowrap;
@@ -14581,7 +14582,7 @@ textarea.k-textarea {
 .k-numerictextbox .k-select {
   border-radius: 0 0.25rem 0.25rem 0;
   padding: 0;
-  width: calc( 1.4285714286em + 8px );
+  width: calc( 1.4285714286em + 2rem );
   border-width: 0 0 0 0px;
   border-style: solid;
   box-sizing: border-box;
@@ -14668,7 +14669,7 @@ textarea.k-textarea {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   background: none;
   display: inline-flex;
@@ -15202,7 +15203,7 @@ textarea.k-textarea {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   background: none;
   text-align: left;
@@ -15214,9 +15215,9 @@ textarea.k-textarea {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .k-colorpicker .k-selected-color {
-  padding: 4px;
-  width: calc( 1.4285714286em + 8px );
-  height: calc( 1.4285714286em + 8px );
+  padding: 1rem;
+  width: calc( 1.4285714286em + 2rem );
+  height: calc( 1.4285714286em + 2rem );
   border-width: 0;
   border-style: solid;
   border-color: inherit;
@@ -15239,9 +15240,9 @@ textarea.k-textarea {
   display: none;
 }
 .k-colorpicker .k-tool-icon {
-  padding: 4px;
-  width: calc( 1.4285714286em + 8px );
-  height: calc( 1.4285714286em + 8px );
+  padding: 1rem;
+  width: calc( 1.4285714286em + 2rem );
+  height: calc( 1.4285714286em + 2rem );
   border-width: 0;
   border-style: solid;
   border-color: inherit;
@@ -15286,7 +15287,7 @@ textarea.k-textarea {
 .k-colorpicker .k-select {
   border-radius: 0 0.25rem 0.25rem 0;
   padding: 4px 4px;
-  width: calc( 1.4285714286em + 8px );
+  width: calc( 1.4285714286em + 2rem );
   border-width: 0 0 0 1px;
   border-style: solid;
   border-color: inherit;
@@ -15314,7 +15315,7 @@ textarea.k-textarea {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-direction: column;
@@ -15470,12 +15471,12 @@ textarea.k-textarea {
   position: relative;
 }
 .k-flatcolorpicker .k-color-value {
-  margin: 0 0 0 calc( calc( 1.4285714286em + 8px ) * 2 );
+  margin: 0 0 0 calc( calc( 1.4285714286em + 2rem ) * 2 );
   padding: 4px 8px;
   width: 100%;
   border: 0;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   font-family: inherit;
   outline: 0;
@@ -15511,7 +15512,7 @@ textarea.k-textarea {
 }
 .k-rtl .k-flatcolorpicker .k-color-value,
 [dir=rtl] .k-flatcolorpicker .k-color-value {
-  margin: 0 calc( calc( 1.4285714286em + 8px ) * 2 ) 0 0;
+  margin: 0 calc( calc( 1.4285714286em + 2rem ) * 2 ) 0 0;
   direction: initial;
   text-align: right;
 }
@@ -15526,7 +15527,7 @@ textarea.k-textarea {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 0;
   display: inline-block;
   position: relative;
@@ -15652,7 +15653,7 @@ textarea.k-textarea {
   outline: 0;
   background: none;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   text-align: left;
   white-space: nowrap;
@@ -15694,7 +15695,7 @@ textarea.k-textarea {
 .k-combobox .k-select {
   border-radius: 0 0.25rem 0.25rem 0;
   padding: 0px 0px;
-  width: calc( 1.4285714286em + 8px );
+  width: calc( 1.4285714286em + 2rem );
   border-width: 0 0 0 0px;
   box-sizing: border-box;
   border-style: solid;
@@ -15762,7 +15763,7 @@ textarea.k-textarea {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   position: relative;
   overflow: hidden;
@@ -15821,8 +15822,8 @@ textarea.k-textarea {
 }
 .k-calendar .k-calendar-view tbody th,
 .k-calendar .k-calendar-view .k-calendar-tbody .k-calendar-th {
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 2rem;
+  padding-right: 2rem;
   height: 2em;
   font: inherit;
   font-weight: bold;
@@ -15896,8 +15897,8 @@ textarea.k-textarea {
   text-decoration: underline;
 }
 .k-calendar .k-calendar-view {
-  width: 17em;
-  height: 17em;
+  width: 14.875em;
+  height: 14.875em;
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -15906,11 +15907,11 @@ textarea.k-textarea {
   gap: 16px;
 }
 .k-calendar.k-week-number .k-calendar-view {
-  width: 19.4285714286em;
+  width: 17em;
 }
 .k-calendar-infinite .k-calendar-view {
-  width: 17em;
-  height: calc( 19.4285714286em + 2em );
+  width: 14.875em;
+  height: calc( 17em + 2em );
   gap: 0;
 }
 .k-calendar .k-content,
@@ -15968,13 +15969,13 @@ textarea.k-textarea {
 .k-calendar .k-month .k-calendar-td,
 .k-calendar .k-calendar-monthview td,
 .k-calendar .k-calendar-monthview .k-calendar-td {
-  width: 2.4285714286em;
-  height: 2.4285714286em;
+  width: 2.125em;
+  height: 2.125em;
 }
 .k-calendar .k-month .k-link,
 .k-calendar .k-calendar-monthview .k-link {
-  width: 2.4285714286em;
-  height: 2.4285714286em;
+  width: 2.125em;
+  height: 2.125em;
 }
 .k-calendar .k-year td,
 .k-calendar .k-year .k-calendar-td,
@@ -15985,8 +15986,8 @@ textarea.k-textarea {
 }
 .k-calendar .k-year .k-link,
 .k-calendar .k-calendar-yearview .k-link {
-  width: 4.25em;
-  height: 4.25em;
+  width: 3.71875em;
+  height: 3.71875em;
 }
 .k-calendar .k-decade td,
 .k-calendar .k-decade .k-calendar-td,
@@ -15997,8 +15998,8 @@ textarea.k-textarea {
 }
 .k-calendar .k-decade .k-link,
 .k-calendar .k-calendar-decadeview .k-link {
-  width: 4.25em;
-  height: 4.25em;
+  width: 3.71875em;
+  height: 3.71875em;
 }
 .k-calendar .k-century td,
 .k-calendar .k-century .k-calendar-td,
@@ -16009,8 +16010,8 @@ textarea.k-textarea {
 }
 .k-calendar .k-century .k-link,
 .k-calendar .k-calendar-centuryview .k-link {
-  width: 4.25em;
-  height: 4.25em;
+  width: 3.71875em;
+  height: 3.71875em;
   text-align: left;
 }
 .k-calendar-infinite {
@@ -16039,7 +16040,7 @@ textarea.k-textarea {
   z-index: 1;
   width: 150%;
   left: -25%;
-  box-shadow: 0 0 2.4285714286em 1.2142857143em #ffffff;
+  box-shadow: 0 0 2.125em 1.0625em #ffffff;
 }
 .k-calendar-infinite .k-calendar-header {
   margin-left: -16px;
@@ -16083,8 +16084,8 @@ textarea.k-textarea {
 .k-calendar-infinite .k-calendar-centuryview .k-calendar-content .k-link,
 .k-calendar-infinite .k-calendar-centuryview .k-calendar-content td.k-empty,
 .k-calendar-infinite .k-calendar-centuryview .k-calendar-content .k-calendar-td.k-empty {
-  width: 3.4em;
-  height: 3.4em;
+  width: 2.975em;
+  height: 2.975em;
 }
 .k-calendar-classic {
   display: inline-flex;
@@ -16185,7 +16186,7 @@ textarea.k-textarea {
 }
 .k-calendar.k-calendar-range .k-calendar-view {
   height: auto;
-  min-height: 17em;
+  min-height: 14.875em;
   width: auto;
   white-space: nowrap;
 }
@@ -16203,7 +16204,7 @@ textarea.k-textarea {
 }
 .k-calendar.k-calendar-range .k-meta-header,
 .k-calendar.k-calendar-range .k-month-header {
-  padding: 0.25em calc( 8px + 1px );
+  padding: 0.25em calc( 2rem + 1px );
   font-size: 12px;
   line-height: 2;
   text-align: left;
@@ -16468,7 +16469,7 @@ textarea.k-textarea {
   outline: 0;
   background: none;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   text-align: left;
   white-space: nowrap;
@@ -16499,7 +16500,7 @@ textarea.k-textarea {
 .k-dateinput .k-select {
   border-radius: 0 0.25rem 0.25rem 0;
   padding: 0;
-  width: calc( 1.4285714286em + 8px );
+  width: calc( 1.4285714286em + 2rem );
   border-width: 0 0 0 0px;
   border-style: solid;
   box-sizing: border-box;
@@ -16571,7 +16572,7 @@ textarea.k-textarea {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   white-space: nowrap;
   background: none;
@@ -16622,7 +16623,7 @@ textarea.k-textarea {
   display: none;
   position: absolute;
   top: 50%;
-  right: calc( calc( 1.4285714286em + 8px ) + 4px);
+  right: calc( calc( 1.4285714286em + 2rem ) + 4px);
   transform: translateY(-50%);
   overflow: visible;
 }
@@ -16645,7 +16646,7 @@ textarea.k-textarea {
 .k-rtl .k-timepicker .k-i-warning,
 .k-timepicker[dir=rtl] .k-i-warning {
   right: auto;
-  left: calc( calc( 1.4285714286em + 8px ) + 4px);
+  left: calc( calc( 1.4285714286em + 2rem ) + 4px);
 }
 
 .k-datetimepicker {
@@ -16654,7 +16655,7 @@ textarea.k-textarea {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   text-align: left;
   white-space: nowrap;
@@ -16698,7 +16699,7 @@ textarea.k-textarea {
 }
 .k-datetimepicker .k-link {
   padding: 4px 4px;
-  width: calc( 1.4285714286em + 8px );
+  width: calc( 1.4285714286em + 2rem );
   height: 100%;
   border-width: 0;
   border-style: solid;
@@ -16712,7 +16713,7 @@ textarea.k-textarea {
   display: none;
   position: absolute;
   top: 50%;
-  right: calc( calc( 1.4285714286em + 8px ) * 2 + 4px);
+  right: calc( calc( 1.4285714286em + 2rem ) * 2 + 4px);
   transform: translateY(-50%);
   overflow: visible;
 }
@@ -16728,7 +16729,7 @@ textarea.k-textarea {
 }
 .k-rtl .k-datetimepicker .k-i-warning, .k-datetimepicker[dir=rtl] .k-i-warning {
   right: auto;
-  left: calc( calc( 1.4285714286em + 8px ) * 2 + 4px);
+  left: calc( calc( 1.4285714286em + 2rem ) * 2 + 4px);
 }
 
 .k-datetime-container .k-datetime-wrap {
@@ -16736,7 +16737,7 @@ textarea.k-textarea {
   overflow: hidden;
 }
 .k-datetime-container .k-datetime-buttongroup {
-  padding: 8px;
+  padding: 2rem;
 }
 .k-datetime-container .k-datetime-selector {
   display: flex;
@@ -16916,7 +16917,7 @@ textarea.k-textarea {
   right: 0;
   transform: translateY(-50%);
   width: 100%;
-  height: calc( 1.4285714286em + 8px );
+  height: calc( 1.4285714286em + 2rem );
   z-index: 1;
   border-width: 1px 0;
   border-style: solid;
@@ -17232,7 +17233,7 @@ textarea.k-textarea {
 }
 
 .k-grid-list > .k-outer-group-header {
-  height: calc( 16px + (14px * 1.4285714286) );
+  height: calc( 16px + (16px * 1.4285714286) );
   display: table-row;
   position: relative;
 }
@@ -17371,7 +17372,7 @@ textarea.k-textarea {
   background: none;
   box-sizing: border-box;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   text-align: left;
   white-space: nowrap;
@@ -17398,7 +17399,7 @@ textarea.k-textarea {
 .k-dropdown .k-dropdown-wrap .k-select, .k-dropdowntree .k-dropdown-wrap .k-select {
   border-radius: 0 0.25rem 0.25rem 0;
   padding: 4px 4px;
-  width: calc( 1.4285714286em + 8px );
+  width: calc( 1.4285714286em + 2rem );
   border-width: 0;
   box-sizing: border-box;
   border-style: solid;
@@ -17442,8 +17443,8 @@ textarea.k-textarea {
   display: none;
 }
 .k-dropdown-operator .k-dropdown-wrap .k-select {
-  width: calc( 1.4285714286em + 8px );
-  height: calc( 1.4285714286em + 8px );
+  width: calc( 1.4285714286em + 2rem );
+  height: calc( 1.4285714286em + 2rem );
 }
 
 select.k-dropdown, select.k-dropdowntree {
@@ -17498,7 +17499,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   outline: 0;
   background: none;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   text-align: left;
   white-space: nowrap;
@@ -17552,8 +17553,8 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   cursor: pointer;
 }
 .k-multiselect .k-multiselect-wrap .k-button, .k-dropdowntree .k-multiselect-wrap .k-button {
-  min-height: calc( 1.4285714286em + 2px + 2px );
-  padding: 1px 4px;
+  min-height: calc( 1.4285714286em + 0.5rem + 2px );
+  padding: 0.25rem 1rem;
   margin: 2px 0 0 2px;
   cursor: default;
   display: inline-flex;
@@ -17580,7 +17581,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
 }
 .k-multiselect .k-multiselect-wrap .k-i-loading, .k-dropdowntree .k-multiselect-wrap .k-i-loading {
   width: calc( 16px + 8px );
-  height: calc( 20px + 8px );
+  height: calc( 22.8571428571px + 8px );
   position: absolute;
   top: 0;
   right: 0;
@@ -17692,7 +17693,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: block;
   cursor: default;
@@ -17873,7 +17874,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
 .k-maskedtextbox {
   width: 12.4em;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   border-width: 0;
   box-sizing: border-box;
@@ -17927,7 +17928,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   border-width: 1px;
   border-style: solid;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: inline-flex;
   align-items: center;
@@ -17980,7 +17981,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   border-width: 1px;
   border-style: solid;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 16px;
   font-family: inherit;
   line-height: 1.4285714286;
   flex: 1 1 auto;
@@ -18041,7 +18042,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   position: relative;
   display: block;
@@ -18175,7 +18176,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   height: 34px;
   border-width: 2px;
   border-style: solid;
-  font-size: 7.98px;
+  font-size: 9.12px;
   text-transform: uppercase;
   box-sizing: content-box;
   position: absolute;
@@ -18404,7 +18405,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
 .k-no-flexbox .k-upload-files .k-file-single > .k-file-name-size-wrapper,
 .k-no-flexbox .k-upload-files .k-file > .k-file-name-size-wrapper {
   margin-left: calc( 32px + 8px );
-  margin-right: calc( (calc( 1.4285714286em + 8px + 2px ) + 8px * 2) + 2em );
+  margin-right: calc( (calc( 1.4285714286em + 2rem + 2px ) + 2rem * 2) + 2em );
 }
 .k-no-flexbox .k-dropzone {
   position: relative;
@@ -18435,7 +18436,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
 .k-no-flexbox .k-rtl .k-multiple-files-wrapper,
 .k-no-flexbox .k-rtl .k-file-single > .k-file-name-size-wrapper,
 .k-no-flexbox .k-rtl .k-file > .k-file-name-size-wrapper {
-  margin-left: calc( (calc( 1.4285714286em + 8px + 2px ) + 8px * 2) + 2em );
+  margin-left: calc( (calc( 1.4285714286em + 2rem + 2px ) + 2rem * 2) + 2em );
   margin-right: calc( 32px + 8px );
 }
 
@@ -18535,7 +18536,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   border-width: 0;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   vertical-align: top;
   background-color: transparent;
@@ -18629,7 +18630,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   outline: 0;
   background: none;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: inline-flex;
   -webkit-touch-callout: none;
@@ -18733,7 +18734,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   list-style: none;
   display: flex;
@@ -18866,7 +18867,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-wrap: wrap;
@@ -18973,7 +18974,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
 .k-menu-group {
   margin: 0;
   padding: 0px 0px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   list-style: none;
   display: none;
@@ -18985,7 +18986,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   flex-direction: column;
 }
 .k-menu-group .k-menu-item {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
 }
 .k-menu-group .k-menu-item + .k-menu-item {
@@ -19174,7 +19175,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.25;
   display: inline-flex;
   flex-direction: column;
@@ -19410,7 +19411,7 @@ select.k-dropdown:focus, select.k-dropdowntree:focus {
 .k-dialog-titlebar {
   border-color: inherit;
   color: #ffffff;
-  background-color: #42c7c2;
+  background-color: #13405d;
 }
 
 .k-drawer-container {
@@ -19432,7 +19433,7 @@ kendo-drawer .k-drawer-wrapper {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-direction: column;
@@ -19849,7 +19850,7 @@ kendo-drawer .k-drawer-wrapper {
   border-style: solid;
   border-color: transparent;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 16px;
   font-family: inherit;
   line-height: 1.4285714286;
   overflow-x: hidden;
@@ -19965,7 +19966,7 @@ kendo-drawer .k-drawer-wrapper {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-direction: row;
@@ -20106,7 +20107,7 @@ kendo-drawer .k-drawer-wrapper {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   align-items: center;
@@ -20165,8 +20166,8 @@ kendo-drawer .k-drawer-wrapper {
 }
 
 .k-pager-refresh, .k-pager-numbers .k-link, .k-pager-nav {
-  min-width: calc( 1.4285714286em + 8px + 2px );
-  height: calc( 1.4285714286em + 8px + 2px );
+  min-width: calc( 1.4285714286em + 2rem + 2px );
+  height: calc( 1.4285714286em + 2rem + 2px );
   box-sizing: border-box;
   color: inherit;
   text-align: center;
@@ -20183,7 +20184,7 @@ kendo-drawer .k-drawer-wrapper {
 }
 
 .k-pager-nav {
-  padding: 4px 4px;
+  padding: 1rem 1rem;
   border-width: 0px;
   border-style: solid;
 }
@@ -20209,7 +20210,7 @@ kendo-drawer .k-drawer-wrapper {
   display: inline-flex;
 }
 .k-pager-numbers .k-link {
-  padding: 4px 4px;
+  padding: 1rem 1rem;
   border-width: 0px;
   border-style: solid;
 }
@@ -20261,7 +20262,7 @@ kendo-drawer .k-drawer-wrapper {
 .k-pager-sm .k-pager-numbers-wrap {
   margin-left: 1em;
   margin-right: 1em;
-  height: calc( 1.4285714286em + 8px + 2px );
+  height: calc( 1.4285714286em + 2rem + 2px );
   box-sizing: border-box;
   border-color: inherit;
 }
@@ -20350,7 +20351,7 @@ kendo-drawer .k-drawer-wrapper {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   list-style: none;
   display: block;
@@ -20606,7 +20607,7 @@ kendo-drawer .k-drawer-wrapper {
   border-style: solid;
   box-sizing: border-box;
   outline: 0;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   font-family: inherit;
   display: block;
@@ -20877,7 +20878,7 @@ kendo-drawer .k-drawer-wrapper {
   border-style: solid;
   box-sizing: border-box;
   outline: 0;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   font-family: inherit;
   position: relative;
@@ -20984,7 +20985,7 @@ kendo-drawer .k-drawer-wrapper {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   color: inherit;
   background-color: transparent;
@@ -21275,7 +21276,7 @@ kendo-drawer .k-drawer-wrapper {
   overflow: hidden;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-direction: column;
@@ -21362,7 +21363,7 @@ kendo-drawer .k-drawer-wrapper {
   border-style: solid;
   border-color: transparent;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 16px;
   line-height: normal;
   font-family: inherit;
   letter-spacing: 0.2px;
@@ -21647,7 +21648,7 @@ kendo-card-footer {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-direction: column;
@@ -21705,7 +21706,7 @@ kendo-card-footer {
   flex: 1 1 auto;
 }
 .k-card-body p {
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 .k-card-body > .k-last,
 .k-card-body > :last-child {
@@ -21831,8 +21832,8 @@ kendo-card-footer {
 }
 .k-card-actions-stretched .k-button {
   border-radius: 0;
-  padding-top: calc( 8px + 4px );
-  padding-bottom: calc( 8px + 4px );
+  padding-top: calc( 8px + 1rem );
+  padding-bottom: calc( 8px + 1rem );
 }
 .k-card .k-card-actions-stretched {
   border-top-width: 1px;
@@ -22155,7 +22156,7 @@ kendo-card-footer {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: block;
   position: relative;
@@ -22415,7 +22416,7 @@ kendo-card-footer {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-direction: column;
@@ -22652,7 +22653,7 @@ kendo-card-footer {
 .k-grid[dir=rtl] .k-grid-header .k-with-icon,
 .k-grid[dir=rtl] .k-grid-header .k-filterable, .k-rtl .k-grid .k-grid-header .k-with-icon,
 .k-rtl .k-grid .k-grid-header .k-filterable {
-  padding-left: calc( calc( 1.4285714286em + 8px + 2px ) + 4px );
+  padding-left: calc( calc( 1.4285714286em + 2rem + 2px ) + 4px );
   padding-right: 12px;
 }
 .k-grid[dir=rtl] .k-grid-header .k-grid-filter,
@@ -22765,7 +22766,7 @@ kendo-card-footer {
 }
 .k-grouping-header::before {
   content: "";
-  height: calc( 1.4285714286em + 8px + 2px );
+  height: calc( 1.4285714286em + 2rem + 2px );
   display: inline-block;
   vertical-align: middle;
 }
@@ -22795,7 +22796,7 @@ kendo-card-footer {
 .k-group-indicator {
   border-radius: 0.25rem;
   margin: 0;
-  padding: 4px 8px;
+  padding: 1rem 2rem;
   border-width: 1px;
   border-style: solid;
   display: inline-flex;
@@ -22850,7 +22851,7 @@ kendo-card-footer {
 
 .k-grouping-dropclue {
   width: 12px;
-  height: calc( 1.4285714286em + 8px + 2px );
+  height: calc( 1.4285714286em + 2rem + 2px );
   position: absolute;
   top: 3px;
   box-sizing: content-box;
@@ -22957,21 +22958,21 @@ div.k-grid-footer {
 }
 .k-grid-header .k-with-icon,
 .k-grid-header .k-filterable {
-  padding-right: calc( calc( 1.4285714286em + 8px + 2px ) + 4px );
+  padding-right: calc( calc( 1.4285714286em + 2rem + 2px ) + 4px );
 }
 .k-ie .k-grid-header .k-with-icon, .k-edge .k-grid-header .k-with-icon,
 .k-ie .k-grid-header .k-filterable,
 .k-edge .k-grid-header .k-filterable {
-  padding-right: calc( calc( 1.4285714286em + 8px + 2px ) + 4px);
+  padding-right: calc( calc( 1.4285714286em + 2rem + 2px ) + 4px);
 }
 .k-grid-header .k-header > .k-link:focus {
   text-decoration: none;
 }
 .k-grid-header .k-grid-filter,
 .k-grid-header .k-header-column-menu {
-  padding: 4px;
-  width: calc( 1.4285714286em + 8px + 2px );
-  height: calc( 1.4285714286em + 8px + 2px );
+  padding: 1rem;
+  width: calc( 1.4285714286em + 2rem + 2px );
+  height: calc( 1.4285714286em + 2rem + 2px );
   box-sizing: border-box;
   outline: 0;
   line-height: 1.4285714286;
@@ -22981,7 +22982,7 @@ div.k-grid-footer {
   justify-content: center;
   position: absolute;
   right: 4px;
-  bottom: calc( 8px + 0.7142857143em - calc( 1.4285714286em + 8px )/2 );
+  bottom: calc( 8px + 0.7142857143em - calc( 1.4285714286em + 2rem )/2 );
   z-index: 1;
 }
 .k-ie .k-grid-header .k-grid-filter, .k-edge .k-grid-header .k-grid-filter,
@@ -22989,9 +22990,9 @@ div.k-grid-footer {
 .k-edge .k-grid-header .k-header-column-menu {
   position: static;
   float: right;
-  margin-top: calc( (calc( 1.4285714286em + 8px + 2px ) - 1.4285714286em) / -2);
-  margin-bottom: calc( (calc( 1.4285714286em + 8px + 2px ) - 1.4285714286em) / -2);
-  margin-right: calc( -1 * calc( 1.4285714286em + 8px + 2px ));
+  margin-top: calc( (calc( 1.4285714286em + 2rem + 2px ) - 1.4285714286em) / -2);
+  margin-bottom: calc( (calc( 1.4285714286em + 2rem + 2px ) - 1.4285714286em) / -2);
+  margin-right: calc( -1 * calc( 1.4285714286em + 2rem + 2px ));
 }
 .k-grid-header .k-grid-filter:hover,
 .k-grid-header .k-header-column-menu:hover {
@@ -23096,14 +23097,14 @@ div.k-grid-footer {
 }
 .k-ie .k-filtercell > span .k-button,
 .k-ie .k-filtercell > span .k-dropdown-operator {
-  min-width: calc( 1.4285714286em + 8px );
+  min-width: calc( 1.4285714286em + 2rem );
 }
 .k-filtercell > span .k-widget {
   width: auto;
 }
 .k-filtercell .k-filtercell-operator > .k-button.k-clear-button-visible {
   visibility: visible;
-  height: calc( 1.4285714286em + 8px + 2px );
+  height: calc( 1.4285714286em + 2rem + 2px );
 }
 .k-filtercell .k-filtercell-operator > .k-button:not(.k-clear-button-visible) {
   visibility: hidden;
@@ -23190,7 +23191,7 @@ div.k-grid-footer {
 .k-grid .k-grid-edit-row td:not(.k-hierarchy-cell),
 .k-grid .k-command-cell,
 .k-grid .k-edit-cell {
-  padding: calc( 8px - (calc( 1.4285714286em + 8px + 2px ) - 1.4285714286em) / 2 ) 12px;
+  padding: calc( 8px - (calc( 1.4285714286em + 2rem + 2px ) - 1.4285714286em) / 2 ) 12px;
 }
 
 .k-command-cell > .k-button {
@@ -23217,7 +23218,7 @@ div.k-grid-footer {
 }
 
 .k-pager-input .k-numerictextbox {
-  margin: 0 7px;
+  margin: 0 8px;
   width: 3em;
 }
 
@@ -23405,11 +23406,11 @@ div.k-grid-norecords {
 }
 
 .k-header > .k-cell-inner {
-  margin: -8px calc(-1 * calc( calc( 1.4285714286em + 8px + 2px ) - 12px)) -8px -12px;
+  margin: -8px calc(-1 * calc( calc( 1.4285714286em + 2rem + 2px ) - 12px)) -8px -12px;
 }
 
 .k-filterable > .k-cell-inner {
-  margin: -8px calc(-1 * calc( 1.4285714286em + 8px + 2px )) -8px -12px;
+  margin: -8px calc(-1 * calc( 1.4285714286em + 2rem + 2px )) -8px -12px;
 }
 .k-filterable > .k-cell-inner .k-link {
   padding-right: 0;
@@ -23734,7 +23735,7 @@ div.k-grid-norecords {
 [dir=rtl] .k-header > .k-cell-inner,
 .k-rtl .k-header > .k-cell-inner {
   margin-right: -12px;
-  margin-left: calc(-1 * calc( calc( 1.4285714286em + 8px + 2px ) - 12px));
+  margin-left: calc(-1 * calc( calc( 1.4285714286em + 2rem + 2px ) - 12px));
 }
 [dir=rtl] .k-header > .k-cell-inner .k-sort-order,
 .k-rtl .k-header > .k-cell-inner .k-sort-order {
@@ -23744,7 +23745,7 @@ div.k-grid-norecords {
 [dir=rtl] .k-filterable > .k-cell-inner,
 .k-rtl .k-filterable > .k-cell-inner {
   margin-right: -12px;
-  margin-left: calc(-1 * calc( 1.4285714286em + 8px + 2px ));
+  margin-left: calc(-1 * calc( 1.4285714286em + 2rem + 2px ));
 }
 [dir=rtl] .k-filterable > .k-cell-inner .k-link,
 .k-rtl .k-filterable > .k-cell-inner .k-link {
@@ -24074,7 +24075,7 @@ kendo-grid tr.k-state-hover .k-grid-content-sticky.k-state-selected {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   flex-flow: column nowrap;
   position: relative;
@@ -24222,7 +24223,7 @@ kendo-grid tr.k-state-hover .k-grid-content-sticky.k-state-selected {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-direction: column;
@@ -24438,7 +24439,7 @@ kendo-grid tr.k-state-hover .k-grid-content-sticky.k-state-selected {
   overflow: hidden;
 }
 .k-spreadsheet-sheets-items .k-tabstrip-items {
-  margin: 0 calc( 1.4285714286em + 8px + 2px ) !important;
+  margin: 0 calc( 1.4285714286em + 2rem + 2px ) !important;
   border-width: 0;
 }
 .k-spreadsheet-sheets-items .k-tabstrip-prev {
@@ -25278,10 +25279,10 @@ kendo-grid tr.k-state-hover .k-grid-content-sticky.k-state-selected {
 .k-fieldselector .k-list li.k-item {
   background-clip: padding-box;
   border-radius: 0.25rem;
-  padding: 4px 8px;
-  padding-right: calc( 8px + 48px );
+  padding: 1rem 2rem;
+  padding-right: calc( 2rem + 48px );
   min-height: auto;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   text-align: left;
   white-space: normal;
@@ -25302,13 +25303,13 @@ kendo-grid tr.k-state-hover .k-grid-content-sticky.k-state-selected {
 .k-settings-columns .k-button,
 .k-settings-measures .k-button {
   margin-right: 8px;
-  margin-bottom: 2px;
+  margin-bottom: 0.5rem;
 }
 
 .k-field-actions {
   position: absolute;
-  right: 4px;
-  top: 4px;
+  right: 1rem;
+  top: 1rem;
   line-height: 1;
   cursor: pointer;
 }
@@ -25391,7 +25392,7 @@ kendo-grid tr.k-state-hover .k-grid-content-sticky.k-state-selected {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -25727,7 +25728,7 @@ kendo-grid tr.k-state-hover .k-grid-content-sticky.k-state-selected {
   border-style: solid;
   box-sizing: border-box;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-flow: column nowrap;
@@ -25937,7 +25938,7 @@ kendo-grid tr.k-state-hover .k-grid-content-sticky.k-state-selected {
 
 .k-taskboard {
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 16px;
   font-family: inherit;
   line-height: 1.4285714286;
   display: flex;
@@ -26201,7 +26202,7 @@ kendo-grid tr.k-state-hover .k-grid-content-sticky.k-state-selected {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-flow: column nowrap;
@@ -26272,9 +26273,9 @@ kendo-editor.k-readonly .k-editor-content.k-state-focused {
   margin-inline-start: 8px;
 }
 .k-editor-toolbar .k-tool {
-  padding: 4px;
-  width: calc( 1.4285714286em + 8px + 2px );
-  height: calc( 1.4285714286em + 8px + 2px );
+  padding: 1rem;
+  width: calc( 1.4285714286em + 2rem + 2px );
+  height: calc( 1.4285714286em + 2rem + 2px );
 }
 .k-editor-toolbar .k-tool-text {
   display: none;
@@ -26289,8 +26290,8 @@ kendo-editor.k-readonly .k-editor-content.k-state-focused {
 .k-editor-toolbar .k-overflow-anchor {
   border-width: 0;
   padding: 8px;
-  width: calc( calc( 1.4285714286em + 8px + 2px ) + 16px );
-  height: calc( calc( 1.4285714286em + 8px + 2px ) + 16px );
+  width: calc( calc( 1.4285714286em + 2rem + 2px ) + 16px );
+  height: calc( calc( 1.4285714286em + 2rem + 2px ) + 16px );
   position: relative;
 }
 .k-editor-toolbar .k-editor-export .k-icon {
@@ -26622,8 +26623,8 @@ kendo-editor.k-readonly .k-editor-content.k-state-focused {
   flex-flow: row wrap;
 }
 .k-popup.k-align .k-list .k-item {
-  padding: 4px;
-  height: calc( 1.4285714286em + 8px + 2px );
+  padding: 1rem;
+  height: calc( 1.4285714286em + 2rem + 2px );
   box-sizing: border-box;
   justify-content: center;
   flex: 1 0 33%;
@@ -26785,7 +26786,7 @@ kendo-editor.k-readonly .k-editor-content.k-state-focused {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -26947,7 +26948,7 @@ kendo-editor.k-readonly .k-editor-content.k-state-focused {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-flow: column nowrap;
@@ -27113,9 +27114,9 @@ kendo-editor.k-readonly .k-editor-content.k-state-focused {
   }
   .k-gantt-toolbar .k-gantt-pdf,
 .k-gantt-toolbar .k-gantt-create {
-    padding: 4px;
-    width: calc( 1.4285714286em + 8px + 2px );
-    height: calc( 1.4285714286em + 8px + 2px );
+    padding: 1rem;
+    width: calc( 1.4285714286em + 2rem + 2px );
+    height: calc( 1.4285714286em + 2rem + 2px );
   }
   .k-gantt-toolbar .k-gantt-pdf .k-button-text,
 .k-gantt-toolbar .k-gantt-create .k-button-text {
@@ -27818,7 +27819,7 @@ kendo-editor.k-readonly .k-editor-content.k-state-focused {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-direction: column;
@@ -28081,7 +28082,7 @@ ul.k-scheduler-navigation .k-state-selected {
   z-index: 2;
 }
 ul.k-scheduler-navigation .k-link {
-  padding: 4px 8px;
+  padding: 1rem 2rem;
   box-sizing: border-box;
   color: inherit;
   text-decoration: none;
@@ -28093,9 +28094,9 @@ ul.k-scheduler-navigation .k-link {
 }
 ul.k-scheduler-navigation .k-nav-prev .k-link,
 ul.k-scheduler-navigation .k-nav-next .k-link {
-  padding: 4px;
-  width: calc( 1.4285714286em + 8px );
-  height: calc( 1.4285714286em + 8px );
+  padding: 1rem;
+  width: calc( 1.4285714286em + 2rem );
+  height: calc( 1.4285714286em + 2rem );
 }
 ul.k-scheduler-navigation .k-nav-current {
   border: 0;
@@ -28136,7 +28137,7 @@ ul.k-scheduler-views .k-state-selected {
   z-index: 2;
 }
 ul.k-scheduler-views .k-link {
-  padding: 4px 8px;
+  padding: 1rem 2rem;
   box-sizing: border-box;
   color: inherit;
   text-decoration: none;
@@ -28235,7 +28236,7 @@ ul.k-scheduler-views .k-current-view .k-link::after {
   z-index: 2;
 }
 .k-scheduler-footer .k-link {
-  padding: 4px 8px;
+  padding: 1rem 2rem;
   box-sizing: border-box;
   color: inherit;
   text-decoration: none;
@@ -28738,7 +28739,7 @@ kendo-scheduler .k-recurrence-editor {
   background-color: inherit;
 }
 .k-scheduler-yearview .k-day-indicator {
-  margin-top: calc( 2.4285714286em - (0.5em * 2));
+  margin-top: calc( 2.125em - (0.5em * 2));
   width: 3px;
   height: 3px;
   border-radius: 50%;
@@ -29102,7 +29103,7 @@ ul.k-scheduler-views li:focus, ul.k-scheduler-views li.k-state-focus, ul.k-sched
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   height: 600px;
   max-height: 100%;
@@ -29637,7 +29638,7 @@ ul.k-scheduler-views li:focus, ul.k-scheduler-views li.k-state-focus, ul.k-sched
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: block;
   position: relative;
@@ -29726,7 +29727,7 @@ ul.k-scheduler-views li:focus, ul.k-scheduler-views li.k-state-focus, ul.k-sched
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: block;
   background-color: transparent;
@@ -29743,7 +29744,7 @@ ul.k-scheduler-views li:focus, ul.k-scheduler-views li.k-state-focus, ul.k-sched
 .k-timeline .k-timeline-flag {
   display: inline-block;
   text-align: center;
-  padding: 4px 8px;
+  padding: 1rem 2rem;
   border-radius: 0.25rem;
   line-height: 1.4285714286;
   min-width: 80px;
@@ -30116,7 +30117,7 @@ ul.k-scheduler-views li:focus, ul.k-scheduler-views li.k-state-focus, ul.k-sched
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: flex;
   flex-direction: column;
@@ -30332,7 +30333,7 @@ kendo-scrollview.k-scrollview,
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   position: relative;
   overflow: hidden;
@@ -30688,7 +30689,7 @@ div.k-scrollview.k-scrollview-light .k-scrollview-nav-wrap {
 }
 
 .k-var--chart-font {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .k-var--chart-title-font {
@@ -30712,7 +30713,7 @@ div.k-scrollview.k-scrollview-light .k-scrollview-nav-wrap {
   box-sizing: border-box;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -30755,7 +30756,7 @@ div.k-scrollview.k-scrollview-light .k-scrollview-nav-wrap {
 
 .k-chart-tooltip {
   border-radius: 0.25rem;
-  font-size: 13.006px;
+  font-size: 14.864px;
   line-height: 1.4285714286;
   padding: 4px 8px;
 }
@@ -30954,7 +30955,7 @@ div.k-scrollview.k-scrollview-light .k-scrollview-nav-wrap {
   border-style: solid;
   outline: 0;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   display: block;
   overflow: hidden;
@@ -30980,7 +30981,7 @@ div.k-scrollview.k-scrollview-light .k-scrollview-nav-wrap {
   border-width: 0 0 1px;
   border-style: solid;
   border-color: inherit;
-  font-size: 14px;
+  font-size: 16px;
   background-position: 0 0;
   background-repeat: repeat-x;
 }
@@ -31012,10 +31013,10 @@ div.k-scrollview.k-scrollview-light .k-scrollview-nav-wrap {
   right: 0;
 }
 .k-treemap .k-treemap-title + .k-treemap-wrap {
-  top: calc( 4px + (1.4285714286 * 14px) + 1px);
+  top: calc( 4px + (1.4285714286 * 16px) + 1px);
 }
 .k-treemap .k-treemap-title-vertical + .k-treemap-wrap {
-  left: calc( 4px + (1.4285714286 * 14px) + 1px);
+  left: calc( 4px + (1.4285714286 * 16px) + 1px);
 }
 .k-treemap .k-leaf {
   padding: 4px;
@@ -31396,7 +31397,7 @@ div.k-scrollview.k-scrollview-light .k-scrollview-nav-wrap {
   height: 600px;
   border-width: 0px;
   border-style: solid;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4285714286;
   font-family: inherit;
 }
@@ -31427,7 +31428,7 @@ div.k-scrollview.k-scrollview-light .k-scrollview-nav-wrap {
 .k-map .k-attribution {
   padding: 2px 4px;
   border-width: 0;
-  font-size: 10.5px;
+  font-size: 12px;
   z-index: 1000;
 }
 
@@ -31493,7 +31494,7 @@ div.k-scrollview.k-scrollview-light .k-scrollview-nav-wrap {
   display: none;
 }
 .k-zoom-control .k-button {
-  padding: 4px;
+  padding: 1rem;
 }
 
 .k-map {
@@ -31516,7 +31517,6 @@ div.k-scrollview.k-scrollview-light .k-scrollview-nav-wrap {
 
 :root {
   --font-weight-headings: 500;
-  --font-size-root: 16px;
   --font-size-lg: 1.25rem;
   --font-size-sm: .875rem;
   --font-size-xs: .75rem;
@@ -31623,6 +31623,7 @@ header.page-header {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(3, 40px);
+    margin-bottom: 2em;
   }
 
   .logo {
@@ -31752,22 +31753,25 @@ body {
   grid-area: book;
 }
 .trip-configuration-item .title {
-  font-size: 1em;
+  line-height: var(--line-height-sm);
+  font-size: var(--font-size-h4);
   color: #f2eabc;
 }
 .trip-configuration-item .text {
   color: #42c7c2;
 }
 .trip-configuration-item .text .primary {
+  line-height: var(--line-height-lg);
+  font-size: var(--font-size-h2);
   font-weight: bold;
   display: block;
   color: #f18918;
-  font-size: 1.5em;
   font-family: "Orbitron";
 }
 .trip-configuration-item .text .meta {
+  line-height: var(--line-height-sm);
+  font-size: var(--font-size-h6);
   display: block;
-  font-size: 1.2em;
 }
 
 .calendar-page {
@@ -31819,19 +31823,19 @@ body {
   --mercury-tilt: rotate(0.034deg);
   --mercury-day: 1407.6;
   --mercury-color: #999999;
-  --moon-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/332937/mercury2.jpg);
-  --moon-tilt: rotate(0.034deg);
-  --moon-day: 1407.6;
+  --moon-image: url(/img/locations/moon-texture.jpg);
+  --moon-tilt: rotate(6.7deg);
+  --moon-day: 655.7;
   --moon-color: #999999;
   --venus-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/332937/venus2.jpg);
   --venus-tilt: rotate(177.3deg);
   --venus-day: 5832.5;
   --venus-color: #e8cda2;
-  --earth-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/332937/earth.jpg);
+  --earth-image: url(/img/locations/earth-texture.jpg);
   --earth-tilt: rotate(23.26deg);
   --earth-day: 23.9;
   --earth-color: #b3caff;
-  --mars-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/332937/mars.jpg);
+  --mars-image: url(/img/locations/mars-texture.jpg);
   --mars-tilt: rotate(25.2deg);
   --mars-day: 24.6;
   --mars-color: #c07158;
@@ -31877,7 +31881,10 @@ body {
   z-index: 999;
 }
 .planet-wrap--earth .planet__atmosphere {
-  box-shadow: inset 10px 0px 12px -2px rgba(255, 255, 255, 0.2), inset -30px 0px 20px 0px black, -5px 0px 10px -4px var(--earth-color);
+  --light-crest: inset calc(var(--planet-size) * 0.05) 0px calc(var(--planet-size) * 0.06) -2px rgba(255,255,255,.4);
+  --dark-crest: inset calc(var(--planet-size) * -0.40) 0px calc(var(--planet-size) * 0.25) 0px black;
+  --atmosphere: -5px 0px 10px -4px var(--earth-color);
+  box-shadow: var(--light-crest), var(--dark-crest), var(--atmosphere);
 }
 .planet-wrap--earth .planet__surface {
   background-image: var(--earth-image);
@@ -31894,7 +31901,10 @@ body {
   color: var(--earth-color);
 }
 .planet-wrap--moon .planet__atmosphere {
-  box-shadow: inset 10px 0px 12px -2px rgba(255, 255, 255, 0.2), inset -30px 0px 20px 0px black, -5px 0px 10px -4px var(--moon-color);
+  --light-crest: inset calc(var(--planet-size) * 0.05) 0px calc(var(--planet-size) * 0.06) -2px rgba(255,255,255,.4);
+  --dark-crest: inset calc(var(--planet-size) * -0.40) 0px calc(var(--planet-size) * 0.25) 0px black;
+  --atmosphere: -5px 0px 10px -4px var(--moon-color);
+  box-shadow: var(--light-crest), var(--dark-crest), var(--atmosphere);
 }
 .planet-wrap--moon .planet__surface {
   background-image: var(--moon-image);
@@ -31911,7 +31921,10 @@ body {
   color: var(--moon-color);
 }
 .planet-wrap--mars .planet__atmosphere {
-  box-shadow: inset 10px 0px 12px -2px rgba(255, 255, 255, 0.2), inset -30px 0px 20px 0px black, -5px 0px 10px -4px var(--mars-color);
+  --light-crest: inset calc(var(--planet-size) * 0.05) 0px calc(var(--planet-size) * 0.06) -2px rgba(255,255,255,.4);
+  --dark-crest: inset calc(var(--planet-size) * -0.40) 0px calc(var(--planet-size) * 0.25) 0px black;
+  --atmosphere: -5px 0px 10px -4px var(--mars-color);
+  box-shadow: var(--light-crest), var(--dark-crest), var(--atmosphere);
 }
 .planet-wrap--mars .planet__surface {
   background-image: var(--mars-image);
@@ -31926,6 +31939,10 @@ body {
 .planet-wrap--mars .tilt__icon {
   transform: var(--mars-tilt);
   color: var(--mars-color);
+}
+
+.k-item .planet-wrap {
+  margin-right: 1rem;
 }
 
 .planet-wrap__planet::before {
