@@ -48,6 +48,18 @@
   --border-color: #E6E6E6;
 }
 
+.content-item, article.destination-details > div, article.destination-details > aside, .card, .trip-configuration-item, #trip-empty-state {
+  background-color: rgba(0, 0, 0, 0.33);
+  padding: 2rem;
+  color: #f2eabc;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 .k-theme-test-class,
 .k-common-test-class {
   opacity: 0;
@@ -31531,42 +31543,42 @@ div.k-scrollview.k-scrollview-light .k-scrollview-nav-wrap {
   --font-size-h6: 1rem;
 }
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-headings);
   font-weight: var(--font-weight-headings);
+  color: #f18918;
 }
 
 p {
   line-height: 1.5rem;
 }
 
-h1, .h1 {
+h1 {
   font-size: var(--font-size-h1);
   line-height: var(--line-height-lg);
 }
 
-h2, .h2 {
+h2 {
   font-size: var(--font-size-h2);
   line-height: var(--line-height-lg);
 }
 
-h3, .h3 {
+h3 {
   font-size: var(--font-size-h3);
   line-height: var(--line-height-lg);
 }
 
-h4, .h4 {
+h4 {
   font-size: var(--font-size-h4);
   line-height: var(--line-height-sm);
 }
 
-h5, .h5 {
+h5 {
   font-size: var(--font-size-h5);
   line-height: var(--line-height-sm);
 }
 
-h6, .h6 {
+h6 {
   font-size: var(--font-size-h6);
   line-height: var(--line-height-sm);
 }
@@ -31700,9 +31712,6 @@ body {
   justify-self: center;
   display: flex;
   flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.33);
-  border-radius: 1rem;
-  padding: 2rem;
   height: max-content;
 }
 #trip-empty-state h1 {
@@ -31724,11 +31733,6 @@ body {
   0% {
     background-position: 0 40px;
   }
-}
-.trip-configuration-item {
-  background-color: rgba(0, 0, 0, 0.33);
-  border-radius: 1rem;
-  padding: 2rem;
 }
 .trip-configuration-item.time {
   grid-area: time;
@@ -31970,6 +31974,59 @@ body {
   background-size: cover;
 }
 
+.destinations {
+  display: flex;
+  gap: 2em;
+}
+
+.card {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-self: auto;
+}
+.card a {
+  margin-top: auto;
+}
+
+.card-img-top {
+  max-width: 100%;
+}
+
+article.destination-details {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 2em;
+}
+article.destination-details .title-block {
+  padding: 10px;
+  grid-column: 1/span 2;
+  background-image: url(/img/locations/earth-600.jpg);
+  background-repeat-x: no-repeat;
+  background-position-x: center;
+  background-color: black;
+}
+article.destination-details ul.list-group {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+article.destination-details ul.list-group a {
+  display: block;
+  color: #42c7c2;
+  text-decoration: none;
+  padding: 1em;
+  border: 1px solid rgba(255, 255, 255, 0);
+}
+article.destination-details ul.list-group a:hover {
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.5rem;
+}
+
 .blazeport-bg {
   background-size: 100%;
   background-image: url("/img/blazeport-bg.jpg");
@@ -31981,6 +32038,10 @@ body {
 
 body {
   background: linear-gradient(0deg, #22c1c3 0%, #13405d 25%, #0e3045 86%, black 100%);
+}
+
+.content {
+  grid-column: 2/span 1;
 }
 
 /*# sourceMappingURL=site.css.map */

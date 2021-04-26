@@ -9,6 +9,7 @@
 @import "./TripConfiguration/trip-empty";
 @import "./TripConfiguration/trip-configuration";
 @import "./_planets";
+@import "./_destinations";
 
 .blazeport-bg {
     background-size: 100%;
@@ -21,4 +22,8 @@
 
 body {
     background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(19,64,93,1) 25%, rgba(14,48,69,1) 86%, rgba(0,0,0,1) 100%);
+}
+
+.content {
+    grid-column: 2 / span 1;
 }

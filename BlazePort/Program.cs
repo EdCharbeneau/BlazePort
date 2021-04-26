@@ -19,7 +19,7 @@ namespace BlazePort
                 var db = scope.ServiceProvider.GetRequiredService<BlazePort.Data.BlazePortContext>();
                 // prefetch: Ping Cosmos to pool connection and avoid dealy on Index
                 // Uncomment to seed Cosmos
-                await db.InitializeContainerAsync();
+                // await db.InitializeContainerAsync();
                 // End Seed Code
                 await db.Locations.FirstOrDefaultAsync();
 

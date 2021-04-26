@@ -1,41 +1,41 @@
-@layout BlogPostLayout
 @page "/port/{LocationId}/{PortId:int}"
 @using Data;
 @inject BlazePortContext dbContext
 
-<SpaLoader IsLoading="@(port == null)">
-    <LoadingTemplate>
-        <span>Loading...</span>
-    </LoadingTemplate>
-    <ContentTemplate>
-        <TitleBlock Title="@port.Name" BackgroundUrl="@port.ImageUrl" />
-        <div class="container no-bg pt-5">
-            <div class="row">
-                <div class="col-md-8">
-                    <h2>About @port.Name</h2>
-                    <p>@port.Description</p>
-                </div>
-                <div class="col-md-4">
-                    <h3>Location</h3>
-                    <div class="list-group">
+<section class="content">
+    @if (!IsLoading)
+    {
+        <article class="destination-details">
+            <TitleBlock Title="@port.Name" BackgroundUrl="@port.ImageUrl" />
+            <div>
+                <h2>About @port.Name</h2>
+                <p>@port.Description</p>
+            </div>
+            <aside>
+
+                <h3>Location</h3>
+                <h4>
+                    <TelerikIcon Icon="marker-pin-target" />
+                    <span>@port.Lat, @port.Long</span>
+                </h4>
+                <ul class="list-group">
+                    <li>
                         <a href="/destination/@port.LocationId" class="list-group-item list-group-item-action">
                             <TelerikIcon Icon="marker-pin" />
                             @port.Location.Name, @port.Country
                         </a>
-                        <span class="list-group-item">
-                            <TelerikIcon Icon="marker-pin-target" />
-                            <span>@port.Lat, @port.Long</span>
-                        </span>
-                    </div>
-                    <ol>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </ContentTemplate>
-</SpaLoader>
+                    </li>
+                </ul>
+            </aside>
+        </article>
+    }
+</section>
+
+<TelerikLoaderContainer Visible="IsLoading"></TelerikLoaderContainer>
 
 @code {
+
+    bool IsLoading => port == null;
 
     [Parameter] public string LocationId { get; set; }
     [Parameter] public int PortId { get; set; }

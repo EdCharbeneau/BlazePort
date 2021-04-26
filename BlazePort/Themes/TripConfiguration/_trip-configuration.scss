@@ -15,9 +15,7 @@
 }
 
 .trip-configuration-item {
-    background-color: rgba(0, 0, 0, 0.33);
-    border-radius: 1rem;
-    padding: 2rem;
+    @extend .content-item;
 
     &.time {
         grid-area: time;

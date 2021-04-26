@@ -2,37 +2,36 @@
 @using Data;
 @inject BlazePortContext dbContext;
 
-<div class="container pt-5">
-
+<section class="content">
     <h1>Destinations</h1>
 
-    <div class="card-columns">
-        <SpaLoader IsLoading="@(Locations == null)">
-            <LoadingTemplate>
-                <span>Loading...</span>
-            </LoadingTemplate>
-            <ContentTemplate>
-                @foreach (var location in Locations)
-                {
-                    <div class="card">
-                        <img class="card-img-top" src="/img/locations/@location.ImageUrl" />
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                @location.Name
-                            </h4>
-                            <p class="card-text">
-                                @location.Description
-                            </p>
-                            <a href="/destination/@location.Id" class="k-button k-primary">View Details</a>
-                        </div>
+    <div class="destinations">
+        @if (!IsLoading)
+        {
+            foreach (var location in Locations)
+            {
+                <div class="card">
+                    <img class="card-img-top" src="/img/locations/@location.ImageUrl" />
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            @location.Name
+                        </h4>
+                        <p class="card-text">
+                            @location.Description
+                        </p>
                     </div>
-                }
-            </ContentTemplate>
-        </SpaLoader>
+                    <a href="/destination/@location.Id" class="k-button k-primary">View Details</a>
+                </div>
+            }
+        }
     </div>
-</div>
+</section>
+
+<TelerikLoaderContainer Visible="IsLoading"></TelerikLoaderContainer>
+
 @code {
 
+    bool IsLoading => Locations == null;
     LocationDetails[] Locations;
 
     protected override async Task OnInitializedAsync()

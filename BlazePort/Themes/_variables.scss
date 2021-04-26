@@ -72,3 +72,16 @@ $font-size: 16px;
 $button-padding-x: 2rem;
 $button-padding-y: 1rem;
 $dialog-titlebar-bg: $deep-space-blue;
+
+.content-item {
+    background-color: rgba(0, 0, 0, 0.33);
+    padding: 2rem;
+    color: $vintage-cream;
+
+    background: rgba( 0, 0, 0, 0.50 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 1rem;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}

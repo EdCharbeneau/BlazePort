@@ -1,45 +1,45 @@
-@layout BlogPostLayout
 @page "/destination/{Id}"
 @using Data;
 @inject BlazePortContext dbContext
 
-<SpaLoader IsLoading="@(location == null)">
-    <LoadingTemplate>
-        <span>Loading...</span>
-    </LoadingTemplate>
-    <ContentTemplate>
-        <TitleBlock Title="@location.Name" BackgroundUrl="@location.ImageUrl" />
-        <div class="container no-bg pt-5">
-            <div class="row">
-                <div class="col-md-8">
-                    <h2>About @location.Name</h2>
-                    <p>@location.Description</p>
-                </div>
-                <div class="col-md-4">
-                    <h3>Ports</h3>
-                    <div class="list-group">
-                        @foreach (var port in location.Ports)
-                        {
+<section class="content">
+    @if (!IsLoading)
+    {
+        <article class="destination-details">
+            <TitleBlock Title="@location.Name" BackgroundUrl="@location.ImageUrl" />
+            <div>
+                <h2>About @location.Name</h2>
+                <p>@location.Description</p>
+            </div>
+            <aside>
+                <h3>Ports</h3>
+                <ul class="list-group">
+                    @foreach (var port in location.Ports)
+                    {
+                        <li>
                             <a href="/port/@Id/@port.Id" class="list-group-item list-group-item-action">
                                 @port.Name
                             </a>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </ContentTemplate>
-</SpaLoader>
+                        </li>
+                    }
+                </ul>
+            </aside>
+        </article>
+    }
+</section>
+
+<TelerikLoaderContainer Visible="IsLoading"></TelerikLoaderContainer>
 
 @code {
 
-    [Parameter] public string Id { get; set; }
+    bool IsLoading => location == null;
 
     LocationDetails location;
 
+    [Parameter] public string Id { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-        // Not yet supported by EF.Cosmos
         location = await dbContext.AllLocationDetails().FirstAsync(l => l.Id == Guid.Parse(Id));
     }
 
