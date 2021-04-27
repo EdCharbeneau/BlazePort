@@ -13,31 +13,31 @@
             <strong>New Destination</strong>
         </TitleTemplate>
         <ContentTemplate>
-            <EditForm Model="editItem" OnValidSubmit="@SaveLocation">
-                <DataAnnotationsValidator />
-                <div class="form-group">
-                    <label class="w-100">Name</label>
-                    <InputText @bind-Value=@editItem.Name Class="form-control" />
-                    <ValidationMessage For="@(()=> editItem.Name)"></ValidationMessage>
-                </div>
-                <div class="form-group">
-                    <label class="w-100">Description</label>
-                    <InputTextArea @bind-Value=@editItem.Description Class="form-control" />
-                    <ValidationMessage For="@(()=> editItem.Description)"></ValidationMessage>
-                </div>
-                <div class="form-group">
-                    <label class="w-100">Image URL</label>
-                    <InputText @bind-Value=@editItem.ImageUrl Class="form-control" />
-                    <ValidationMessage For="@(()=> editItem.ImageUrl)"></ValidationMessage>
-                </div>
-                <div class="form-group">
-                    <label class="w-100">Distance from Earth</label>
-                    <TelerikNumericTextBox @bind-Value=@editItem.Distance Decimals=3 Format="##0.### Mil Miles" Class="form-control" />
-                    <ValidationMessage For="@(()=> editItem.Distance)"></ValidationMessage>
-                </div>
-                <TelerikButton Primary=true Icon="save" ButtonType=ButtonType.Submit>Save</TelerikButton>
-                <TelerikButton OnClick=HandleCancel Icon="cancel" ButtonType=ButtonType.Button>Cancel</TelerikButton>
-            </EditForm>
+            <TelerikForm Model="editItem" OnValidSubmit="@SaveLocation">
+                <FormItems>
+                    <FormItem Field="Name" />
+                    <FormItem Field="Description">
+                        <Template>
+                            <label>Description</label>
+                            <TelerikTextArea @bind-Value="editItem.Description"></TelerikTextArea>
+                        </Template>
+                    </FormItem>
+                    <FormItem Field="ImageUrl" />
+                    <FormItem Field="Distance">
+                        <Template>
+                            <label>Distance from Earth</label>
+                            <TelerikNumericTextBox @bind-Value="editItem.Distance" Decimals="3" Format="##0.### Mil Miles" />
+                        </Template>
+                    </FormItem>
+                </FormItems>
+                <FormButtons>
+                    <TelerikButton ButtonType="ButtonType.Submit" Primary="true">Submit</TelerikButton>
+                    <TelerikButton ButtonType="ButtonType.Button" OnClick="HandleCancel">Cancel</TelerikButton>
+                </FormButtons>
+                <FormValidation>
+                    <DataAnnotationsValidator />
+                </FormValidation>
+            </TelerikForm>
         </ContentTemplate>
     </FlyoutPanel>
 
@@ -50,7 +50,7 @@
                      @bind-SelectedItems=@selectedItems
                      FilterMode=GridFilterMode.FilterMenu>
             <GridToolBar>
-                <GridCommandButton OnClick=HandleCreate Command="Create" Icon="add">Add Port</GridCommandButton>
+                <GridCommandButton OnClick=HandleCreate Command="Create" Icon="add">Add Location</GridCommandButton>
                 <GridCommandButton OnClick=HandleSelected Command="Edit" Icon="edit" Enabled="@(selectedItems.Any())">Edit</GridCommandButton>
             </GridToolBar>
             <GridColumns>
@@ -61,10 +61,4 @@
     </div>
 </div>
 
-<Notification @ref="SuccessNotification" Title="Saved Item" Theme=@Theme.Success>
-    <p>The item saved successfully.</p>
-</Notification>
-
-<Notification @ref="FailNotification" Title="Error" Theme=@Theme.Danger>
-    <p>Failed to update database.</p>
-</Notification>
+<TelerikNotification @ref="@NotificationReference" Class="crud-notification" VerticalPosition="NotificationVerticalPosition.Top" HorizontalPosition="NotificationHorizontalPosition.Right"/>

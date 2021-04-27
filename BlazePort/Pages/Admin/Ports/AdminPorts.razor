@@ -2,55 +2,46 @@
 @layout BlogPostLayout
 
 <TitleBlock Title="Admin Ports">
-    <a href="/admin/index"><TelerikIcon Icon="arrow-root"/> Admin Home</a>
+    <a href="/admin/index"><TelerikIcon Icon="arrow-root" /> Admin Home</a>
 </TitleBlock>
 
 <div class="container-fluid">
 
-    <FlyoutPanel Visible=editorPanelVisible>
+    <FlyoutPanel Visible="editorPanelVisible">
         <TitleTemplate>
             <strong>@FormTitle</strong>
         </TitleTemplate>
         <ContentTemplate>
-            <EditForm Model="editItem" OnValidSubmit="SaveLocation">
-                <DataAnnotationsValidator />
-                <div class="form-group">
-                    <label class="w-100">Name</label>
-                    <InputText @bind-Value="editItem.Name" class="form-control" />
-                    <ValidationMessage For="@(()=> editItem.Name)"></ValidationMessage>
-                </div>
-                <div class="form-group">
-                    <label class="w-100">Description</label>
-                    <InputTextArea @bind-Value="editItem.Description" class="form-control" />
-                    <ValidationMessage For="@(()=> editItem.Description)"></ValidationMessage>
-                </div>
-                <div class="form-group">
-                    <label class="w-100">Country</label>
-                    <InputTextArea @bind-Value="editItem.Country" class="form-control" />
-                    <ValidationMessage For="@(()=> editItem.Country)"></ValidationMessage>
-                </div>
-                <div class="form-group">
-                    <label class="w-100">Image URL</label>
-                    <InputText @bind-Value="editItem.ImageUrl" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label class="w-100">Parent Location</label>
-                    <InputSelect @bind-Value="editItem.SelectedLocation" class="form-control" disabled="@(FormMode != Data.FormMode.New)">
-                        <option value="@(Guid.Empty)">--Select a location</option>
-                        @if (locations != null)
-                        {
-                            @foreach (var location in locations)
-                            {
-                                <option value="@location.Id">@location.Name</option>
-                            }
-                        }
-                    </InputSelect>
-                    <ValidationMessage For="@(()=> editItem.SelectedLocation)"></ValidationMessage>
-                </div>
-                <TelerikButton Primary=true Icon="save" ButtonType=ButtonType.Submit>Save</TelerikButton>
-                <TelerikButton OnClick=HandleCancel Icon="cancel" ButtonType=ButtonType.Button>Cancel</TelerikButton>
+            <TelerikForm Model="editItem" OnValidSubmit="SaveLocation">
+                <FormItems>
+                    <FormItem Field="Name"></FormItem>
+                    <FormItem Field="Description"></FormItem>
+                    <FormItem Field="Country"></FormItem>
+                    <FormItem Field="ImageUrl"></FormItem>
+                    <FormItem Field="SelectedLocation">
+                        <Template>
+                            <InputSelect @bind-Value="editItem.SelectedLocation" class="form-control" disabled="@(FormMode != Data.FormMode.New)">
+                                <option value="@(Guid.Empty)">--Select a location</option>
+                                @if (locations != null)
+                                {
+                                    @foreach (var location in locations)
+                                    {
+                                        <option value="@location.Id">@location.Name</option>
+                                    }
+                                }
+                            </InputSelect>
+                        </Template>
+                    </FormItem>
+                </FormItems>
+                <FormButtons>
+                    <TelerikButton ButtonType="ButtonType.Submit" Primary="true">Submit</TelerikButton>
+                    <TelerikButton ButtonType="ButtonType.Button" OnClick="HandleCancel">Cancel</TelerikButton>
+                </FormButtons>
+                <FormValidation>
+                    <DataAnnotationsValidator />
+                </FormValidation>
+            </TelerikForm>
 
-            </EditForm>
         </ContentTemplate>
     </FlyoutPanel>
 
@@ -76,10 +67,4 @@
     </div>
 </div>
 
-<Notification @ref="SuccessNotification" Title="Saved Item" Theme=@Theme.Success>
-    <p>The item saved successfully.</p>
-</Notification>
-
-<Notification @ref="FailNotification" Title="Error" Theme=@Theme.Danger>
-    <p>Failed to update database.</p>
-</Notification>
+<TelerikNotification @ref="@NotificationReference" Class="crud-notification" VerticalPosition="NotificationVerticalPosition.Top" HorizontalPosition="NotificationHorizontalPosition.Right" />

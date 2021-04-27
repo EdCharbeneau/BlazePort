@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Telerik.Blazor;
 using Telerik.Blazor.Components;
 
 namespace BlazePort.Pages.Admin.Ports
@@ -15,8 +16,8 @@ namespace BlazePort.Pages.Admin.Ports
         [Inject] BlazePortContext Db { get; set; }
 
         bool editorPanelVisible;
-        Notification SuccessNotification { get; set; }
-        Notification FailNotification { get; set; }
+
+        public TelerikNotification NotificationReference { get; set; }
 
         PortDetailsGridView[] portsGridView;
         LocationDetails[] locations;
@@ -52,19 +53,32 @@ namespace BlazePort.Pages.Admin.Ports
 
             await TrySaving(
                 OnSuccess: SuccessFullySaved,
-                OnFail: FailNotification.Show
+                OnFail: FailNotification
                 );
         }
 
-        async Task SuccessFullySaved()
+        void FailNotification()
+        {
+            NotificationReference.Show(new NotificationModel()
+            {
+                Text = "Failed to update database.",
+                ThemeColor = ThemeColors.Error
+            });
+        }
+
+        void SuccessFullySaved()
         {
             ClearSelections();
             LoadGrid();
             StateHasChanged();
-            await SuccessNotification.Show();
+            NotificationReference.Show(new NotificationModel()
+            {
+                Text = "The item saved successfully.",
+                ThemeColor = ThemeColors.Success
+            });
         }
 
-        private async Task TrySaving(Func<Task> OnSuccess, Func<Task> OnFail)
+        private async Task TrySaving(Action OnSuccess, Action OnFail)
         {
             try
             {
@@ -74,13 +88,13 @@ namespace BlazePort.Pages.Admin.Ports
                 }
 
                 await Db.SaveChangesAsync();
-                await OnSuccess();
+                OnSuccess();
             }
             catch (Exception e)
             {
                 // TODO: Logging
                 Console.WriteLine(e);
-                await OnFail();
+                OnFail();
             }
         }
 

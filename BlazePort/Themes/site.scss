@@ -8,8 +8,10 @@
 @import "./page-home";
 @import "./TripConfiguration/trip-empty";
 @import "./TripConfiguration/trip-configuration";
-@import "./_planets";
-@import "./_destinations";
+@import "./planets";
+@import "./destinations";
+@import "./Admin/admin-index";
+@import "./Admin/admin-ml.scss";
 
 .blazeport-bg {
     background-size: 100%;
@@ -24,6 +26,31 @@ body {
     background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(19,64,93,1) 25%, rgba(14,48,69,1) 86%, rgba(0,0,0,1) 100%);
 }
 
+a {
+    color: $accent;
+    text-decoration: none;
+
+    &:hover {
+        color: darken($accent, 5%);
+    }
+}
+
 .content {
     grid-column: 2 / span 1;
+}
+
+
+.crud-notification {
+    padding: 1.5rem;
+    z-index: 10002;
+
+    .k-notification {
+        font-size: 1.2rem;
+        padding: 2rem;
+    }
+
+    .k-icon {
+        font-size: auto;
+        height: auto;
+    }
 }

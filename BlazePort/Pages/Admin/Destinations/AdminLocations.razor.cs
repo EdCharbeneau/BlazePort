@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Telerik.Blazor;
 using Telerik.Blazor.Components;
 
 namespace BlazePort.Pages.Admin.Destinations
@@ -14,8 +15,8 @@ namespace BlazePort.Pages.Admin.Destinations
     {
         bool editorPanelVisible;
         [Inject] BlazePortContext Db { get; set; }
-        Notification SuccessNotification { get; set; }
-        Notification FailNotification { get; set; }
+        public TelerikNotification NotificationReference { get; set; }
+
         public FormMode FormMode { get; set; }
 
         LocationDetails[] locations;
@@ -40,8 +41,17 @@ namespace BlazePort.Pages.Admin.Destinations
 
             await TrySaving(
                 OnSuccess: SuccessFullySaved,
-                OnFail: FailNotification.Show
+                OnFail: FailNotification
                 );
+        }
+
+        void FailNotification()
+        {
+            NotificationReference.Show(new NotificationModel()
+            {
+                Text = "Failed to update database.",
+                ThemeColor = ThemeColors.Error
+            });
         }
 
         async Task SuccessFullySaved()
@@ -49,10 +59,14 @@ namespace BlazePort.Pages.Admin.Destinations
             ClearSelections();
             await LoadGrid();
             StateHasChanged();
-            await SuccessNotification.Show();
+            NotificationReference.Show(new NotificationModel()
+            {
+                Text = "The item saved successfully.",
+                ThemeColor = ThemeColors.Success
+            });
         }
 
-        private async Task TrySaving(Func<Task> OnSuccess, Func<Task> OnFail)
+        private async Task TrySaving(Func<Task> OnSuccess, Action OnFail)
         {
             try
             {
@@ -67,7 +81,7 @@ namespace BlazePort.Pages.Admin.Destinations
             catch (Exception e)
             {
                 // TODO: Logging
-                await OnFail();
+                OnFail();
             }
         }
 

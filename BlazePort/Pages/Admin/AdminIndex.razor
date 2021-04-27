@@ -1,16 +1,17 @@
-@layout BlogPostLayout
 @page "/admin/index"
 
-<TitleBlock Title="Admin Index" />
 
-<div class="container no-bg pt-5">
-    <div class="row">
-        <div class="col">
-            <div class="list-group">
-                <a class="list-group-item" href="/admin/destinations">Manage Destinations</a>
-                <a class="list-group-item" href="/admin/ports">Manage Ports</a>
-                <a class="list-group-item" href="/admin/ml">Prediction Engine Status</a>
-            </div>
-        </div>
-    </div>
+<div id="admin-menu">
+    <h1>Main Menu</h1>
+    <ul class="list-group">
+        <li>
+            <a class="list-group-item" href="/admin/destinations">Manage Locations</a>
+        </li>
+        <li>
+            <a class="list-group-item" href="/admin/ports">Manage Ports</a>
+        </li>
+        <li>
+            <a class="list-group-item" href="/admin/ml">Prediction Engine Status</a>
+        </li>
+    </ul>
 </div>

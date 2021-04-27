@@ -1,42 +1,49 @@
 ﻿@page "/admin/ml"
-@layout BlogPostLayout
 @using BlazePort.TripCost.Service
 @using BlazePort.TripCost.Service.DataStructures
 @using System.IO
 
-<TitleBlock Title="Admin: Prediction Engine">
-    <a href="/admin/index"><TelerikIcon Icon="arrow-root" /> Admin Home</a>
-</TitleBlock>
 
-<div class="container no-bg pt-5">
-    @if (testResults != null)
-    {
-        <ul class="list-group">
-            <li class="list-group-item">RMSE: <span class="k-badge k-badge-info k-badge-rounded">@testResults.RootMeansSquaredError.ToString("#.###")</span></li>
-            <li class="list-group-item">MAE: <span class="k-badge k-badge-info k-badge-rounded">@testResults.MeanAbsoluteError.ToString("#.###")</span></li>
-            <li class="list-group-item">MSE: <span class="k-badge k-badge-info k-badge-rounded">@testResults.MeanSquaredError.ToString("#.###")</span></li>
-            <li class="list-group-item">R<sup>2</sup>: <span class="k-badge k-badge-info k-badge-rounded">@testResults.RSquared.ToString("P")</span></li>
-        </ul>
 
-        <TelerikChart Width="650px" Height="650px">
-            <ChartSeriesItems>
+<div class="content">
+    <section class="ml-stats">
+        <TitleBlock Title="Admin: Prediction Engine">
+            <a href="/admin/index"><TelerikIcon Icon="arrow-root" /> Admin Home</a>
+        </TitleBlock>
+        @if (testResults != null)
+        {
+            <div class="content-item">
+                <TelerikChart Width="600px" Height="600px">
 
-                <ChartSeries Type="ChartSeriesType.ScatterLine" Data="@testResults.MinimizedSquareError"
-                             XField="@nameof(DataPoint.X)"
-                             YField="@nameof(DataPoint.Y)"
-                             Name="Minimized Square Error">
-                </ChartSeries>
-                <ChartSeries Type="ChartSeriesType.Scatter"
-                             Data="@testResults.ResultSet"
-                             XField="@nameof(TestDataPoint.Actual)"
-                             YField="@nameof(TestDataPoint.Predicted)">
-                    <ChartSeriesMarkers Type="ChartSeriesMarkersType.Cross" Size="3"></ChartSeriesMarkers>
-                </ChartSeries>
-                <ChartLegend Position="Telerik.Blazor.ChartLegendPosition.Bottom">
-                </ChartLegend>
-            </ChartSeriesItems>
-        </TelerikChart>
-    }
+                    <ChartSeriesItems>
+
+                        <ChartSeries Type="ChartSeriesType.ScatterLine" Data="@testResults.MinimizedSquareError"
+                                     XField="@nameof(DataPoint.X)"
+                                     YField="@nameof(DataPoint.Y)"
+                                     Name="Minimized Square Error">
+                        </ChartSeries>
+                        <ChartSeries Type="ChartSeriesType.Scatter"
+                                     Data="@testResults.ResultSet"
+                                     XField="@nameof(TestDataPoint.Actual)"
+                                     YField="@nameof(TestDataPoint.Predicted)">
+                            <ChartSeriesMarkers Type="ChartSeriesMarkersType.Cross" Size="3"></ChartSeriesMarkers>
+                        </ChartSeries>
+                        <ChartLegend Position="Telerik.Blazor.ChartLegendPosition.Bottom">
+                        </ChartLegend>
+                    </ChartSeriesItems>
+                </TelerikChart>
+            </div>
+            <aside class="content-item">
+                <h3>Stats</h3>
+                <ul class="list-group">
+                    <li class="list-group-item"><span>RMSE: <span class="data">@testResults.RootMeansSquaredError.ToString("#.###")</span></span></li>
+                    <li class="list-group-item">MAE: <span class="data">@testResults.MeanAbsoluteError.ToString("#.###")</span></li>
+                    <li class="list-group-item">MSE: <span class="data">@testResults.MeanSquaredError.ToString("#.###")</span></li>
+                    <li class="list-group-item">R<sup>2</sup>: <span class="data">@testResults.RSquared.ToString("P")</span></li>
+                </ul>
+            </aside>
+        }
+    </section>
 </div>
 
 @code {
