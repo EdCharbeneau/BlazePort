@@ -1,7 +1,20 @@
 ﻿.destinations {
-    display: flex;
+    display: grid;
     gap: 2em;
 }
+
+@media only screen and (min-width: 768px) {
+    .destinations {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .destinations {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
 
 .card {
     @extend .content-item;
@@ -21,20 +34,25 @@
 
 article.destination-details {
     display: grid;
-    grid-template-columns: 2fr 1fr;
     grid-gap: 2em;
 
     .title-block {
-        padding: 10px;
-        grid-column: 1/span 2;
         background-image: url(/img/locations/earth-600.jpg);
         background-repeat-x: no-repeat;
         background-position-x: center;
         background-color: black;
+        padding: 10px;
     }
 
     > div, > aside {
         @extend .content-item;
     }
-}
 
+    @media only screen and (min-width: 768px) {
+        grid-template-columns: 2fr 1fr;
+
+        .title-block {
+            grid-column: 1/span 2;
+        }
+    }
+}

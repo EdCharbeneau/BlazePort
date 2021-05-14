@@ -31627,6 +31627,7 @@ header.page-header {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: max-content max-content 1rem max-content;
+  margin-bottom: 2em;
   grid-column: 1/span 3;
 }
 
@@ -31634,7 +31635,6 @@ header.page-header {
   header.page-header {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(3, 40px);
-    margin-bottom: 2em;
   }
 
   .logo {
@@ -31737,6 +31737,7 @@ body {
   display: flex;
   flex-direction: column;
   height: max-content;
+  margin: 0 1rem;
 }
 #trip-empty-state h1 {
   font-family: Yesteryear;
@@ -31746,6 +31747,7 @@ body {
 @media only screen and (min-width: 768px) {
   #trip-empty-state {
     grid-column: 2/span 1;
+    margin: 0;
   }
 }
 .trip-configuration {
@@ -31755,7 +31757,7 @@ body {
   grid-template-rows: max-content;
   height: max-content;
   gap: 1rem;
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 @keyframes bg-scrolling-reverse {
@@ -32079,10 +32081,20 @@ body {
   }
 }
 .destinations {
-  display: flex;
+  display: grid;
   gap: 2em;
 }
 
+@media only screen and (min-width: 768px) {
+  .destinations {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .destinations {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
 .card {
   width: fit-content;
   display: flex;
@@ -32099,17 +32111,24 @@ body {
 
 article.destination-details {
   display: grid;
-  grid-template-columns: 2fr 1fr;
   grid-gap: 2em;
 }
 article.destination-details .title-block {
-  padding: 10px;
-  grid-column: 1/span 2;
   background-image: url(/img/locations/earth-600.jpg);
   background-repeat-x: no-repeat;
   background-position-x: center;
   background-color: black;
+  padding: 10px;
 }
+@media only screen and (min-width: 768px) {
+  article.destination-details {
+    grid-template-columns: 2fr 1fr;
+  }
+  article.destination-details .title-block {
+    grid-column: 1/span 2;
+  }
+}
+
 #admin-menu {
   grid-column: 2/span 1;
   align-self: center;
@@ -32183,9 +32202,15 @@ a:hover {
 }
 
 .content {
-  grid-column: 2/span 1;
+  padding: 0 1rem;
 }
 
+@media only screen and (min-width: 768px) {
+  .content {
+    padding: 0;
+    grid-column: 2/span 1;
+  }
+}
 .crud-notification {
   padding: 1.5rem;
   z-index: 10002;
