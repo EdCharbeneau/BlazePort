@@ -158,6 +158,29 @@
     border-bottom-left-radius: 6px;
 }
 
-.countdown-wrap {
-    display: flex;
+.t-days, .t-hours, .t-minutes, .t-seconds {
+    font-weight: bold;
+    font-size: 1.25em;
+    color: $secondary;
+    font-family: 'Orbitron';
+}
+
+.t-seperator {
+    font-size: 1.25em;
+    color: $body-bg;
+    font-weight: bold;
+    font-family: 'Orbitron';
+}
+
+.tt-days, .tt-hours, .tt-minutes, .tt-seconds {
+    font-size: 1.25em;
+    color: $secondary;
+    font-weight: bold;
+    font-family: 'Orbitron';
+}
+
+.tt-seperator {
+    font-weight: bold;
+    font-size: 1em;
+    font-family: 'Orbitron';
 }

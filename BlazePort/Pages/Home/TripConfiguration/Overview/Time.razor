@@ -2,7 +2,7 @@
     <h2 class="title">
         Next trip will launch in t-minus
     </h2>
-    <div class="countdown-wrap text">
+    <div class="countdown-wrap text" style="@CountdownWrapStyle">
         <Countdown CountdownTo="@TripConfiguration.TripStart" />
         @if (IsLarge)
         {
@@ -18,9 +18,15 @@
         }
     </div>
 </div>
+
 <TelerikMediaQuery Media="(min-width: 1200px)" OnChange="@(m => IsLarge = m)" />
 
 @code {
     bool IsLarge { get; set; }
+
+    string CountdownWrapStyle => StyleBuilder.Empty()
+        .AddStyle("display", "flex", when: IsLarge)
+        .NullIfEmpty();
+
     [Parameter] public TripConfigurationModel TripConfiguration { get; set; }
 }
