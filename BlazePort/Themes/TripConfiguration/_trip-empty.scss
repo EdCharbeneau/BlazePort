@@ -1,14 +1,19 @@
 ﻿#trip-empty-state {
-	@extend .content-item;
-	grid-column: 2 / span 1;
-	align-self: center;
-	justify-self: center;
-	display: flex;
-	flex-direction: column;
-	height:max-content;
+    @extend .content-item;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    height: max-content;
 
-	h1 {
-		font-family: Yesteryear;
-		color: $primary;
-	}
+    h1 {
+        font-family: Yesteryear;
+        color: $primary;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #trip-empty-state {
+        grid-column: 2 / span 1;
+    }
 }

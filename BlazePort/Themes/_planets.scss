@@ -34,7 +34,7 @@ $solarSystem: ( /*"mercury", "venus",*/ "earth", "moon", "mars", /*"jupiter", "s
     --mars-tilt: rotate(25.2deg);
     --mars-day: 24.6;
     --mars-color: #c07158;
-    --planet-size: 190px;
+    --planet-size: 50px;
     /*    --jupiter-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/332937/jupiter.jpg);
     --jupiter-tilt: rotate(3.1deg);
     --jupiter-day: 9.9;
@@ -61,97 +61,103 @@ $solarSystem: ( /*"mercury", "venus",*/ "earth", "moon", "mars", /*"jupiter", "s
     --sun-color: #cc9f4c;*/
 }
 
-//Mixin for styling each planet
-@mixin planetization {
-    @each $planet in $solarSystem {
-        &--#{$planet} {
-            .planet__atmosphere {
-                // Adjusted from the original example so the planets could be resized and maintain their atmospheres
-                // x, y, blur, spread, color
-                --light-crest: inset calc(var(--planet-size) * 0.05) 0px calc(var(--planet-size) * 0.06) -2px rgba(255,255,255,.4);
-                // The Inner Crest (inner left): inset 10px 0px 12px -2px rgba(255,255,255,.2)
-                --dark-crest: inset calc(var(--planet-size) * -0.40) 0px calc(var(--planet-size) * 0.25) 0px black;
-                // The Dark Side (inner right): inset -70px 0px 50px 0px black
-                --atmosphere: -5px 0px 10px -4px var(--#{$planet}-color);
-                // The Atmosphere (outer left): -5px 0px 10px -4px var(--mars-color)
-                // Spherical Spotlight (inner middle): radial-gradient(circle at 30% 50%, rgba(255,255,255,.2) 0%, rgba(255,255,255,0);
-                box-shadow: var(--light-crest), var(--dark-crest), var(--atmosphere);
-            }
+    //Mixin for styling each planet
+    @mixin planetization {
+        @each $planet in $solarSystem {
+            &--#{$planet} {
+                .planet__atmosphere {
+                    // Adjusted from the original example so the planets could be resized and maintain their atmospheres
+                    // x, y, blur, spread, color
+                    --light-crest: inset calc(var(--planet-size) * 0.05) 0px calc(var(--planet-size) * 0.06) -2px rgba(255,255,255,.4);
+                    // The Inner Crest (inner left): inset 10px 0px 12px -2px rgba(255,255,255,.2)
+                    --dark-crest: inset calc(var(--planet-size) * -0.40) 0px calc(var(--planet-size) * 0.25) 0px black;
+                    // The Dark Side (inner right): inset -70px 0px 50px 0px black
+                    --atmosphere: -5px 0px 10px -4px var(--#{$planet}-color);
+                    // The Atmosphere (outer left): -5px 0px 10px -4px var(--mars-color)
+                    // Spherical Spotlight (inner middle): radial-gradient(circle at 30% 50%, rgba(255,255,255,.2) 0%, rgba(255,255,255,0);
+                    box-shadow: var(--light-crest), var(--dark-crest), var(--atmosphere);
+                }
 
-            .planet__surface {
-                background-image: var(--#{$planet}-image);
-                transform: var(--#{$planet}-tilt)scale(1.2);
-                animation: planetRotate calc(var(--#{$planet}-day)*.1s) linear infinite;
-            }
-
-            .card__planet {
-                &::before {
+                .planet__surface {
+                    background-image: var(--#{$planet}-image);
                     transform: var(--#{$planet}-tilt)scale(1.2);
-                    border-color: var(--#{$planet}-color);
+                    animation: planetRotate calc(var(--#{$planet}-day)*.1s) linear infinite;
+                }
+
+                .card__planet {
+                    &::before {
+                        transform: var(--#{$planet}-tilt)scale(1.2);
+                        border-color: var(--#{$planet}-color);
+                        color: var(--#{$planet}-color);
+                    }
+                }
+
+                .tilt__icon {
+                    transform: var(--#{$planet}-tilt);
                     color: var(--#{$planet}-color);
                 }
             }
-
-            .tilt__icon {
-                transform: var(--#{$planet}-tilt);
-                color: var(--#{$planet}-color);
-            }
         }
     }
-}
 
-//Planet rotation animation
-@keyframes planetRotate {
-    0% {
-        background-position: 0% center;
+    //Planet rotation animation
+    @keyframes planetRotate {
+        0% {
+            background-position: 0% center;
+        }
+
+        100% {
+            background-position: -200% center;
+        }
     }
+    // End definitions
+    //---------------------------
+    //Start styles
 
-    100% {
-        background-position: -200% center;
-    }
-}
-// End definitions
-//---------------------------
-//Start styles
-
-.planet-wrap {
-    width: var(--planet-size);
-    height: var(--planet-size);
-    position: relative;
-    z-index: 999;
-    @include planetization;
-}
-
-.k-item .planet-wrap {
-    margin-right:1rem;
-}
-
-.planet-wrap__planet {
-    &::before {
-        content: '';
-        position: absolute;
-        height: var(--planet-size);
-        z-index: -2;
-        left: 50%;
-        top: 0%;
-    }
-}
-
-.planet {
-    &__atmosphere {
-        height: var(--planet-size);
+    .planet-wrap {
         width: var(--planet-size);
+        height: var(--planet-size);
         position: relative;
-        background: radial-gradient(circle at 30% 50%, rgba(255,255,255,.3) 0%, rgba(255,255,255,0) 65%);
-        border-radius: 100px;
-        overflow: hidden;
+        z-index: 999;
+        @include planetization;
     }
 
-    &__surface {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        z-index: -1;
-        background-size: cover;
+    .k-item .planet-wrap {
+        margin-right: 1rem;
+    }
+
+    .planet-wrap__planet {
+        &::before {
+            content: '';
+            position: absolute;
+            height: var(--planet-size);
+            z-index: -2;
+            left: 50%;
+            top: 0%;
+        }
+    }
+
+    .planet {
+        &__atmosphere {
+            height: var(--planet-size);
+            width: var(--planet-size);
+            position: relative;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,.3) 0%, rgba(255,255,255,0) 65%);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        &__surface {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+            background-size: cover;
+        }
+    }
+
+@media only screen and (min-width: 768px) {
+    :root {
+        --planet-size: 100px;
     }
 }

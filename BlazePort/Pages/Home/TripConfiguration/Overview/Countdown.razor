@@ -1,94 +1,117 @@
 ﻿@using System.Threading
+@implements IDisposable
 
-<TelerikCircularGauge @ref="GDays" Transitions="false">
-    <CircularGaugeCenterLabel>
-        <Template>
-            @(context.Pointers[0].Value) Days
-        </Template>
-    </CircularGaugeCenterLabel>
-    <CircularGaugeScales>
-        <CircularGaugeScale Min="0" Max="365">
-        </CircularGaugeScale>
-    </CircularGaugeScales>
-    <CircularGaugePointers>
-        <CircularGaugePointer Value="@timeSpan.Days">
-        </CircularGaugePointer>
-    </CircularGaugePointers>
-</TelerikCircularGauge>
+@if (IsLarge)
+{
 
-<TelerikCircularGauge @ref="GHours" Transitions="false">
-    <CircularGaugeCenterLabel>
-        <Template>
-            @(context.Pointers[0].Value) Hours
-        </Template>
-    </CircularGaugeCenterLabel>
-    <CircularGaugeScales>
-        <CircularGaugeScale Min="0" Max="24">
-        </CircularGaugeScale>
-    </CircularGaugeScales>
-    <CircularGaugePointers>
-        <CircularGaugePointer Value="@timeSpan.Hours">
-        </CircularGaugePointer>
-    </CircularGaugePointers>
-</TelerikCircularGauge>
+    <TelerikCircularGauge @ref="GDays" Transitions="false">
+        <CircularGaugeCenterLabel>
+            <Template>
+                @(context.Pointers[0].Value) Days
+            </Template>
+        </CircularGaugeCenterLabel>
+        <CircularGaugeScales>
+            <CircularGaugeScale Min="0" Max="365">
+            </CircularGaugeScale>
+        </CircularGaugeScales>
+        <CircularGaugePointers>
+            <CircularGaugePointer Value="@timeSpan.Days">
+            </CircularGaugePointer>
+        </CircularGaugePointers>
+    </TelerikCircularGauge>
 
-<TelerikCircularGauge @ref="GMinutes" Transitions="false">
-    <CircularGaugeCenterLabel>
-        <Template>
-            @(context.Pointers[0].Value) Minutes
-        </Template>
-    </CircularGaugeCenterLabel>
-    <CircularGaugeScales>
-        <CircularGaugeScale Min="0" Max="60">
-        </CircularGaugeScale>
-    </CircularGaugeScales>
-    <CircularGaugePointers>
-        <CircularGaugePointer Value="@timeSpan.Minutes">
-        </CircularGaugePointer>
-    </CircularGaugePointers>
-</TelerikCircularGauge>
+    <TelerikCircularGauge @ref="GHours" Transitions="false">
+        <CircularGaugeCenterLabel>
+            <Template>
+                @(context.Pointers[0].Value) Hours
+            </Template>
+        </CircularGaugeCenterLabel>
+        <CircularGaugeScales>
+            <CircularGaugeScale Min="0" Max="24">
+            </CircularGaugeScale>
+        </CircularGaugeScales>
+        <CircularGaugePointers>
+            <CircularGaugePointer Value="@timeSpan.Hours">
+            </CircularGaugePointer>
+        </CircularGaugePointers>
+    </TelerikCircularGauge>
 
-<TelerikCircularGauge @ref="GSeconds" Transitions="false">
-    <CircularGaugeCenterLabel>
-        <Template>
-            @(context.Pointers[0].Value) Seconds
-        </Template>
-    </CircularGaugeCenterLabel>
-    <CircularGaugeScales>
-        <CircularGaugeScale Min="0" Max="60">
-        </CircularGaugeScale>
-    </CircularGaugeScales>
-    <CircularGaugePointers>
-        <CircularGaugePointer Value="@timeSpan.Seconds">
-        </CircularGaugePointer>
-    </CircularGaugePointers>
-</TelerikCircularGauge>
+    <TelerikCircularGauge @ref="GMinutes" Transitions="false">
+        <CircularGaugeCenterLabel>
+            <Template>
+                @(context.Pointers[0].Value) Minutes
+            </Template>
+        </CircularGaugeCenterLabel>
+        <CircularGaugeScales>
+            <CircularGaugeScale Min="0" Max="60">
+            </CircularGaugeScale>
+        </CircularGaugeScales>
+        <CircularGaugePointers>
+            <CircularGaugePointer Value="@timeSpan.Minutes">
+            </CircularGaugePointer>
+        </CircularGaugePointers>
+    </TelerikCircularGauge>
+
+    <TelerikCircularGauge @ref="GSeconds" Transitions="false">
+        <CircularGaugeCenterLabel>
+            <Template>
+                @(context.Pointers[0].Value) Seconds
+            </Template>
+        </CircularGaugeCenterLabel>
+        <CircularGaugeScales>
+            <CircularGaugeScale Min="0" Max="60">
+            </CircularGaugeScale>
+        </CircularGaugeScales>
+        <CircularGaugePointers>
+            <CircularGaugePointer Value="@timeSpan.Seconds">
+            </CircularGaugePointer>
+        </CircularGaugePointers>
+    </TelerikCircularGauge>
+}
+else
+{
+    <span class="t-days">@timeSpan.Days</span>
+    <span class="t-seperator">:</span>
+    <span class="t-hours">@timeSpan.Hours</span>
+    <span class="t-seperator">:</span>
+    <span class="t-minutes">@timeSpan.Minutes</span>
+    <span class="t-seperator">:</span>
+    <span class="t-seconds">@timeSpan.Seconds</span>
+
+}
+
+<TelerikMediaQuery Media="(min-width: 1200px)" OnChange="@(m => IsLarge = m)" />
 
 @code {
+
+    [Parameter] public DateTime CountdownTo { get; set; }
+
+    bool IsLarge { get; set; }
+
+    TimeSpan timeSpan;
+
+    CancellationTokenSource stopTimer;
 
     TelerikCircularGauge GDays { get; set; }
     TelerikCircularGauge GHours { get; set; }
     TelerikCircularGauge GMinutes { get; set; }
     TelerikCircularGauge GSeconds { get; set; }
 
-    TimeSpan timeSpan;
-
-    [Parameter] public DateTime CountdownTo { get; set; }
-
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnInitializedAsync()
     {
-        if (firstRender)
+        stopTimer = new CancellationTokenSource();
+        do
         {
-            var timer = new Timer(new TimerCallback(_ =>
-            {
-                timeSpan = CountdownTo - DateTime.Now;
-                GDays.Refresh();
-                GHours.Refresh();
-                GMinutes.Refresh();
-                GSeconds.Refresh();
-
-                InvokeAsync(StateHasChanged);
-            }), null, 1000, 1000);
-        }
+            timeSpan = CountdownTo - DateTime.Now;
+            await Task.Delay(10000, stopTimer.Token);
+            GDays?.Refresh();
+            GHours?.Refresh();
+            GMinutes?.Refresh();
+            GSeconds?.Refresh();
+            StateHasChanged();
+        } while (timeSpan.TotalSeconds > 0);
     }
+
+    public void Dispose() => stopTimer?.Cancel();
+
 }

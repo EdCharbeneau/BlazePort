@@ -17,12 +17,11 @@ header.page-header {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: max-content max-content 1rem max-content;
+    grid-column: 1 / span 3;
 }
 
 @media only screen and (min-width: 768px) {
     header.page-header {
-        grid-column: 1 / span 3;
-        display: grid;
         grid-template-columns: repeat(12, 1fr);
         grid-template-rows: repeat(3, 40px);
         margin-bottom:2em;

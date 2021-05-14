@@ -26,11 +26,13 @@
         </p>
     </div>
     <div class="from">
-        <Planet Name="@TripConfiguration.DepartureLocation?.Name" Size="100px" />
+        <Planet Name="@TripConfiguration.DepartureLocation?.Name" />
     </div>
-    <Planet Name="@TripConfiguration.ArrivalLocation?.Name" Size="100px" />
+    <Planet Name="@TripConfiguration.ArrivalLocation?.Name" />
 </section>
 
 @code {
+    bool IsMedium { get; set; }
+
     [Parameter] public TripConfigurationModel TripConfiguration { get; set; }
 } 

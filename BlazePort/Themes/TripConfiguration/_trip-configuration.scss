@@ -1,39 +1,39 @@
 ﻿.trip-configuration {
-    grid-column: 2/span 1;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "time time time" "dept dept price" "dist dist book";
+    grid-template-columns: 1fr;
+    grid-template-areas: "time" "dept" "dist" "price" "book";
     grid-template-rows: max-content;
     height: max-content;
     gap: 1rem;
+    padding: 1rem;
 }
 
+
+
 @keyframes bg-scrolling-reverse {
-    0% {
-        background-position: 0 40px;
+    100% {
+        background-position-y: center;
+        background-position-x: 20px;
     }
 }
 
 .trip-configuration-item {
     @extend .content-item;
+    padding: 1rem;
 
     &.time {
         grid-area: time;
+    }
+
+    &.price {
+        grid-area: price;
     }
 
     &.dept {
         grid-area: dept;
         display: grid;
         grid-template-columns: 1fr 1fr;
-
-        .from {
-            background-image: radial-gradient(#42c7c2 20%, transparent 10%);
-            background-position: 0 0;
-            background-size: 20px 20px;
-            background-repeat-y: no-repeat;
-            background-position: center;
-            animation: bg-scrolling-reverse 5s linear infinite;
-        }
+        grid-gap: 1rem;
     }
 
     &.dist {
@@ -45,8 +45,8 @@
     }
 
     .title {
-        line-height: var(--line-height-sm);
-        font-size: var(--font-size-h4);
+        line-height: var(--line-height-xs);
+        font-size: var(--font-size-h5);
         color: $vintage-cream;
     }
 
@@ -54,8 +54,8 @@
         color: $accent;
 
         .primary {
-            line-height: var(--line-height-lg);
-            font-size: var(--font-size-h2);
+            line-height: var(--line-height-sm);
+            font-size: var(--font-size-h4);
             font-weight: bold;
             display: block;
             color: $secondary;
@@ -69,6 +69,64 @@
         }
     }
 }
+
+@media only screen and (min-width: 768px) {
+    .trip-configuration {
+        grid-column: 2 / span 1;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .trip-configuration {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: "time time time" "dept dept price" "dist dist book";
+    }
+
+    .trip-configuration-item {
+
+        .title {
+            line-height: var(--line-height-sm);
+            font-size: var(--font-size-h4);
+            color: $vintage-cream;
+        }
+
+        &.dept {
+            grid-area: dept;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap:0;
+
+            .from {
+                background-image: radial-gradient($accent 20%, transparent 10% );
+                background-position-y: center;
+                background-position-x: left;
+                background-size: 20px 20px;
+                background-repeat-y: no-repeat;
+                animation: bg-scrolling-reverse .5s linear infinite;
+            }
+        }
+
+        .text {
+            color: $accent;
+
+            .primary {
+                line-height: var(--line-height-lg);
+                font-size: var(--font-size-h2);
+                font-weight: bold;
+                display: block;
+                color: $secondary;
+                font-family: 'Orbitron';
+            }
+
+            .meta {
+                line-height: var(--line-height-sm);
+                font-size: var(--font-size-h6);
+                display: block;
+            }
+        }
+    }
+}
+
 .calendar-page {
     display: grid;
     justify-content: center;
@@ -79,7 +137,7 @@
 
 .calendar-page > p {
     display: block;
-    background-color: #42c7c2; 
+    background-color: $accent;
     text-align: center;
     font-size: 1.2em;
     padding: 0 2rem;
@@ -89,8 +147,8 @@
 
 .calendar-page > p:nth-child(even) {
     background: transparent;
-    color: #42c7c2;
-    border: 3px solid #42c7c2;
+    color: $accent;
+    border: 3px solid $accent;
     font-size: 4em;
     line-height: initial;
 }
@@ -103,4 +161,3 @@
 .countdown-wrap {
     display: flex;
 }
-

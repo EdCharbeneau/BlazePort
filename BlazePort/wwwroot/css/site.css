@@ -31627,12 +31627,11 @@ header.page-header {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: max-content max-content 1rem max-content;
+  grid-column: 1/span 3;
 }
 
 @media only screen and (min-width: 768px) {
   header.page-header {
-    grid-column: 1/span 3;
-    display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(3, 40px);
     margin-bottom: 2em;
@@ -31714,12 +31713,17 @@ body {
   font-size: 16px;
 }
 
+.container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content;
+}
+
 @media only screen and (min-width: 768px) {
   .container {
-    display: grid;
     grid-template-columns: minmax(1rem, 1fr) auto minmax(1rem, 1fr);
     grid-template-rows: max-content auto max-content;
-    height: 100vh;
   }
 }
 @media only screen and (min-width: 1200px) {
@@ -31728,7 +31732,6 @@ body {
   }
 }
 #trip-empty-state {
-  grid-column: 2/span 1;
   align-self: center;
   justify-self: center;
   display: flex;
@@ -31740,36 +31743,41 @@ body {
   color: #42c7c2;
 }
 
+@media only screen and (min-width: 768px) {
+  #trip-empty-state {
+    grid-column: 2/span 1;
+  }
+}
 .trip-configuration {
-  grid-column: 2/span 1;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas: "time time time" "dept dept price" "dist dist book";
+  grid-template-columns: 1fr;
+  grid-template-areas: "time" "dept" "dist" "price" "book";
   grid-template-rows: max-content;
   height: max-content;
   gap: 1rem;
+  padding: 1rem;
 }
 
 @keyframes bg-scrolling-reverse {
-  0% {
-    background-position: 0 40px;
+  100% {
+    background-position-y: center;
+    background-position-x: 20px;
   }
+}
+.trip-configuration-item {
+  padding: 1rem;
 }
 .trip-configuration-item.time {
   grid-area: time;
+}
+.trip-configuration-item.price {
+  grid-area: price;
 }
 .trip-configuration-item.dept {
   grid-area: dept;
   display: grid;
   grid-template-columns: 1fr 1fr;
-}
-.trip-configuration-item.dept .from {
-  background-image: radial-gradient(#42c7c2 20%, transparent 10%);
-  background-position: 0 0;
-  background-size: 20px 20px;
-  background-repeat-y: no-repeat;
-  background-position: center;
-  animation: bg-scrolling-reverse 5s linear infinite;
+  grid-gap: 1rem;
 }
 .trip-configuration-item.dist {
   grid-area: dist;
@@ -31778,16 +31786,16 @@ body {
   grid-area: book;
 }
 .trip-configuration-item .title {
-  line-height: var(--line-height-sm);
-  font-size: var(--font-size-h4);
+  line-height: var(--line-height-xs);
+  font-size: var(--font-size-h5);
   color: #f2eabc;
 }
 .trip-configuration-item .text {
   color: #42c7c2;
 }
 .trip-configuration-item .text .primary {
-  line-height: var(--line-height-lg);
-  font-size: var(--font-size-h2);
+  line-height: var(--line-height-sm);
+  font-size: var(--font-size-h4);
   font-weight: bold;
   display: block;
   color: #f18918;
@@ -31799,6 +31807,53 @@ body {
   display: block;
 }
 
+@media only screen and (min-width: 768px) {
+  .trip-configuration {
+    grid-column: 2/span 1;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .trip-configuration {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "time time time" "dept dept price" "dist dist book";
+  }
+
+  .trip-configuration-item .title {
+    line-height: var(--line-height-sm);
+    font-size: var(--font-size-h4);
+    color: #f2eabc;
+  }
+  .trip-configuration-item.dept {
+    grid-area: dept;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0;
+  }
+  .trip-configuration-item.dept .from {
+    background-image: radial-gradient(#42c7c2 20%, transparent 10%);
+    background-position-y: center;
+    background-position-x: left;
+    background-size: 20px 20px;
+    background-repeat-y: no-repeat;
+    animation: bg-scrolling-reverse 0.5s linear infinite;
+  }
+  .trip-configuration-item .text {
+    color: #42c7c2;
+  }
+  .trip-configuration-item .text .primary {
+    line-height: var(--line-height-lg);
+    font-size: var(--font-size-h2);
+    font-weight: bold;
+    display: block;
+    color: #f18918;
+    font-family: "Orbitron";
+  }
+  .trip-configuration-item .text .meta {
+    line-height: var(--line-height-sm);
+    font-size: var(--font-size-h6);
+    display: block;
+  }
+}
 .calendar-page {
   display: grid;
   justify-content: center;
@@ -31864,7 +31919,7 @@ body {
   --mars-tilt: rotate(25.2deg);
   --mars-day: 24.6;
   --mars-color: #c07158;
-  --planet-size: 190px;
+  --planet-size: 50px;
   /*    --jupiter-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/332937/jupiter.jpg);
   --jupiter-tilt: rotate(3.1deg);
   --jupiter-day: 9.9;
@@ -31995,6 +32050,11 @@ body {
   background-size: cover;
 }
 
+@media only screen and (min-width: 768px) {
+  :root {
+    --planet-size: 100px;
+  }
+}
 .destinations {
   display: flex;
   gap: 2em;
@@ -32076,13 +32136,17 @@ article.destination-details .title-block {
 
 .blazeport-bg {
   background-size: 100%;
-  background-image: url("/img/blazeport-bg.jpg");
   background-position: bottom;
   background-repeat-x: repeat;
   background-repeat-y: no-repeat;
-  height: 100%;
+  height: 100vh;
 }
 
+@media only screen and (min-width: 1200px) {
+  .blazeport-bg {
+    background-image: url("/img/blazeport-bg.jpg");
+  }
+}
 body {
   background: linear-gradient(0deg, #22c1c3 0%, #13405d 25%, #0e3045 86%, black 100%);
 }

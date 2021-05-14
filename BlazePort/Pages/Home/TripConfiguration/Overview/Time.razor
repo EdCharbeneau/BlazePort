@@ -4,15 +4,23 @@
     </h2>
     <div class="countdown-wrap text">
         <Countdown CountdownTo="@TripConfiguration.TripStart" />
-        @*<span class="meta">On @TripConfiguration.TripStart.ToShortDateString()</span>*@
-        <div class="calendar-page">
-            <p>@TripConfiguration.TripStart.Month</p>
-            <p>@TripConfiguration.TripStart.Day</p>
-            <p>@TripConfiguration.TripStart.Year</p>
-        </div>
+        @if (IsLarge)
+        {
+            <div class="calendar-page">
+                <p>@TripConfiguration.TripStart.Month</p>
+                <p>@TripConfiguration.TripStart.Day</p>
+                <p>@TripConfiguration.TripStart.Year</p>
+            </div>
+        }
+        else
+        {
+            <span class="meta">On @TripConfiguration.TripStart.ToShortDateString()</span>
+        }
     </div>
 </div>
+<TelerikMediaQuery Media="(min-width: 1200px)" OnChange="@(m => IsLarge = m)" />
 
 @code {
+    bool IsLarge { get; set; }
     [Parameter] public TripConfigurationModel TripConfiguration { get; set; }
 }
