@@ -94,7 +94,7 @@
             grid-area: dept;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-gap:0;
+            grid-gap: 0;
 
             .from {
                 background-image: radial-gradient($accent 20%, transparent 10% );
@@ -131,7 +131,8 @@
     display: grid;
     justify-content: center;
     align-content: center;
-    width: 100%;
+    width: 275px;
+    height: 200px;
     grid-auto-rows: max-content;
 }
 
