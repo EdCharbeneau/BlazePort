@@ -342,3 +342,5 @@ healthchecksdb
 # Sass vendor files
 */sass/vendors/
 /BlazePort/MLModels
+
+*/wwwroot/css/
