@@ -2,63 +2,62 @@
 @using BlazePort.Data;
 @layout BlogPostLayout
 
-<TitleBlock Title="Admin Locations">
-    <a href="/admin/index"><TelerikIcon Icon="arrow-root" /> Admin Home</a>
-</TitleBlock>
+<section class="admin-content">
 
-<div class="container-fluid">
+	<TitleBlock Title="Admin Locations">
+		<a href="/admin/index"><TelerikIcon Icon="arrow-root" /> Admin Home</a>
+	</TitleBlock>
 
-    <FlyoutPanel Visible="editorPanelVisible">
-        <TitleTemplate>
-            <strong>New Destination</strong>
-        </TitleTemplate>
-        <ContentTemplate>
-            <TelerikForm Model="editItem" OnValidSubmit="@SaveLocation">
-                <FormItems>
-                    <FormItem Field="Name" />
-                    <FormItem Field="Description">
-                        <Template>
-                            <label>Description</label>
-                            <TelerikTextArea @bind-Value="editItem.Description"></TelerikTextArea>
-                        </Template>
-                    </FormItem>
-                    <FormItem Field="ImageUrl" />
-                    <FormItem Field="Distance">
-                        <Template>
-                            <label>Distance from Earth</label>
-                            <TelerikNumericTextBox @bind-Value="editItem.Distance" Decimals="3" Format="##0.### Mil Miles" />
-                        </Template>
-                    </FormItem>
-                </FormItems>
-                <FormButtons>
-                    <TelerikButton ButtonType="ButtonType.Submit" Primary="true">Submit</TelerikButton>
-                    <TelerikButton ButtonType="ButtonType.Button" OnClick="HandleCancel">Cancel</TelerikButton>
-                </FormButtons>
-                <FormValidation>
-                    <DataAnnotationsValidator />
-                </FormValidation>
-            </TelerikForm>
-        </ContentTemplate>
-    </FlyoutPanel>
+	<TelerikGrid Data="locations"
+				 Sortable="true"
+				 Pageable="true"
+				 Groupable="true"
+				 SelectionMode="GridSelectionMode.Single"
+				 @bind-SelectedItems="selectedItems"
+				 FilterMode="GridFilterMode.FilterMenu">
+		<GridToolBar>
+			<GridCommandButton OnClick="HandleCreate" Command="Create" Icon="add">Add Location</GridCommandButton>
+			<GridCommandButton OnClick="HandleSelected" Command="Edit" Icon="edit" Enabled="selectedItems.Any()">Edit</GridCommandButton>
+		</GridToolBar>
+		<GridColumns>
+			<GridColumn Field="@nameof(LocationDetails.Name)" />
+			<GridColumn Field="@nameof(LocationDetails.Description)" />
+		</GridColumns>
+	</TelerikGrid>
+</section>
 
-    <div class="grid-outer">
-        <TelerikGrid Data="locations"
-                     Sortable="true"
-                     Pageable="true"
-                     Groupable="true"
-                     SelectionMode=GridSelectionMode.Single
-                     @bind-SelectedItems=@selectedItems
-                     FilterMode=GridFilterMode.FilterMenu>
-            <GridToolBar>
-                <GridCommandButton OnClick=HandleCreate Command="Create" Icon="add">Add Location</GridCommandButton>
-                <GridCommandButton OnClick=HandleSelected Command="Edit" Icon="edit" Enabled="@(selectedItems.Any())">Edit</GridCommandButton>
-            </GridToolBar>
-            <GridColumns>
-                <GridColumn Field=@nameof(LocationDetails.Name) />
-                <GridColumn Field=@nameof(LocationDetails.Description) />
-            </GridColumns>
-        </TelerikGrid>
-    </div>
-</div>
+<FlyoutPanel Visible="editorPanelVisible">
+	<TitleTemplate>
+		<strong>New Destination</strong>
+	</TitleTemplate>
+	<ContentTemplate>
+		<TelerikForm Model="editItem" OnValidSubmit="SaveLocation">
+			<FormItems>
+				<FormItem Field="Name" />
+				<FormItem Field="Description">
+					<Template>
+						<label>Description</label>
+						<TelerikTextArea @bind-Value="editItem.Description"></TelerikTextArea>
+					</Template>
+				</FormItem>
+				<FormItem Field="ImageUrl" />
+				<FormItem Field="Distance">
+					<Template>
+						<label>Distance from Earth</label>
+						<TelerikNumericTextBox @bind-Value="editItem.Distance" Decimals="3" Format="##0.### Mil Miles" />
+					</Template>
+				</FormItem>
+			</FormItems>
+			<FormButtons>
+				<TelerikButton ButtonType="ButtonType.Submit" Primary="true">Submit</TelerikButton>
+				<TelerikButton ButtonType="ButtonType.Button" OnClick="HandleCancel">Cancel</TelerikButton>
+			</FormButtons>
+			<FormValidation>
+				<DataAnnotationsValidator />
+			</FormValidation>
+		</TelerikForm>
+	</ContentTemplate>
+</FlyoutPanel>
 
-<TelerikNotification @ref="@NotificationReference" Class="crud-notification" VerticalPosition="NotificationVerticalPosition.Top" HorizontalPosition="NotificationHorizontalPosition.Right"/>
+
+<TelerikNotification @ref="NotificationReference" Class="crud-notification" VerticalPosition="NotificationVerticalPosition.Top" HorizontalPosition="NotificationHorizontalPosition.Right" />

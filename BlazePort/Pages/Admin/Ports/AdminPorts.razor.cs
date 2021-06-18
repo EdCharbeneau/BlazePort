@@ -82,11 +82,8 @@ namespace BlazePort.Pages.Admin.Ports
         {
             try
             {
-                if (FormMode == FormMode.New)
-                {
-                    Db.PortDetails.Add(editItem);
-                }
-
+                LocationDetails locationToUpdate = Db.Locations.Find(editItem.LocationId);
+                locationToUpdate.Ports.Add(editItem);
                 await Db.SaveChangesAsync();
                 OnSuccess();
             }
@@ -103,7 +100,6 @@ namespace BlazePort.Pages.Admin.Ports
             editItem = new PortDetails();
             FormMode = FormMode.New;
             editorPanelVisible = true;
-
         }
 
         async Task HandleSelected(GridCommandEventArgs e)

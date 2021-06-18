@@ -10,8 +10,10 @@
 @import "./TripConfiguration/trip-configuration";
 @import "./planets";
 @import "./destinations";
+@import "./Admin/admin";
 @import "./Admin/admin-index";
-@import "./Admin/admin-ml.scss";
+@import "./Admin/admin-ml";
+@import "./errors";
 
 .blazeport-bg {
     background-size: 100%;

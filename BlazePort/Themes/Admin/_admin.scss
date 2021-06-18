@@ -1,0 +1,10 @@
+﻿.admin-content {
+    margin: 0 1rem;
+    @extend .content-item;
+}
+@media only screen and (min-width: 1200px) {
+    .admin-content {
+        margin: 0 auto;
+        max-width: 1200px;
+    }
+}

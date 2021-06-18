@@ -22,7 +22,7 @@ namespace BlazePort.Data
         [NotMapped] // Form Field Only
         [Required(AllowEmptyStrings = false)]
         public string SelectedLocation {
-            get => LocationId == null ? string.Empty : LocationId.ToString();
+            get => LocationId == Guid.Empty ? string.Empty : LocationId.ToString();
             set => LocationId = string.IsNullOrWhiteSpace(value) ? Guid.Empty : Guid.Parse(value);
         }
 

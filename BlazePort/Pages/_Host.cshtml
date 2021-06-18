@@ -5,22 +5,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BlazePort</title>
-    <base href="~/" />
-    <link href="https://fonts.googleapis.com/css?family=Muli|Orbitron|Yesteryear&display=swap" rel="stylesheet">
-    <environment include="Development">
-        <link rel="stylesheet" href="css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="css/site.min.css" />
-    </environment>
-    <script src="_content/telerik.ui.for.blazor/js/telerik-blazor.js" defer></script>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>BlazePort</title>
+	<base href="~/" />
+	<link href="https://fonts.googleapis.com/css?family=Muli|Orbitron|Yesteryear&display=swap" rel="stylesheet">
+	<environment include="Development">
+		<link rel="stylesheet" href="css/site.css" />
+	</environment>
+	<environment exclude="Development">
+		<link rel="stylesheet" href="css/site.min.css" />
+	</environment>
+	<script src="_content/telerik.ui.for.blazor/js/telerik-blazor.js" defer></script>
 </head>
 <body>
-    <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
+	<component type="typeof(App)" render-mode="ServerPrerendered" />
 
-    <script src="_framework/blazor.server.js"></script>
+	<div id="blazor-error-ui">
+		<environment include="Staging,Production">
+			An error has occurred. This application may no longer respond until reloaded.
+		</environment>
+		<environment include="Development">
+			An unhandled exception has occurred. See browser dev tools for details.
+		</environment>
+		<a href="" class="reload">Reload</a>
+		<a class="dismiss">🗙</a>
+	</div>
+
+	<script src="_framework/blazor.server.js"></script>
 </body>
 </html>

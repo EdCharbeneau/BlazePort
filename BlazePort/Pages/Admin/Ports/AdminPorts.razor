@@ -1,70 +1,75 @@
+@using BlazePort.Data
 @page "/admin/ports"
 @layout BlogPostLayout
 
-<TitleBlock Title="Admin Ports">
-    <a href="/admin/index"><TelerikIcon Icon="arrow-root" /> Admin Home</a>
-</TitleBlock>
+<section class="admin-content">
+	<TitleBlock Title="Admin Ports">
+		<a href="/admin/index"><TelerikIcon Icon="arrow-root" /> Admin Home</a>
+	</TitleBlock>
 
-<div class="container-fluid">
+	<div class="grid-outer">
+		<TelerikGrid Data="portsGridView"
+					 Sortable="true"
+					 Pageable="true"
+					 PageSize="5"
+					 SelectionMode="GridSelectionMode.Single"
+					 @bind-SelectedItems="selectedItems"
+					 FilterMode="GridFilterMode.FilterMenu">
+			<GridToolBar>
+				<GridCommandButton OnClick="HandleCreate" Command="Create" Icon="add">Add Port</GridCommandButton>
+				<GridCommandButton OnClick="HandleSelected" Command="Edit" Icon="edit" Enabled="selectedItems.Any()">Edit</GridCommandButton>
+			</GridToolBar>
+			<GridColumns>
+				<GridColumn Field="@nameof(PortDetailsGridView.Name)" />
+				<GridColumn Field="@nameof(PortDetailsGridView.LatLong)" />
+				<GridColumn Field="@nameof(PortDetailsGridView.Country)" />
+				<GridColumn Field="@nameof(PortDetailsGridView.LocationName)" />
+				<GridColumn Field="@nameof(PortDetailsGridView.ShortDescription)" />
+			</GridColumns>
+		</TelerikGrid>
+	</div>
 
-    <FlyoutPanel Visible="editorPanelVisible">
-        <TitleTemplate>
-            <strong>@FormTitle</strong>
-        </TitleTemplate>
-        <ContentTemplate>
-            <TelerikForm Model="editItem" OnValidSubmit="SaveLocation">
-                <FormItems>
-                    <FormItem Field="Name"></FormItem>
-                    <FormItem Field="Description"></FormItem>
-                    <FormItem Field="Country"></FormItem>
-                    <FormItem Field="ImageUrl"></FormItem>
-                    <FormItem Field="SelectedLocation">
-                        <Template>
-                            <InputSelect @bind-Value="editItem.SelectedLocation" class="form-control" disabled="@(FormMode != Data.FormMode.New)">
-                                <option value="@(Guid.Empty)">--Select a location</option>
-                                @if (locations != null)
-                                {
-                                    @foreach (var location in locations)
-                                    {
-                                        <option value="@location.Id">@location.Name</option>
-                                    }
-                                }
-                            </InputSelect>
-                        </Template>
-                    </FormItem>
-                </FormItems>
-                <FormButtons>
-                    <TelerikButton ButtonType="ButtonType.Submit" Primary="true">Submit</TelerikButton>
-                    <TelerikButton ButtonType="ButtonType.Button" OnClick="HandleCancel">Cancel</TelerikButton>
-                </FormButtons>
-                <FormValidation>
-                    <DataAnnotationsValidator />
-                </FormValidation>
-            </TelerikForm>
+</section>
 
-        </ContentTemplate>
-    </FlyoutPanel>
+<FlyoutPanel Visible="editorPanelVisible">
+	<TitleTemplate>
+		<strong>@FormTitle</strong>
+	</TitleTemplate>
+	<ContentTemplate>
+		<TelerikForm Model="editItem" OnValidSubmit="SaveLocation">
+			<FormItems>
+				<FormItem Field="Name"></FormItem>
+				<FormItem Field="Description"></FormItem>
+				<FormItem Field="Country"></FormItem>
+				<FormItem Field="ImageUrl"></FormItem>
+				@if (FormMode == FormMode.New)
+					{
+				<FormItem Field="SelectedLocation">
+					<Template>
+						<label for="SelectedLocationId">Arriving to</label>
+						<TelerikDropDownList Data="locations"
+											 Width="100%"
+											 @bind-Value="editItem.LocationId"
+											 ValueField="@nameof(LocationDetails.Id)"
+											 TextField="@nameof(LocationDetails.Name)">
+							<ItemTemplate Context="location">
+								<Planet Name="@location.Name" Size="50px" /><span>@location.Name</span>
+							</ItemTemplate>
+						</TelerikDropDownList>
+					</Template>
+				</FormItem>
+				}
+			</FormItems>
+			<FormButtons>
+				<TelerikButton ButtonType="ButtonType.Submit" Primary="true">Submit</TelerikButton>
+				<TelerikButton ButtonType="ButtonType.Button" OnClick="HandleCancel">Cancel</TelerikButton>
+			</FormButtons>
+			<FormValidation>
+				<DataAnnotationsValidator />
+			</FormValidation>
+		</TelerikForm>
 
-    <div class="grid-outer">
-        <TelerikGrid Data="portsGridView"
-                     Sortable=true
-                     Pageable=true
-                     SelectionMode=GridSelectionMode.Single
-                     @bind-SelectedItems=@selectedItems
-                     FilterMode=GridFilterMode.FilterMenu>
-            <GridToolBar>
-                <GridCommandButton OnClick=HandleCreate Command="Create" Icon="add">Add Port</GridCommandButton>
-                <GridCommandButton OnClick=HandleSelected Command="Edit" Icon="edit" Enabled="@(selectedItems.Any())">Edit</GridCommandButton>
-            </GridToolBar>
-            <GridColumns>
-                <GridColumn Field="@nameof(PortDetailsGridView.Name)" />
-                <GridColumn Field="@nameof(PortDetailsGridView.LatLong)" />
-                <GridColumn Field="@nameof(PortDetailsGridView.Country)" />
-                <GridColumn Field="@nameof(PortDetailsGridView.LocationName)" />
-                <GridColumn Field="@nameof(PortDetailsGridView.ShortDescription)" />
-            </GridColumns>
-        </TelerikGrid>
-    </div>
-</div>
+	</ContentTemplate>
+</FlyoutPanel>
 
-<TelerikNotification @ref="@NotificationReference" Class="crud-notification" VerticalPosition="NotificationVerticalPosition.Top" HorizontalPosition="NotificationHorizontalPosition.Right" />
+<TelerikNotification @ref="NotificationReference" Class="crud-notification" VerticalPosition="NotificationVerticalPosition.Top" HorizontalPosition="NotificationHorizontalPosition.Right" />
