@@ -6,7 +6,7 @@
     <TripOverview Model="Model" TotalPrice="State.TotalPrice">
         <ButtonTemplate>
             <TelerikButton OnClick="ShowConfigurationPanel">Edit Trip</TelerikButton>
-            <TelerikButton Primary="true">Book Now</TelerikButton>
+            <TelerikButton ThemeColor="primary">Book Now</TelerikButton>
         </ButtonTemplate>
     </TripOverview>
 }
@@ -14,7 +14,7 @@ else
 {
     <TripEmptyState>
         <ButtonTemplate>
-            <TelerikButton OnClick="ShowConfigurationPanel" Primary="true">
+            <TelerikButton OnClick="ShowConfigurationPanel" ThemeColor="primary">
                 Start Trip
             </TelerikButton>
         </ButtonTemplate>
@@ -84,7 +84,7 @@ else
                 </FormItem>
             </FormItems>
             <FormButtons>
-                <TelerikButton ButtonType="ButtonType.Submit" Primary="true">Submit</TelerikButton>
+                <TelerikButton ButtonType="ButtonType.Submit" ThemeColor="primary" >Submit</TelerikButton>
                 <TelerikButton ButtonType="ButtonType.Button" OnClick="@(_ => configurationPanelVisible = false)">Cancel</TelerikButton>
             </FormButtons>
             <FormValidation>

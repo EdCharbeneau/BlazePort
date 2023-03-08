@@ -30,11 +30,15 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
-    <PackageReference Include="Telerik.UI.for.Blazor" Version="2.24.0" />
+    <PackageReference Include="Telerik.UI.for.Blazor" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazePort.TripCost.Service\BlazePort.TripCost.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
   <Target Name="BuildCssDev" Condition="'$(Configuration)' == 'Debug'" BeforeTargets="Build">

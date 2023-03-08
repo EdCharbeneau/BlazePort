@@ -62,7 +62,7 @@ namespace BlazePort.Pages.Admin.Ports
             NotificationReference.Show(new NotificationModel()
             {
                 Text = "Failed to update database.",
-                ThemeColor = ThemeColors.Error
+                ThemeColor = "Error"
             });
         }
 
@@ -74,7 +74,7 @@ namespace BlazePort.Pages.Admin.Ports
             NotificationReference.Show(new NotificationModel()
             {
                 Text = "The item saved successfully.",
-                ThemeColor = ThemeColors.Success
+                ThemeColor = "Success"
             });
         }
 

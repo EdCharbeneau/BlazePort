@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sass": "npx sass ./Themes/site.scss ./wwwroot/css/site.css",
-    "sass:watch": "npx sass --watch ./Themes/site.scss ./wwwroot/css/site.css"
+    "sass": "sass ./Themes/site.scss ./wwwroot/css/site.css",
+    "sass:watch": "sass --watch ./Themes/site.scss ./wwwroot/css/site.css"
   },
   "devDependencies": {
-    "@progress/kendo-theme-default": "4.37.0",
-    "sass": "1.32.11"
+    "@progress/kendo-theme-default": "6.0.0",
+    "autoprefixer": "10.4.13",
+    "gulp": "4.0.2",
+    "gulp-postcss": "9.0.1",
+    "gulp-sass": "5.1.0",
+    "postcss-calc": "8.2.4",
+    "sass": "^1.58.3"
   },
   "author": "",
   "license": "ISC"

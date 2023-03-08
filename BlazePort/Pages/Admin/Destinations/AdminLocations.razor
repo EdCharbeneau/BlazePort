@@ -15,10 +15,10 @@
 				 SelectionMode="GridSelectionMode.Single"
 				 @bind-SelectedItems="selectedItems"
 				 FilterMode="GridFilterMode.FilterMenu">
-		<GridToolBar>
-			<GridCommandButton OnClick="HandleCreate" Command="Create" Icon="add">Add Location</GridCommandButton>
-			<GridCommandButton OnClick="HandleSelected" Command="Edit" Icon="edit" Enabled="selectedItems.Any()">Edit</GridCommandButton>
-		</GridToolBar>
+		<GridToolBarTemplate>
+			<GridCommandButton OnClick="HandleCreate" Command="Create">Add Location</GridCommandButton>
+			<GridCommandButton OnClick="HandleSelected" Command="Edit" Enabled="selectedItems.Any()">Edit</GridCommandButton>
+		</GridToolBarTemplate>
 		<GridColumns>
 			<GridColumn Field="@nameof(LocationDetails.Name)" />
 			<GridColumn Field="@nameof(LocationDetails.Description)" />
